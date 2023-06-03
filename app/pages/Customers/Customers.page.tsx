@@ -1,3 +1,4 @@
+import { DeleteCustomerPopconfirm } from '@components/customer';
 import { Container } from '@components/design-system';
 import {
     useDeleteCustomerMutation,
@@ -58,26 +59,32 @@ export const Customers: React.FC = () => {
                         ? toDeleteCustomerId === customer.id
                         : false;
                     return (
-                        <Link
-                            key={customer.id}
-                            to={createRoute('customers.view', {
-                                id: customer.id,
-                            })}
-                        >
-                            <Col sm={12}>
-                                <Space size='large'>
-                                    {customer.id}
+                        <Col sm={12} key={customer.id}>
+                            <Space size='large'>
+                                <Link
+                                    to={createRoute('customers.view', {
+                                        id: customer.id,
+                                    })}
+                                >
+                                    {customer.company}
+                                </Link>
+                                <Button
+                                    onClick={onDeleteCustomer(customer.id)}
+                                    loading={_isLoading}
+                                    type='primary'
+                                >
+                                    Update Customer
+                                </Button>
 
-                                    <Button
-                                        onClick={onDeleteCustomer(customer.id)}
-                                        loading={_isLoading}
-                                        type='primary'
-                                    >
-                                        Update Customer
+                                <DeleteCustomerPopconfirm
+                                    customerId={customer.id}
+                                >
+                                    <Button type='primary' danger>
+                                        Delete Customer
                                     </Button>
-                                </Space>
-                            </Col>
-                        </Link>
+                                </DeleteCustomerPopconfirm>
+                            </Space>
+                        </Col>
                     );
                 })}
             </Row>
