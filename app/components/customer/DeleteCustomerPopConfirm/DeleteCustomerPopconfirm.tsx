@@ -35,6 +35,7 @@ export const DeleteCustomerPopconfirm: React.FC<
     return (
         <Popconfirm
             {...props}
+            placement='topRight'
             title='Delete the customer'
             description='Are you sure to delete this customer?'
             onConfirm={onDeleteCustomer(customerId)}
