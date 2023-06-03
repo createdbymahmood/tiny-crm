@@ -6,19 +6,14 @@ import type {
 import { createRoute } from '@routes/createRoute';
 import { Button, Space, Table, Tooltip } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
-import type { TableRowSelection } from 'antd/es/table/interface';
+import type {
+    TablePaginationConfig,
+    TableRowSelection,
+} from 'antd/es/table/interface';
 import { find } from 'lodash';
 import { map, pipe, uniqBy } from 'lodash/fp';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-type TablePaginationPosition =
-    | 'bottomCenter'
-    | 'bottomLeft'
-    | 'bottomRight'
-    | 'topCenter'
-    | 'topLeft'
-    | 'topRight';
 
 const expandableContent = {
     expandedRowRender: (record: Customer) => <p>{record.about}</p>,
@@ -75,6 +70,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
                 {address}
             </Tooltip>
         ),
+        width: 200,
     },
     {
         title: 'Industry',
@@ -82,6 +78,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         filters: createIndustryFiltersMap(data),
         onFilter: (value, record) =>
             record.industry.startsWith(value as string),
+        width: 200,
     },
     {
         title: 'About',
@@ -93,6 +90,8 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         title: 'Action',
         key: 'action',
         render: renderAction,
+        fixed: 'right',
+        width: 150,
     },
 ];
 
@@ -145,7 +144,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
             console.log({ pagination, filters, sorter, extra });
         },
         pagination: {
-            position: ['bottomRight'] as TablePaginationPosition[],
+            position: ['bottomRight'] as TablePaginationConfig['position'],
         },
     };
     return <Table {...tableProps} columns={tableColumns} dataSource={data} />;
