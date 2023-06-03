@@ -14,20 +14,22 @@ export const routes: RouteObject[] = [
         element: <Outlet />,
         children: [
             {
-                index: true,
+                path: paths.customers.index,
                 element: <Customers />,
-            },
-            {
-                path: paths.customers.view,
-                element: <ViewCustomer />,
-            },
-            {
-                path: paths.customers.create,
-                element: <CreateCustomer />,
-            },
-            {
-                path: paths.customers.update,
-                element: <UpdateCustomer />,
+                children: [
+                    {
+                        path: paths.customers.view,
+                        element: <ViewCustomer />,
+                    },
+                    {
+                        path: paths.customers.create,
+                        element: <CreateCustomer />,
+                    },
+                    {
+                        path: paths.customers.update,
+                        element: <UpdateCustomer />,
+                    },
+                ],
             },
         ],
     },

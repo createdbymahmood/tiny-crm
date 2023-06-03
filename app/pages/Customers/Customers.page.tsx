@@ -4,10 +4,12 @@ import {
     useGetCustomersQuery,
     useUpdateCustomerMutation,
 } from '@lib/data-provider/services/customer';
+import { createRoute } from '@routes/createRoute';
 import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import { Alert, Button, Col, message, Row, Space, Spin } from 'antd';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link, Outlet } from 'react-router-dom';
 
 export const Customers: React.FC = () => {
     const { data = [], isLoading, error } = useGetCustomersQuery();
@@ -49,29 +51,37 @@ export const Customers: React.FC = () => {
 
     return (
         <Container>
-            <Helmet title='Customers' />;
+            <Helmet title='Customers' />
             <Row>
                 {data.map(customer => {
                     const _isLoading = isDeletingCustomer
                         ? toDeleteCustomerId === customer.id
                         : false;
                     return (
-                        <Col key={customer.id} sm={12}>
-                            <Space size='large'>
-                                {customer.about}
+                        <Link
+                            key={customer.id}
+                            to={createRoute('customers.view', {
+                                id: customer.id,
+                            })}
+                        >
+                            <Col sm={12}>
+                                <Space size='large'>
+                                    {customer.id}
 
-                                <Button
-                                    onClick={onDeleteCustomer(customer.id)}
-                                    loading={_isLoading}
-                                    type='primary'
-                                >
-                                    Update Customer
-                                </Button>
-                            </Space>
-                        </Col>
+                                    <Button
+                                        onClick={onDeleteCustomer(customer.id)}
+                                        loading={_isLoading}
+                                        type='primary'
+                                    >
+                                        Update Customer
+                                    </Button>
+                                </Space>
+                            </Col>
+                        </Link>
                     );
                 })}
             </Row>
+            <Outlet />
         </Container>
     );
 };
