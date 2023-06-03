@@ -4,9 +4,10 @@ import type {
     Customers,
 } from '@lib/data-provider/services/customer/customer.types';
 import { createRoute } from '@routes/createRoute';
-import { Button, Space, Table } from 'antd';
+import { Button, Space, Table, Tooltip } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type { TableRowSelection } from 'antd/es/table/interface';
+import { find } from 'lodash';
 import { map, pipe, uniqBy } from 'lodash/fp';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -54,6 +55,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         title: 'Company',
         dataIndex: 'company',
         responsive: ['md'],
+        showSorterTooltip: true,
         sorter: (a, b) => {
             if (a.company < b.company) {
                 return -1;
@@ -65,6 +67,14 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
 
             return 0;
         },
+        ellipsis: {
+            showTitle: false,
+        },
+        render: address => (
+            <Tooltip placement='topLeft' title={address}>
+                {address}
+            </Tooltip>
+        ),
     },
     {
         title: 'Industry',
@@ -77,6 +87,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         title: 'About',
         dataIndex: 'about',
         ellipsis: true,
+        responsive: ['md'],
     },
     {
         title: 'Action',
@@ -104,41 +115,21 @@ export const CustomersList: React.FC<CustomersListProps> = ({
         onChange: onSelectChange,
         selections: [
             Table.SELECTION_ALL,
-            Table.SELECTION_INVERT,
             Table.SELECTION_NONE,
             {
-                key: 'odd',
-                text: 'Select Odd Row',
+                key: 'inactive',
+                text: 'Select Inactive Customers',
                 onSelect: changeableRowKeys => {
                     // eslint-disable-next-line fp/no-let
                     let newSelectedRowKeys = [] as React.Key[];
-                    newSelectedRowKeys = changeableRowKeys.filter(
-                        (_, index) => {
-                            if (index % 2 !== 0) {
-                                return false;
-                            }
+                    newSelectedRowKeys = changeableRowKeys.filter(id => {
+                        const customer = find(data, { id }) as
+                            | Customer
+                            | undefined;
 
-                            return true;
-                        },
-                    );
-                    setSelectedRowKeys(newSelectedRowKeys);
-                },
-            },
-            {
-                key: 'even',
-                text: 'Select Even Row',
-                onSelect: changeableRowKeys => {
-                    // eslint-disable-next-line fp/no-let
-                    let newSelectedRowKeys = [] as React.Key[];
-                    newSelectedRowKeys = changeableRowKeys.filter(
-                        (_, index) => {
-                            if (index % 2 !== 0) {
-                                return true;
-                            }
-
-                            return false;
-                        },
-                    );
+                        if (customer?.isActive) return false;
+                        return true;
+                    });
                     setSelectedRowKeys(newSelectedRowKeys);
                 },
             },
@@ -153,15 +144,9 @@ export const CustomersList: React.FC<CustomersListProps> = ({
         onChange(pagination, filters, sorter, extra) {
             console.log({ pagination, filters, sorter, extra });
         },
+        pagination: {
+            position: ['bottomRight'] as TablePaginationPosition[],
+        },
     };
-    return (
-        <Table
-            {...tableProps}
-            pagination={{
-                position: ['bottomRight'] as TablePaginationPosition[],
-            }}
-            columns={tableColumns}
-            dataSource={data}
-        />
-    );
+    return <Table {...tableProps} columns={tableColumns} dataSource={data} />;
 };
