@@ -10,12 +10,12 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@types/lodash": "4.14.195",
         "antd": "5.5.2",
         "lodash": "4.17.21",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "vite-tsconfig-paths": "4.2.0"
+        "react-router-dom": "6.11.2",
+        "urlcat": "2.0.4"
     },
     "devDependencies": {
         "@fullstacksjs/eslint-config": "9.4.0",
@@ -30,6 +30,8 @@
         "prettier": "2.8.8",
         "typescript": "5.0.2",
         "vite": "4.3.9",
-        "vite-plugin-checker": "0.6.0"
+        "vite-plugin-checker": "0.6.0",
+        "@types/lodash": "4.14.195",
+        "vite-tsconfig-paths": "4.2.0"
     }
 }
