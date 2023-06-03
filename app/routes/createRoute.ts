@@ -9,7 +9,7 @@ export const createRoute = (
     params: ParamMap = {},
 ) => {
     try {
-        return generatePath(get(paths, path), params);
+        return generatePath(get(paths, path as string), params);
     } catch (error) {
         console.error('Failed to generate route', error);
         return '';

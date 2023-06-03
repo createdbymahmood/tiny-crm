@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import * as React from 'react';
 
 import { retry } from './retry';
@@ -29,7 +30,7 @@ export const lazyImport = <
     const LazyComponent = React.lazy(lazyFactory);
 
     return (props: React.ComponentProps<U>): JSX.Element => (
-        <React.Suspense fallback={opts.fallback ?? <React.Fragment />}>
+        <React.Suspense fallback={opts.fallback ?? <Spin />}>
             {/* <Page> */}
             <LazyComponent {...props} />
             {/* </Page> */}

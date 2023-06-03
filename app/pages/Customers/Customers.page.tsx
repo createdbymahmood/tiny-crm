@@ -8,7 +8,7 @@ import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import { Alert, Button, Col, message, Row, Space, Spin } from 'antd';
 import * as React from 'react';
 
-export const Home: React.FC = () => {
+export const Customers: React.FC = () => {
     const { data = [], isLoading, error } = useGetCustomersQuery();
     const [
         deleteCustomer,
