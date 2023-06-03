@@ -1,7 +1,10 @@
 import { lazyImport } from '@utils/lazyImport';
 
 const UpdateCustomer = lazyImport(
-    () => import('./UpdateCustomer' /* webpackChunkName: "UpdateCustomer" */),
+    () =>
+        import(
+            './UpdateCustomer.page' /* webpackChunkName: "UpdateCustomer" */
+        ),
     module => module.UpdateCustomer,
 );
 

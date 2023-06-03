@@ -7,6 +7,7 @@ import {
 import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import { Alert, Button, Col, message, Row, Space, Spin } from 'antd';
 import * as React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 export const Customers: React.FC = () => {
     const { data = [], isLoading, error } = useGetCustomersQuery();
@@ -48,6 +49,7 @@ export const Customers: React.FC = () => {
 
     return (
         <Container>
+            <Helmet title='Customers' />;
             <Row>
                 {data.map(customer => {
                     const _isLoading = isDeletingCustomer
