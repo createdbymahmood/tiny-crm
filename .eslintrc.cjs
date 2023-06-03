@@ -15,4 +15,7 @@ module.exports = init({
             typescript: {},
         },
     },
+    rules: {
+        'import/no-cycle': ['off'],
+    },
 });

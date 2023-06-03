@@ -16,7 +16,8 @@
         "jsx": "react-jsx",
 
         /* Linting */
-        "baseUrl": "."
+        "baseUrl": ".",
+        "strictNullChecks": true
     },
     "include": ["app", "@types/index.d.ts", "lib", "configs"],
     "references": [{ "path": "./tsconfig.node.json" }],
