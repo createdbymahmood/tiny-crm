@@ -1,4 +1,4 @@
 export const urls = {
-    getCustomers: '/customers',
-    getCustomer: '/customers/:id',
+    customers: '/customers',
+    customer: '/customers/:id',
 };
