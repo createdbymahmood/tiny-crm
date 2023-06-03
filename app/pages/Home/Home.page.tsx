@@ -1,10 +1,11 @@
+import { Container } from '@components/design-system';
 import {
     useDeleteCustomerMutation,
     useGetCustomersQuery,
     useUpdateCustomerMutation,
 } from '@lib/data-provider/services/customer';
 import { toClientErrorMessage } from '@utils/toClientErrorMessage';
-import { Alert, Button, message, Space, Spin } from 'antd';
+import { Alert, Button, Col, message, Row, Space, Spin } from 'antd';
 import * as React from 'react';
 
 export const Home: React.FC = () => {
@@ -46,27 +47,29 @@ export const Home: React.FC = () => {
     };
 
     return (
-        <React.Fragment>
-            {data.map(customer => {
-                const _isLoading = isDeletingCustomer
-                    ? toDeleteCustomerId === customer.id
-                    : false;
-                return (
-                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                    <Space key={customer.id} size='large'>
-                        {customer.about}
+        <Container>
+            <Row>
+                {data.map(customer => {
+                    const _isLoading = isDeletingCustomer
+                        ? toDeleteCustomerId === customer.id
+                        : false;
+                    return (
+                        <Col key={customer.id} sm={12}>
+                            <Space size='large'>
+                                {customer.about}
 
-                        <Button
-                            onClick={onDeleteCustomer(customer.id)}
-                            loading={_isLoading}
-                            type='primary'
-                            danger
-                        >
-                            Update Customer
-                        </Button>
-                    </Space>
-                );
-            })}
-        </React.Fragment>
+                                <Button
+                                    onClick={onDeleteCustomer(customer.id)}
+                                    loading={_isLoading}
+                                    type='primary'
+                                >
+                                    Update Customer
+                                </Button>
+                            </Space>
+                        </Col>
+                    );
+                })}
+            </Row>
+        </Container>
     );
 };
