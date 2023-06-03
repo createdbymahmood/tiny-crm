@@ -4,7 +4,7 @@ import { createEntityAdapter } from '@reduxjs/toolkit';
 import { find } from 'lodash';
 import { rest } from 'msw';
 
-import type { Customer } from '../services/customer';
+import type { Customer } from '../services/customer/customer.types.d';
 // eslint-disable-next-line import/extensions
 import customers from './customers.json';
 
