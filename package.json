@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@reduxjs/toolkit": "1.9.5",
+        "@types/uuid": "9.0.1",
         "antd": "5.5.2",
         "lodash": "4.17.21",
         "msw": "1.2.1",
@@ -18,7 +19,8 @@
         "react-dom": "18.2.0",
         "react-redux": "8.0.7",
         "react-router-dom": "6.11.2",
-        "urlcat": "2.0.4"
+        "urlcat": "2.0.4",
+        "uuid": "9.0.0"
     },
     "devDependencies": {
         "@fullstacksjs/eslint-config": "9.4.0",

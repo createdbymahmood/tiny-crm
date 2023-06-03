@@ -22,7 +22,7 @@
         "noFallthroughCasesInSwitch": true,
         "baseUrl": "."
     },
-    "include": ["app", "@types/index.d.ts"],
+    "include": ["app", "@types/index.d.ts", "lib", "configs"],
     "references": [{ "path": "./tsconfig.node.json" }],
     "exclude": ["node_modules"]
 }
