@@ -12,7 +12,6 @@ import { useForm } from 'antd/es/form/Form';
 import { produce } from 'immer';
 import { noop } from 'lodash';
 import { pipe } from 'lodash/fp';
-import type { Callbacks } from 'rc-field-form/lib/interface';
 import * as React from 'react';
 
 import type {
@@ -25,7 +24,7 @@ interface CreateCustomerFormProps {
     onCancel?: FormCancelHandle;
 }
 
-const createCustomerDtoTransformer = pipe(
+export const createCustomerDtoTransformer = pipe(
     transformAllDayjsInstancesToIso8601FormattedValue,
     transformEmptyValuesToNull,
 );
@@ -45,7 +44,7 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
 
         try {
             void message.loading('Creating customer...');
-            await createCustomer(data);
+            await createCustomer(data).unwrap();
             void message.success('Customer created successfully!');
             /* Closing modal... */
             onCancel();

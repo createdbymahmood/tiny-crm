@@ -42,6 +42,10 @@ const renderAction = (customer: Customer) => (
                 Delete
             </Button>
         </DeleteCustomerPopconfirm>
+
+        <Link to={createRoute('customers.update', { id: customer.id })}>
+            <Button type='default'>Edit</Button>
+        </Link>
     </Space>
 );
 
@@ -91,7 +95,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         key: 'action',
         render: renderAction,
         fixed: 'right',
-        width: 150,
+        width: 220,
     },
 ];
 
@@ -146,6 +150,20 @@ export const CustomersList: React.FC<CustomersListProps> = ({
         pagination: {
             position: ['bottomRight'] as TablePaginationConfig['position'],
         },
+        caption: (
+            <div
+                style={{
+                    // background: 'red',
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    padding: 20,
+                }}
+            >
+                <Link to={createRoute('customers.create')}>
+                    <Button type='primary'>New Customer</Button>
+                </Link>
+            </div>
+        ),
     };
     return <Table {...tableProps} columns={tableColumns} dataSource={data} />;
 };
