@@ -3,16 +3,21 @@
  *CreateCustomerView
  *
  */
+import type { FormCancelHandle } from '@components/customer/CreateCustomerModalForm/CreateCustomerForm.types';
+import { CreateCustomerProjectsField } from '@components/customer/CreateCustomerModalForm/CreateCustomerProjectsField';
+import { ISO_8601_DATE_FORMAT } from '@configs/constants';
 import type { useCreateCustomerMutation } from '@lib/data-provider/services/customer';
-import { Button, Checkbox, Form, Input, Space } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, Space } from 'antd';
 import * as React from 'react';
 
 interface CreateCustomerFormViewProps {
     result: ReturnType<typeof useCreateCustomerMutation>['1'];
+    onCancel: FormCancelHandle;
 }
 
 export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
     result,
+    onCancel,
 }) => {
     return (
         <React.Fragment>
@@ -59,6 +64,8 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                 <Checkbox>Is Active</Checkbox>
             </Form.Item>
 
+            <CreateCustomerProjectsField />
+
             <Form.Item
                 style={{
                     justifyContent: 'flex-end',
@@ -66,7 +73,7 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                 }}
             >
                 <Space size='middle'>
-                    <Button type='default' htmlType='reset'>
+                    <Button type='default' onClick={onCancel}>
                         Cancel
                     </Button>
 

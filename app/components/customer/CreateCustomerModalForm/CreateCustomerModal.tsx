@@ -10,7 +10,7 @@ export const CreateCustomerModal: React.FC<
 > = props => {
     return (
         <Modal {...props} footer={null}>
-            <CreateCustomerForm />
+            <CreateCustomerForm onCancel={props.onCancel} />
         </Modal>
     );
 };
