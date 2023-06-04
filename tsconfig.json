@@ -19,7 +19,13 @@
         "baseUrl": ".",
         "strictNullChecks": true
     },
-    "include": ["app", "@types/index.d.ts", "lib", "configs"],
+    "include": [
+        "app",
+        "@types/index.d.ts",
+        "lib",
+        "configs",
+        "@testing-library/jest-dom"
+    ],
     "references": [{ "path": "./tsconfig.node.json" }],
     "exclude": ["node_modules"]
 }

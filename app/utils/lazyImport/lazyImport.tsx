@@ -1,7 +1,7 @@
 import { Spin } from 'antd';
 import * as React from 'react';
 
-import { retry } from './retry';
+import { retry } from '../retry';
 
 interface LazyImportOptions {
     fallback: React.ReactNode;

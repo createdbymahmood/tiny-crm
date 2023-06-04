@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@reduxjs/toolkit": "1.9.5",
+        "@testing-library/jest-dom": "5.16.5",
         "@testing-library/react-hooks": "8.0.1",
         "@types/uuid": "9.0.1",
         "antd": "5.5.2",
