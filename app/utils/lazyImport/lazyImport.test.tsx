@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react';
 
 const loadingIndicator = 'Loading...';
 
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 describe('lazyImport', () => {
     it('should render without any props', () => {
         const LazyComponent = lazyImport(() => import('./ExampleComponent'));
@@ -13,10 +14,7 @@ describe('lazyImport', () => {
 
     it('displays fallback element while loading', async () => {
         const LazyComponent = lazyImport(
-            () =>
-                new Promise(resolve => setTimeout(resolve, 1000)).then(
-                    () => import('./ExampleComponent'),
-                ),
+            () => sleep(1000).then(() => import('./ExampleComponent')),
             undefined,
             { fallback: <div>{loadingIndicator}</div> },
         );
