@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
@@ -7,6 +9,10 @@ const viteConfig = defineConfig({
     plugins: [react(), checker({ typescript: true }), tsconfigPaths()],
     server: {
         port: 9900,
+    },
+    test: {
+        environment: 'jsdom',
+        globals: true,
     },
 });
 
