@@ -24,13 +24,13 @@
         "react-redux": "8.0.7",
         "react-router-dom": "6.11.2",
         "urlcat": "2.0.4",
-        "uuid": "9.0.0",
+        "uuid": "9.0.0"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "5.16.5",
         "@testing-library/react-hooks": "8.0.1",
         "@types/uuid": "9.0.1",
-        "vite-plugin-compression": "0.5.1"
+        "vite-plugin-compression": "0.5.1",
         "@fullstacksjs/eslint-config": "9.4.0",
         "@testing-library/react": "14.0.0",
         "@types/lodash": "4.14.195",
