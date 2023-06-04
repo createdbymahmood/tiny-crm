@@ -11,12 +11,12 @@ import { Button, Checkbox, DatePicker, Form, Input, Space } from 'antd';
 import * as React from 'react';
 
 interface CreateCustomerFormViewProps {
-    result: ReturnType<typeof useCreateCustomerMutation>['1'];
+    isLoading: boolean;
     onCancel: FormCancelHandle;
 }
 
 export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
-    result,
+    isLoading,
     onCancel,
 }) => {
     return (
@@ -77,7 +77,11 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                         Cancel
                     </Button>
 
-                    <Button type='primary' htmlType='submit'>
+                    <Button
+                        type='primary'
+                        htmlType='submit'
+                        loading={isLoading}
+                    >
                         Submit
                     </Button>
                 </Space>

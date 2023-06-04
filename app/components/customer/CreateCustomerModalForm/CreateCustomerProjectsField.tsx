@@ -53,6 +53,8 @@ const renderFormList =
         return (
             <React.Fragment>
                 {fields.map(field => {
+                    const getFieldName = (path: string) => [field.name, path];
+
                     const startDateFieldPath = [
                         'projects',
                         field.name,
@@ -62,9 +64,8 @@ const renderFormList =
                     return (
                         <Form.Item required={false} key={field.key}>
                             <Form.Item
-                                {...field}
                                 label='Project name'
-                                name={[field.name, 'name']}
+                                name={getFieldName('name')}
                                 rules={[
                                     {
                                         required: true,
@@ -76,21 +77,14 @@ const renderFormList =
                             </Form.Item>
 
                             <Form.Item
-                                {...field}
                                 label='Contact'
-                                name={[field.name, 'contact']}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input project contact',
-                                    },
-                                ]}
+                                name={getFieldName('contact')}
                             >
                                 <Input />
                             </Form.Item>
 
                             <Form.Item
-                                name={[field.name, 'start_date']}
+                                name={getFieldName('start_date')}
                                 label='Start Date'
                             >
                                 <DatePicker
@@ -101,7 +95,7 @@ const renderFormList =
                             </Form.Item>
 
                             <Form.Item
-                                name={[field.name, 'end_date']}
+                                name={getFieldName('end_date')}
                                 label='End Date'
                                 rules={[
                                     {
@@ -122,14 +116,6 @@ const renderFormList =
                                 />
                             </Form.Item>
 
-                            <Form.Item>
-                                <Button type='dashed' onClick={() => add()}>
-                                    Add Project
-                                </Button>
-
-                                <Form.ErrorList errors={errors} />
-                            </Form.Item>
-
                             {fields.length > 1 ? (
                                 <Button
                                     danger
@@ -141,28 +127,29 @@ const renderFormList =
                         </Form.Item>
                     );
                 })}
+
+                <Form.Item>
+                    <Button type='dashed' onClick={() => add()}>
+                        Add Project
+                    </Button>
+
+                    <Form.ErrorList errors={errors} />
+                </Form.Item>
             </React.Fragment>
         );
     };
+
+const projectsValidator = async (_, names?: string[]) => {
+    if (!names || names.length < 1) {
+        return Promise.reject(new Error('At least 1 project'));
+    }
+};
 
 export const CreateCustomerProjectsField: React.FC = () => {
     const form = Form.useFormInstance<CreateCustomerFormPayload>();
     const update = useUpdate();
     return (
-        <Form.List
-            name='projects'
-            rules={[
-                {
-                    validator: async (_, names) => {
-                        if (!names || names.length < 1) {
-                            return Promise.reject(
-                                new Error('At least 1 project'),
-                            );
-                        }
-                    },
-                },
-            ]}
-        >
+        <Form.List name='projects' rules={[{ validator: projectsValidator }]}>
             {renderFormList({ form, update })}
         </Form.List>
     );
