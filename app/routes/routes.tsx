@@ -10,32 +10,26 @@ import { paths } from './paths';
 
 export const routes: RouteObject[] = [
     {
-        path: paths.index,
-        element: <Outlet />,
+        path: paths.customers.index,
+        element: <Customers />,
         children: [
             {
-                path: paths.customers.index,
-                element: <Customers />,
-                children: [
-                    {
-                        path: paths.customers.view,
-                        element: <ViewCustomer />,
-                    },
-                    {
-                        path: paths.customers.create,
-                        element: <CreateCustomer />,
-                    },
-                    {
-                        path: paths.customers.update,
-                        element: <UpdateCustomer />,
-                    },
-                ],
+                path: paths.customers.view,
+                element: <ViewCustomer />,
+            },
+            {
+                path: paths.customers.create,
+                element: <CreateCustomer />,
+            },
+            {
+                path: paths.customers.update,
+                element: <UpdateCustomer />,
             },
         ],
     },
     {
-        path: paths.customers.index,
-        element: <Navigate to={paths.index} />,
+        path: paths.index,
+        element: <Navigate to={paths.customers.index} />,
     },
 ];
 
