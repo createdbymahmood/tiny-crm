@@ -4,6 +4,7 @@ import { describe, it } from 'vitest';
 describe('retry()', () => {
     it('returns a Promise', () => {
         const result = retry(() => Promise.resolve());
+
         expect(result).toBeInstanceOf(Promise);
     });
 
@@ -16,10 +17,12 @@ describe('retry()', () => {
             if (count < 3) {
                 return Promise.reject(new Error('Something went wrong'));
             }
+
             return Promise.resolve('Success');
         };
 
         await retry(fn, 3, 0);
+
         expect(count).toBe(3);
     });
 
@@ -37,16 +40,21 @@ describe('retry()', () => {
     it('delays retrying by the specified interval', async () => {
         let count = 0;
         const startTime = Date.now();
+
         const fn = () => {
             count++;
+
             if (count < 3) {
                 return Promise.reject(new Error('Something went wrong'));
             }
+
             return Promise.resolve('Success');
         };
+
         const interval = 1000;
         await retry(fn, 3, interval);
         const endTime = Date.now();
+
         expect(endTime - startTime).toBeGreaterThanOrEqual(interval * 2);
     });
 });

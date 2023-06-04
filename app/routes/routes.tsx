@@ -4,7 +4,7 @@ import UpdateCustomer from '@pages/UpdateCustomer';
 import ViewCustomer from '@pages/ViewCustomer';
 import * as React from 'react';
 import type { RouteObject } from 'react-router-dom';
-import { Navigate, Outlet, useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 
 import { paths } from './paths';
 

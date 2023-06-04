@@ -1,6 +1,7 @@
 import { MODAL_AS_ROUTE_CLOSE_DELAY } from '@configs/constants';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { useModalRouteState } from './useModalRouteState';
 
 let mockedUseNavigate;
@@ -23,11 +24,13 @@ describe('useModalRouteState()', () => {
 
     it('should initiates correctly', () => {
         const hook = renderHook(useModalRouteState);
+
         expect(typeof hook.result.current).not.toBe('undefined');
     });
 
     it('should return the correct objects', () => {
         const hook = renderHook(useModalRouteState);
+
         expect(typeof hook.result.current.modal).toBe('object');
         expect(typeof hook.result.current.modal.isOpen).toBe('boolean');
         expect(typeof hook.result.current.modal.onCancel).toBe('function');
@@ -39,6 +42,7 @@ describe('useModalRouteState()', () => {
             result.current.modal.onCancel();
         });
         vi.advanceTimersByTime(MODAL_AS_ROUTE_CLOSE_DELAY);
+
         expect(result.current.modal.isOpen).toBe(false);
     });
 
@@ -47,6 +51,7 @@ describe('useModalRouteState()', () => {
         act(() => {
             result.current.modal.onCancel();
         });
+
         expect(mockedUseNavigate).not.toBeCalled();
     });
 
@@ -55,8 +60,11 @@ describe('useModalRouteState()', () => {
         act(() => {
             result.current.modal.onCancel();
         });
+
         expect(mockedUseNavigate).not.toBeCalled();
+
         vi.advanceTimersByTime(MODAL_AS_ROUTE_CLOSE_DELAY);
+
         expect(mockedUseNavigate).toBeCalled();
     });
 });

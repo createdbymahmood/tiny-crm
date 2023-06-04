@@ -1,17 +1,18 @@
-import { renderHook, act } from '@testing-library/react-hooks';
-import { describe, it } from 'vitest';
-import { expect } from 'vitest';
+import { act, renderHook } from '@testing-library/react-hooks';
+import { describe, expect, it } from 'vitest';
 
 import { useUpdate } from './useUpdate';
 
 describe('useUpdate()', () => {
     it('should initiate correctly', () => {
         const hook = renderHook(useUpdate);
+
         expect(typeof hook.result.current).not.toBe('undefined');
     });
 
     it('should return a function', () => {
         const hook = renderHook(useUpdate);
+
         expect(typeof hook.result.current).toBe('function');
     });
 
@@ -30,12 +31,15 @@ describe('useUpdate()', () => {
         });
 
         const update = hook.result.current;
+
         expect(renders).toBe(1);
 
         act(() => update());
+
         expect(renders).toBe(2);
 
         act(() => update());
+
         expect(renders).toBe(3);
     });
 });
