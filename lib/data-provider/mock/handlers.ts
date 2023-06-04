@@ -1,8 +1,9 @@
 import { MOCK_API_CALL_REQUEST_DELAY } from '@configs/constants';
 import { urls } from '@lib/data-provider/mock/urls';
 import { createEntityAdapter } from '@reduxjs/toolkit';
-import { find } from 'lodash';
+import { each, find } from 'lodash';
 import { rest } from 'msw';
+import { v4 as uuid } from 'uuid';
 
 import type { Customer } from '../services/customer/customer.types.d';
 // eslint-disable-next-line import/extensions
@@ -87,4 +88,20 @@ export const handlers = [
             ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
         );
     }),
+
+    rest.post(urls.customers, async (req, res, ctx) => {
+        const customer: Customer = await req.json();
+
+        each(customer.projects, project => {
+            project.id = uuid();
+        });
+
+        state = adapter.addOne(state, { ...customer, id: uuid() } as Customer);
+        return res(
+            ctx.json(Object.values(state.entities)),
+            ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+        );
+    }),
 ];
+
+export { adapter };

@@ -5,6 +5,7 @@ import {
     getCustomers,
     updateCustomer,
 } from '@lib/data-provider/services/customer/operations';
+import { createCustomer } from '@lib/data-provider/services/customer/operations/createCustomer';
 import type { EndpointBuilder } from '@reduxjs/toolkit/dist/query/endpointDefinitions';
 import type {
     BaseQueryFn,
@@ -36,6 +37,7 @@ export const customerApi = createApi({
         getCustomers: getCustomers(builder),
         deleteCustomer: deleteCustomer(builder),
         updateCustomer: updateCustomer(builder),
+        createCustomer: createCustomer(builder),
     }),
 });
 
@@ -44,4 +46,5 @@ export const {
     useGetCustomersQuery,
     useDeleteCustomerMutation,
     useUpdateCustomerMutation,
+    useCreateCustomerMutation,
 } = customerApi;
