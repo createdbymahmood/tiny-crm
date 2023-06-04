@@ -4,7 +4,7 @@ import type {
     Customers,
 } from '@lib/data-provider/services/customer/customer.types';
 import { createRoute } from '@routes/createRoute';
-import { Button, Space, Table, Tooltip } from 'antd';
+import { Button, Space, Table, Tooltip, Typography } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type {
     TablePaginationConfig,
@@ -16,7 +16,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const expandableContent = {
-    expandedRowRender: (record: Customer) => <p>{record.about}</p>,
+    expandedRowRender: (record: Customer) => (
+        <Typography>{record.about}</Typography>
+    ),
 };
 
 interface CustomersListProps {
@@ -34,10 +36,12 @@ const createIndustryFiltersMap = pipe(
 const renderAction = (customer: Customer) => (
     <Space size='middle'>
         <Link to={createRoute('customers.view', { id: customer.id })}>
-            <Space>View</Space>
+            <Space>
+                <Typography>View</Typography>
+            </Space>
         </Link>
 
-        <DeleteCustomerPopconfirm customerId={customer.id}>
+        <DeleteCustomerPopconfirm customerIds={[customer.id]}>
             <Button type='primary' danger>
                 Delete
             </Button>
@@ -68,9 +72,9 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         ellipsis: {
             showTitle: false,
         },
-        render: address => (
-            <Tooltip placement='topLeft' title={address}>
-                {address}
+        render: company => (
+            <Tooltip placement='topLeft' title={company}>
+                {company}
             </Tooltip>
         ),
         width: 200,
@@ -81,7 +85,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         filters: createIndustryFiltersMap(data),
         onFilter: (value, record) =>
             record.industry.startsWith(value as string),
-        width: 200,
+        width: 100,
         responsive: ['md'],
     },
     {
@@ -95,7 +99,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         key: 'action',
         render: renderAction,
         fixed: 'right',
-        width: 220,
+        width: 230,
     },
 ];
 
@@ -150,10 +154,10 @@ export const CustomersList: React.FC<CustomersListProps> = ({
         pagination: {
             position: ['bottomRight'] as TablePaginationConfig['position'],
         },
+
         caption: (
-            <div
+            <Space
                 style={{
-                    // background: 'red',
                     display: 'flex',
                     justifyContent: 'flex-start',
                     padding: 20,
@@ -162,7 +166,17 @@ export const CustomersList: React.FC<CustomersListProps> = ({
                 <Link to={createRoute('customers.create')}>
                     <Button type='primary'>New Customer</Button>
                 </Link>
-            </div>
+
+                {Boolean(selectedRowKeys.length) && (
+                    <DeleteCustomerPopconfirm
+                        customerIds={selectedRowKeys as string[]}
+                    >
+                        <Button type='primary' danger>
+                            Delete selected customer(s)
+                        </Button>
+                    </DeleteCustomerPopconfirm>
+                )}
+            </Space>
         ),
     };
     return <Table {...tableProps} columns={tableColumns} dataSource={data} />;

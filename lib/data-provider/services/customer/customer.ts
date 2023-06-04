@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import {
-    deleteCustomer,
+    deleteCustomers,
     getCustomer,
     getCustomers,
     updateCustomer,
@@ -35,7 +35,7 @@ export const customerApi = createApi({
     endpoints: builder => ({
         getCustomer: getCustomer(builder),
         getCustomers: getCustomers(builder),
-        deleteCustomer: deleteCustomer(builder),
+        deleteCustomers: deleteCustomers(builder),
         updateCustomer: updateCustomer(builder),
         createCustomer: createCustomer(builder),
     }),
@@ -44,7 +44,7 @@ export const customerApi = createApi({
 export const {
     useGetCustomerQuery,
     useGetCustomersQuery,
-    useDeleteCustomerMutation,
+    useDeleteCustomersMutation,
     useUpdateCustomerMutation,
     useCreateCustomerMutation,
 } = customerApi;

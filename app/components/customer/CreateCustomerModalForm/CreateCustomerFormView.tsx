@@ -5,9 +5,7 @@
  */
 import type { FormCancelHandle } from '@components/customer/CreateCustomerModalForm/CreateCustomerForm.types';
 import { CreateCustomerProjectsField } from '@components/customer/CreateCustomerModalForm/CreateCustomerProjectsField';
-import { ISO_8601_DATE_FORMAT } from '@configs/constants';
-import type { useCreateCustomerMutation } from '@lib/data-provider/services/customer';
-import { Button, Checkbox, DatePicker, Form, Input, Space } from 'antd';
+import { Button, Checkbox, Form, Input, Space } from 'antd';
 import * as React from 'react';
 
 interface CreateCustomerFormViewProps {

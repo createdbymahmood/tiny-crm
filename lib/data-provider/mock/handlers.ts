@@ -7,13 +7,13 @@ import { v4 as uuid } from 'uuid';
 
 import type { Customer } from '../services/customer/customer.types.d';
 // eslint-disable-next-line import/extensions
-import customers from './customers.json';
+import customersMock from './customers.json';
 
 const adapter = createEntityAdapter<Customer>();
 
 // eslint-disable-next-line fp/no-let, import/no-mutable-exports
 let state = adapter.getInitialState();
-state = adapter.setAll(state, customers);
+state = adapter.setAll(state, customersMock);
 
 export { state };
 
@@ -63,26 +63,27 @@ export const handlers = [
         );
     }),
 
-    rest.delete(urls.customer, (req, res, ctx) => {
-        const { id } = req.params as { id: string };
+    rest.post(urls.deleteCustomers, async (req, res, ctx) => {
+        const { ids } = await req.json();
+        const customers = ids
+            .map(id => find(state.entities, { id }))
+            .filter(Boolean);
 
-        const customer = find(state.entities, { id });
-
-        if (!customer) {
+        if (!customers.length) {
             return res(
                 ctx.json({
-                    message: `Customer with id ${id} not found`,
+                    message: `No customers found with specified ids`,
                 }),
                 ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
                 ctx.status(404),
             );
         }
 
-        state = adapter.removeOne(state, id);
+        state = adapter.removeMany(state, ids);
 
         return res(
             ctx.json({
-                id,
+                ids,
                 success: true,
             }),
             ctx.delay(MOCK_API_CALL_REQUEST_DELAY),

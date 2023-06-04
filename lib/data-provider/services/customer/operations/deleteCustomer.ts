@@ -1,31 +1,34 @@
 import { urls } from '@lib/data-provider/mock/urls';
 import type { CustomerEndpointBuilder } from '@lib/data-provider/services/customer';
-import { findIndex } from 'lodash';
-import urlcat from 'urlcat';
+import { each, findIndex } from 'lodash';
 
-// eslint-disable-next-line import/no-cycle
 import { customerApi } from '../customer';
 
-export const deleteCustomer = (build: CustomerEndpointBuilder) =>
-    build.mutation<{ success: boolean; id: number }, string>({
-        query(id) {
+export const deleteCustomers = (build: CustomerEndpointBuilder) =>
+    build.mutation<{ success: boolean; id: number }, string[]>({
+        query(ids) {
             return {
-                url: urlcat(urls.customer, { id }),
-                method: 'DELETE',
+                url: urls.deleteCustomers,
+                method: 'POST',
+                body: { ids },
             };
         },
         invalidatesTags: customer => [{ type: 'Customers', id: customer?.id }],
-        async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        async onQueryStarted(ids, { dispatch, queryFulfilled }) {
             const customersQueryUpdateResult = dispatch(
                 customerApi.util.updateQueryData(
                     'getCustomers',
                     undefined,
                     draft => {
-                        const entityIndex = findIndex(draft, { id });
+                        const entityIndexes = ids.map(id =>
+                            findIndex(draft, { id }),
+                        );
 
-                        if (entityIndex > -1) {
-                            draft.splice(entityIndex, 1);
-                        }
+                        each(entityIndexes, entityIndex => {
+                            if (entityIndex > -1) {
+                                draft = draft.splice(entityIndex, 1);
+                            }
+                        });
                     },
                 ),
             );

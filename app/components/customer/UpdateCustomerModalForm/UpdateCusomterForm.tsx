@@ -20,6 +20,12 @@ export interface UpdateCusomterFormProps {
     customer: Customer;
 }
 
+/**
+ *
+ * @param customer  Customer object
+ * @returns maps øver all of the properties of the customer object
+ * to ensure all of date values are transformed into dayjs instances to be able to be used in the form's datepicker.
+ */
 const transformCustomerToEditableFormValues = (customer: Customer) => {
     return deepObjectTransformer({
         obj: customer,

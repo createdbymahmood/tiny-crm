@@ -1,17 +1,17 @@
-import { useDeleteCustomerMutation } from '@lib/data-provider/services/customer';
+import { useDeleteCustomersMutation } from '@lib/data-provider/services/customer';
 import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import type { PopconfirmProps } from 'antd';
 import { message, Popconfirm } from 'antd';
 import * as React from 'react';
 
 const useDeleteCustomerPopConfirmState = () => {
-    const [deleteCustomer] = useDeleteCustomerMutation();
+    const [deleteCustomers] = useDeleteCustomersMutation();
 
-    const onDeleteCustomer = (customerId: string) => async () => {
+    const onDeleteCustomer = (customerIds: string[]) => async () => {
         try {
-            void message.loading(`Deleting customer with the id ${customerId}`);
-            await deleteCustomer(customerId).unwrap();
-            void message.success(`Customer deleted`);
+            void message.loading(`Deleting customer(s)`);
+            await deleteCustomers(customerIds).unwrap();
+            void message.success(`Customer(s) deleted`);
         } catch (error) {
             void message.error(toClientErrorMessage(error));
         }
@@ -24,21 +24,21 @@ const useDeleteCustomerPopConfirmState = () => {
 
 export interface DeleteCustomerPopConfirmProps
     extends Omit<PopconfirmProps, 'description' | 'title'> {
-    customerId: string;
+    customerIds: string[];
 }
 
 export const DeleteCustomerPopconfirm: React.FC<
     DeleteCustomerPopConfirmProps
-> = ({ customerId, ...props }) => {
+> = ({ customerIds, onConfirm, ...props }) => {
     const { onDeleteCustomer } = useDeleteCustomerPopConfirmState();
 
     return (
         <Popconfirm
             {...props}
             placement='topRight'
-            title='Delete the customer'
-            description='Are you sure to delete this customer?'
-            onConfirm={onDeleteCustomer(customerId)}
+            title='Delete customer(s)'
+            description='Are you sure to delete selected customer(s)?'
+            onConfirm={onDeleteCustomer(customerIds)}
             okText='Yes'
             cancelText='No'
         />

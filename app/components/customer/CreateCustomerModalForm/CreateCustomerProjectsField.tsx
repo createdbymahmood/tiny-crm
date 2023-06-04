@@ -22,18 +22,24 @@ const getIsEndDateValid =
         return isStartOfDay || startDate.isAfter(current);
     };
 
+/**
+ *
+ * @param startDateFieldPath path of start_date field array
+ * @param form Form instance
+ * @returns checks whether end date is after start date
+ */
 const endDateValidator =
     (startDateFieldPath: NamePath, form: FormInstance) =>
     async (_: RuleObject, value?: Dayjs): Promise<undefined> => {
-        if (value) {
-            const startDate: Dayjs | undefined =
-                form.getFieldValue(startDateFieldPath);
+        if (!value) return;
 
-            if (startDate?.isAfter(value)) {
-                return Promise.reject(
-                    new Error('End date must be after start date'),
-                );
-            }
+        const startDate: Dayjs | undefined =
+            form.getFieldValue(startDateFieldPath);
+
+        if (startDate?.isAfter(value)) {
+            return Promise.reject(
+                new Error('End date must be after start date'),
+            );
         }
     };
 
