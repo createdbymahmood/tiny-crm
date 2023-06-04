@@ -53,7 +53,6 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
     {
         title: 'Company',
         dataIndex: 'company',
-        responsive: ['md'],
         showSorterTooltip: true,
         sorter: (a, b) => {
             if (a.company < b.company) {
@@ -83,6 +82,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         onFilter: (value, record) =>
             record.industry.startsWith(value as string),
         width: 200,
+        responsive: ['md'],
     },
     {
         title: 'About',
