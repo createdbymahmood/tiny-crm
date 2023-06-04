@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-    readonly APP_API_ENDPOINT: string;
+    readonly APP_JSON_MOCK_URL: string;
 }
 
 interface ImportMeta {

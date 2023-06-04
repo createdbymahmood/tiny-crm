@@ -1,4 +1,5 @@
 import { MOCK_API_CALL_REQUEST_DELAY } from '@configs/constants';
+import { env } from '@configs/env';
 import { urls } from '@lib/data-provider/mock/urls';
 import { createEntityAdapter } from '@reduxjs/toolkit';
 import { each, find } from 'lodash';
@@ -11,11 +12,18 @@ import customersMock from './customers.json';
 
 const adapter = createEntityAdapter<Customer>();
 
-// eslint-disable-next-line fp/no-let, import/no-mutable-exports
+// eslint-disable-next-line fp/no-let
 let state = adapter.getInitialState();
-state = adapter.setAll(state, customersMock);
 
-export { state };
+void (async () => {
+    try {
+        const response = await fetch(env.JsonMockUrl);
+        const data = await response.json();
+        state = adapter.setAll(state, data);
+    } catch (error) {
+        state = adapter.setAll(state, customersMock);
+    }
+})();
 
 export const handlers = [
     rest.get(urls.customer, (req, res, ctx) => {
@@ -104,5 +112,3 @@ export const handlers = [
         );
     }),
 ];
-
-export { adapter };
