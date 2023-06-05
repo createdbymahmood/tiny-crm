@@ -1,9 +1,11 @@
 import { DeleteCustomerPopconfirm } from '@components/customer';
+import * as testIds from '@lib/cypress/testIds';
 import type {
     Customer,
     Customers,
 } from '@lib/data-provider/services/customer/customer.types';
 import { createRoute } from '@routes/createRoute';
+import { getTestAttributes } from '@utils/test/getTestAttributes';
 import { Button, Space, Table, Tooltip, Typography } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type {
@@ -35,14 +37,21 @@ const createIndustryFiltersMap = pipe(
 
 const renderAction = (customer: Customer) => (
     <Space size='middle'>
-        <Link to={createRoute('customers.view', { id: customer.id })}>
+        <Link
+            to={createRoute('customers.view', { id: customer.id })}
+            {...getTestAttributes(testIds.viewCustomer.cta)}
+        >
             <Space>
                 <Typography>View</Typography>
             </Space>
         </Link>
 
         <DeleteCustomerPopconfirm customerIds={[customer.id]}>
-            <Button type='primary' danger>
+            <Button
+                type='primary'
+                danger
+                {...getTestAttributes(testIds.deleteCustomer.cta)}
+            >
                 Delete
             </Button>
         </DeleteCustomerPopconfirm>
@@ -163,7 +172,10 @@ export const CustomersList: React.FC<CustomersListProps> = ({
                     padding: 20,
                 }}
             >
-                <Link to={createRoute('customers.create')}>
+                <Link
+                    to={createRoute('customers.create')}
+                    {...getTestAttributes(testIds.createCustomer.cta)}
+                >
                     <Button type='primary'>New Customer</Button>
                 </Link>
 

@@ -1,3 +1,4 @@
+import { paths } from '@lib/react-router/paths';
 import CreateCustomer from '@pages/CreateCustomer';
 import Customers from '@pages/Customers';
 import UpdateCustomer from '@pages/UpdateCustomer';
@@ -5,8 +6,6 @@ import ViewCustomer from '@pages/ViewCustomer';
 import * as React from 'react';
 import type { RouteObject } from 'react-router-dom';
 import { Navigate, useRoutes } from 'react-router-dom';
-
-import { paths } from './paths';
 
 export const routes: RouteObject[] = [
     {

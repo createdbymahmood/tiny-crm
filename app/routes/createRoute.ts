@@ -1,5 +1,5 @@
+import { paths } from '@lib/react-router/paths';
 import type { ObjectPath } from '@types';
-import { paths } from 'app/routes/paths';
 import { get } from 'lodash';
 import type { ParamMap } from 'urlcat';
 import generatePath from 'urlcat';
