@@ -83,8 +83,8 @@ const renderFormList =
                             >
                                 <Input
                                     {...getTestAttributes(
-                                        testIds.createCustomer.form.elements
-                                            .projects.name,
+                                        testIds.createOrUpdateCustomer.form
+                                            .elements.projects.name,
                                     )}
                                 />
                             </Form.Item>
@@ -95,8 +95,8 @@ const renderFormList =
                             >
                                 <Input
                                     {...getTestAttributes(
-                                        testIds.createCustomer.form.elements
-                                            .projects.contact,
+                                        testIds.createOrUpdateCustomer.form
+                                            .elements.projects.contact,
                                     )}
                                 />
                             </Form.Item>

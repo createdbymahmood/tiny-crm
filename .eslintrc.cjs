@@ -17,5 +17,6 @@ module.exports = init({
     },
     rules: {
         'import/no-cycle': ['off'],
+        'cypress/unsafe-to-chain-command': ['off'],
     },
 });

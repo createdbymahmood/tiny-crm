@@ -175,7 +175,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
             >
                 <Link
                     to={createRoute('customers.create')}
-                    {...getTestAttributes(testIds.createCustomer.cta)}
+                    {...getTestAttributes(testIds.createOrUpdateCustomer.cta)}
                 >
                     <Button type='primary'>New Customer</Button>
                 </Link>

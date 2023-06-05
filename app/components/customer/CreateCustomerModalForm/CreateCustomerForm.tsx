@@ -66,7 +66,7 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
                     projects: [{}],
                 } as CreateCustomerFormPayload
             }
-            {...getTestAttributes(testIds.createCustomer.form.root)}
+            {...getTestAttributes(testIds.createOrUpdateCustomer.form.create)}
         >
             <CreateCustomerFormView onCancel={onCancel} isLoading={isLoading} />
         </Form>

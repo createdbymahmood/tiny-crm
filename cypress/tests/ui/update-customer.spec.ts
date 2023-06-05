@@ -1,26 +1,35 @@
+import urlcat from 'urlcat';
+
 import * as testIds from '../../../lib/cypress/testIds';
 import type { Customer } from '../../../lib/data-provider/services/customer/customer.types';
 import { paths } from '../../../lib/react-router/paths';
 
-describe('Create Customer', () => {
-    it('should show create customer form', () => {
-        cy.visit(paths.customers.create);
-        cy.findByTestId(testIds.createOrUpdateCustomer.form.create).should(
+describe('pdate Customer', () => {
+    it('should show update customer form', () => {
+        cy.fixture('customer.json')
+            .as('customer')
+            .then((customer: Customer) => {
+                cy.visit(urlcat(paths.customers.update, { id: customer.id }));
+            });
+        cy.findByTestId(testIds.createOrUpdateCustomer.form.update).should(
             'be.visible',
         );
     });
 
-    it('should create new customer', () => {
+    it('should should update current customer', () => {
         cy.fixture('new-customer')
             .as('newCustomer')
             .then((newCustomer: Customer) => {
-                cy.visit(paths.customers.create);
+                cy.visit(
+                    urlcat(paths.customers.update, { id: newCustomer.id }),
+                );
 
-                /* Type customer name */
+                /* Clear previous customer name */
                 cy.findByTestId(
                     testIds.createOrUpdateCustomer.form.elements.company,
                 )
                     .should('be.visible')
+                    .clear()
                     .type(newCustomer.company);
 
                 /* Type customer industry */
@@ -28,6 +37,7 @@ describe('Create Customer', () => {
                     testIds.createOrUpdateCustomer.form.elements.industry,
                 )
                     .should('be.visible')
+                    .clear()
                     .type(newCustomer.industry);
 
                 /* Type customer about */
@@ -35,6 +45,7 @@ describe('Create Customer', () => {
                     testIds.createOrUpdateCustomer.form.elements.about,
                 )
                     .should('be.visible')
+                    .clear()
                     .type(newCustomer.about);
 
                 /* Type customer project's name */
@@ -42,6 +53,7 @@ describe('Create Customer', () => {
                     testIds.createOrUpdateCustomer.form.elements.projects.name,
                 )
                     .should('be.visible')
+                    .clear()
                     .type(newCustomer.projects[0].name);
 
                 /* Type customer project's contact */
@@ -50,6 +62,7 @@ describe('Create Customer', () => {
                         .contact,
                 )
                     .should('be.visible')
+                    .clear()
                     .type(newCustomer.projects[0].contact);
             });
 

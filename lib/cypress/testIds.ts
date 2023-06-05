@@ -1,7 +1,8 @@
-export const createCustomer = {
+export const createOrUpdateCustomer = {
     cta: 'create-customer-cta',
     form: {
-        root: 'create-customer-form',
+        create: 'create-customer-form',
+        update: 'update-customer-form',
         elements: {
             company: 'create-customer-form-name',
             industry: 'create-customer-form-industry',

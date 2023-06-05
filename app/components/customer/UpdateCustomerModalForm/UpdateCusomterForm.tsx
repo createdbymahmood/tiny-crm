@@ -4,9 +4,11 @@ import type {
     FormCancelHandle,
 } from '@components/customer/CreateCustomerModalForm/CreateCustomerForm.types';
 import { CreateCustomerFormView as UpdateCustomerFormView } from '@components/customer/CreateCustomerModalForm/CreateCustomerFormView';
+import * as testIds from '@lib/cypress/testIds';
 import { useUpdateCustomerMutation } from '@lib/data-provider/services/customer';
 import type { Customer } from '@lib/data-provider/services/customer/customer.types';
 import { deepObjectTransformer } from '@utils/deepObjectTransformer';
+import { getTestAttributes } from '@utils/test/getTestAttributes';
 import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import { Form, message } from 'antd';
 import { useForm } from 'antd/es/form/Form';
@@ -73,6 +75,7 @@ export const UpdateCusomterForm: React.FC<UpdateCusomterFormProps> = ({
             onFinish={onSubmit}
             layout='vertical'
             initialValues={transformCustomerToEditableFormValues(customer)}
+            {...getTestAttributes(testIds.createOrUpdateCustomer.form.update)}
         >
             <UpdateCustomerFormView onCancel={onCancel} isLoading={isLoading} />
         </Form>

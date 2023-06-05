@@ -33,7 +33,7 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
             >
                 <Input
                     {...getTestAttributes(
-                        testIds.createCustomer.form.elements.company,
+                        testIds.createOrUpdateCustomer.form.elements.company,
                     )}
                 />
             </Form.Item>
@@ -50,7 +50,7 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
             >
                 <Input
                     {...getTestAttributes(
-                        testIds.createCustomer.form.elements.industry,
+                        testIds.createOrUpdateCustomer.form.elements.industry,
                     )}
                 />
             </Form.Item>
@@ -68,7 +68,7 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                 <Input.TextArea
                     rows={5}
                     {...getTestAttributes(
-                        testIds.createCustomer.form.elements.about,
+                        testIds.createOrUpdateCustomer.form.elements.about,
                     )}
                 />
             </Form.Item>
@@ -95,7 +95,7 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                         htmlType='submit'
                         loading={isLoading}
                         {...getTestAttributes(
-                            testIds.createCustomer.form.elements.submit,
+                            testIds.createOrUpdateCustomer.form.elements.submit,
                         )}
                     >
                         Submit
