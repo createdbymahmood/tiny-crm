@@ -4,9 +4,11 @@ import * as testIds from '../../../lib/cypress/testIds';
 import { paths } from '../../../lib/react-router/paths';
 
 describe('View Customer', () => {
-    it('should display customer list modal', () => {
+    beforeEach(() => {
         cy.visit(paths.customers.index);
+    });
 
+    it('should display customer list modal', () => {
         cy.fixture('customer').then(customer => {
             /* Click on view button */
             cy.findByTestId(testIds.viewCustomer.cta(customer.id))

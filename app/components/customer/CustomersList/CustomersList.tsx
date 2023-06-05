@@ -46,7 +46,7 @@ const renderAction = (customer: Customer) => (
             <Button
                 type='primary'
                 danger
-                {...getTestAttributes(testIds.deleteCustomer.cta)}
+                {...getTestAttributes(testIds.deleteCustomer.cta(customer.id))}
             >
                 Delete
             </Button>

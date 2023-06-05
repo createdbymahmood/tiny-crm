@@ -3,8 +3,11 @@ import type { Customer } from '../../../lib/data-provider/services/customer/cust
 import { paths } from '../../../lib/react-router/paths';
 
 describe('Create Customer', () => {
-    it('should show create customer form', () => {
+    beforeEach(() => {
         cy.visit(paths.customers.create);
+    });
+
+    it('should show create customer form', () => {
         cy.findByTestId(testIds.createOrUpdateCustomer.form.create).should(
             'be.visible',
         );
@@ -14,8 +17,6 @@ describe('Create Customer', () => {
         cy.fixture('new-customer')
             .as('newCustomer')
             .then((newCustomer: Customer) => {
-                cy.visit(paths.customers.create);
-
                 /* Type customer name */
                 cy.findByTestId(
                     testIds.createOrUpdateCustomer.form.elements.company,

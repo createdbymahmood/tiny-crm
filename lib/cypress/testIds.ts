@@ -17,7 +17,7 @@ export const createOrUpdateCustomer = {
 };
 
 export const deleteCustomer = {
-    cta: 'delete-customer-cta',
+    cta: (customerId: string) => `delete-customer-cta-${customerId}`,
 };
 export const viewCustomer = {
     list: {
