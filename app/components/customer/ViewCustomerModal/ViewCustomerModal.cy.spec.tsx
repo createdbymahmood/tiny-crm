@@ -19,7 +19,7 @@ describe('Login Form', () => {
         customer = undefined;
     });
 
-    it('Should setup', () => {
+    it('Should be visible', () => {
         cy.findByTestId(testIds.viewCustomer.content(customer.id)).should(
             'be.visible',
         );
