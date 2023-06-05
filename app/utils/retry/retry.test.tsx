@@ -1,5 +1,5 @@
 import { retry } from '@utils/retry';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 describe('retry()', () => {
     it('returns a Promise', () => {

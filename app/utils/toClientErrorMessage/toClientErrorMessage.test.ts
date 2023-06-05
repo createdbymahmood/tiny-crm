@@ -1,5 +1,5 @@
 import { DEFAULT_ERROR_MESSAGE } from '@configs/constants';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { toClientErrorMessage } from './toClientErrorMessage';
 
