@@ -14,7 +14,7 @@ import type {
 } from 'antd/es/table/interface';
 import { find } from 'lodash';
 import { map, pipe, uniqBy } from 'lodash/fp';
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const expandableContent = {
@@ -191,5 +191,16 @@ export const CustomersList: React.FC<CustomersListProps> = ({
             </Space>
         ),
     };
-    return <Table {...tableProps} columns={tableColumns} dataSource={data} />;
+    return (
+        <Fragment>
+            <Typography.Title
+                level={4}
+                style={{ padding: '0 20px' }}
+                {...getTestAttributes(testIds.viewCustomer.list.title)}
+            >
+                Customers list
+            </Typography.Title>
+            <Table {...tableProps} columns={tableColumns} dataSource={data} />
+        </Fragment>
+    );
 };
