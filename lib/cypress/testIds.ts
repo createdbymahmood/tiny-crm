@@ -9,5 +9,7 @@ export const viewCustomer = {
     list: {
         title: 'customers-list-title',
     },
-    cta: 'view-customer',
+    cta: (customerId: string) => `view-customer-${customerId}`,
+    content: (customerId: string) =>
+        `view-customer-modal-content-${customerId}`,
 };

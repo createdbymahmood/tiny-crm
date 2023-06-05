@@ -39,7 +39,7 @@ const renderAction = (customer: Customer) => (
     <Space size='middle'>
         <Link
             to={createRoute('customers.view', { id: customer.id })}
-            {...getTestAttributes(testIds.viewCustomer.cta)}
+            {...getTestAttributes(testIds.viewCustomer.cta(customer.id))}
         >
             <Space>
                 <Typography>View</Typography>

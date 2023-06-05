@@ -1,0 +1,16 @@
+{
+    "id": "40c0bad7-f1a6-4173-bd44-7ebef044905d",
+    "isActive": false,
+    "company": "Abbott, Olson and Moen",
+    "industry": "insurance",
+    "projects": [
+        {
+            "id": "69812942-9b25-4eb1-8fe2-7b3709f9b29e",
+            "name": "User-friendly",
+            "contact": "ldodamead0@wikipedia.org",
+            "start_date": "2021-10-26T03:45:04Z",
+            "end_date": "2022-06-16T16:27:29Z"
+        }
+    ],
+    "about": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue."
+}
