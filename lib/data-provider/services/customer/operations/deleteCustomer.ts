@@ -1,6 +1,6 @@
 import { urls } from '@lib/data-provider/mock/urls';
 import type { CustomerEndpointBuilder } from '@lib/data-provider/services/customer';
-import { each, findIndex } from 'lodash';
+import { findIndex, includes, remove } from 'lodash';
 
 import { customerApi } from '../customer';
 
@@ -24,11 +24,9 @@ export const deleteCustomers = (build: CustomerEndpointBuilder) =>
                             findIndex(draft, { id }),
                         );
 
-                        each(entityIndexes, entityIndex => {
-                            if (entityIndex > -1) {
-                                draft = draft.splice(entityIndex, 1);
-                            }
-                        });
+                        remove(draft, (_, index) =>
+                            includes(entityIndexes, index),
+                        );
                     },
                 ),
             );
