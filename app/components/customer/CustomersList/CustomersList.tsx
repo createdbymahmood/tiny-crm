@@ -6,7 +6,7 @@ import type {
 } from '@lib/data-provider/services/customer/customer.types';
 import { createRoute } from '@routes/createRoute';
 import { getTestAttributes } from '@utils/test/getTestAttributes';
-import { Button, Space, Table, Tooltip, Typography } from 'antd';
+import { Button, Space, Table, Tag, Tooltip, Typography } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type {
     TablePaginationConfig,
@@ -83,6 +83,19 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
             </Tooltip>
         ),
         width: 200,
+    },
+    {
+        title: 'State',
+        dataIndex: 'isActive',
+        width: 100,
+        responsive: ['md'],
+        render: isActive => {
+            return isActive ? (
+                <Tag color='success'>Active</Tag>
+            ) : (
+                <Tag color='error'>Inactive</Tag>
+            );
+        },
     },
     {
         title: 'Industry',
