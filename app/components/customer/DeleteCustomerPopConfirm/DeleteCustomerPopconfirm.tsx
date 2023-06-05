@@ -10,7 +10,7 @@ import * as React from 'react';
 const useDeleteCustomerPopConfirmState = () => {
     const [deleteCustomers] = useDeleteCustomersMutation();
 
-    const onDeleteCustomer = (customerIds: string[]) => async () => {
+    const onDeleteCustomer = async (customerIds: string[]) => {
         try {
             void message.loading(`Deleting customer(s)`);
             await deleteCustomers(customerIds).unwrap();
@@ -41,7 +41,10 @@ export const DeleteCustomerPopconfirm: React.FC<
             placement='topRight'
             title='Delete customer(s)'
             description='Are you sure to delete selected customer(s)?'
-            onConfirm={onDeleteCustomer(customerIds)}
+            onConfirm={e => {
+                onConfirm?.(e);
+                void onDeleteCustomer(customerIds);
+            }}
             okText='Yes'
             cancelText='No'
             okButtonProps={getTestAttributes(

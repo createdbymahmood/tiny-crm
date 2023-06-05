@@ -127,6 +127,8 @@ export const CustomersList: React.FC<CustomersListProps> = ({
         setSelectedRowKeys(newSelectedRowKeys);
     };
 
+    const clearRowSelection = (): void => setSelectedRowKeys([]);
+
     const rowSelection: TableRowSelection<Customer> = {
         selectedRowKeys,
         onChange: onSelectChange,
@@ -183,6 +185,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
                 {Boolean(selectedRowKeys.length) && (
                     <DeleteCustomerPopconfirm
                         customerIds={selectedRowKeys as string[]}
+                        onConfirm={clearRowSelection}
                     >
                         <Button type='primary' danger>
                             Delete selected customer(s)
