@@ -1,5 +1,6 @@
+import React from 'react';
 import type { Preview } from '@storybook/react';
-
+import { Providers } from '../app/components/providers/Providers';
 const preview: Preview = {
     parameters: {
         actions: { argTypesRegex: '^on[A-Z].*' },
@@ -10,6 +11,15 @@ const preview: Preview = {
             },
         },
     },
+    decorators: [
+        Story => {
+            return (
+                <Providers>
+                    <Story />
+                </Providers>
+            );
+        },
+    ],
 };
 
 export default preview;
