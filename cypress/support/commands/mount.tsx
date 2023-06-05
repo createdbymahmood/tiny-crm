@@ -1,6 +1,6 @@
 import { mount } from 'cypress/react18';
 
-import { Providers } from '../../../app/components/Providers';
+import { Providers } from '../../../app/components/providers';
 
 Cypress.Commands.add(
     'mount',

@@ -6,20 +6,29 @@ import type { ModalProps } from 'antd';
 import { Alert, Modal, Spin } from 'antd';
 import { merge } from 'lodash';
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
 
-const useViewCustomerModalState = () => {
-    const customerId = useParams().id!;
+interface UseViewCustomerModalStateParams {
+    customerId: string;
+}
+
+const useViewCustomerModalState = ({
+    customerId,
+}: UseViewCustomerModalStateParams) => {
     const customerQuery = useGetCustomerQuery(customerId);
     return { customerId, customerQuery };
 };
 
-export interface ViewCustomerModalProps extends ModalProps {}
+export interface ViewCustomerModalProps extends ModalProps {
+    customerId: string;
+}
 
 const defaultModalProps: ModalProps = { footer: null };
 
-export const ViewCustomerModal: React.FC<ViewCustomerModalProps> = props => {
-    const { customerQuery } = useViewCustomerModalState();
+export const ViewCustomerModal: React.FC<ViewCustomerModalProps> = ({
+    customerId,
+    ...props
+}) => {
+    const { customerQuery } = useViewCustomerModalState({ customerId });
 
     const content: React.ReactNode = (() => {
         if (customerQuery.isLoading) return <Spin />;

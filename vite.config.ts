@@ -19,6 +19,8 @@ const viteConfig = defineConfig({
     test: {
         environment: 'jsdom',
         globals: true,
+        exclude: ['node_modules', '**/*.cy.spec.tsx'],
+        include: ['app/**/*.{spec,test}.{j,t}s?(x)'],
     },
     envPrefix: 'APP',
 });
