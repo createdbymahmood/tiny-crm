@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import { describe, expect, it } from 'vitest';
 
 import { useUpdate } from './useUpdate';
@@ -34,11 +34,11 @@ describe('useUpdate()', () => {
 
         expect(renders).toBe(1);
 
-        act(() => update());
+        update();
 
         expect(renders).toBe(2);
 
-        act(() => update());
+        update();
 
         expect(renders).toBe(3);
     });
