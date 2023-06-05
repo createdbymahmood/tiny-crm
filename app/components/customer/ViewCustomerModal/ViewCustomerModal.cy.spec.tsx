@@ -1,3 +1,4 @@
+import { Providers } from '@components/providers';
 import * as testIds from '@lib/cypress/testIds';
 import type { Customer } from '@lib/data-provider/services/customer/customer.types';
 
@@ -11,7 +12,11 @@ describe('Login Form', () => {
             .as('customer')
             .then((fixture: Customer) => {
                 customer = fixture;
-                cy.mount(<ViewCustomerModal customerId={customer.id} open />);
+                cy.mount(
+                    <Providers>
+                        <ViewCustomerModal customerId={customer.id} open />
+                    </Providers>,
+                );
             });
     });
 

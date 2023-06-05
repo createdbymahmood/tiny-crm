@@ -5,6 +5,8 @@
  */
 import type { FormCancelHandle } from '@components/customer/CreateCustomerModalForm/CreateCustomerForm.types';
 import { CreateCustomerProjectsField } from '@components/customer/CreateCustomerModalForm/CreateCustomerProjectsField';
+import * as testIds from '@lib/cypress/testIds';
+import { getTestAttributes } from '@utils/test/getTestAttributes';
 import { Button, Checkbox, Form, Input, Space } from 'antd';
 import * as React from 'react';
 
@@ -29,7 +31,11 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                     },
                 ]}
             >
-                <Input />
+                <Input
+                    {...getTestAttributes(
+                        testIds.createCustomer.form.elements.company,
+                    )}
+                />
             </Form.Item>
 
             <Form.Item
@@ -42,7 +48,11 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                     },
                 ]}
             >
-                <Input />
+                <Input
+                    {...getTestAttributes(
+                        testIds.createCustomer.form.elements.industry,
+                    )}
+                />
             </Form.Item>
 
             <Form.Item
@@ -55,7 +65,12 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                     },
                 ]}
             >
-                <Input.TextArea rows={5} />
+                <Input.TextArea
+                    rows={5}
+                    {...getTestAttributes(
+                        testIds.createCustomer.form.elements.about,
+                    )}
+                />
             </Form.Item>
 
             <Form.Item name='isActive' valuePropName='checked'>
@@ -79,6 +94,9 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                         type='primary'
                         htmlType='submit'
                         loading={isLoading}
+                        {...getTestAttributes(
+                            testIds.createCustomer.form.elements.submit,
+                        )}
                     >
                         Submit
                     </Button>

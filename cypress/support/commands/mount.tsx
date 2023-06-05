@@ -1,12 +1,6 @@
 import { mount } from 'cypress/react18';
 
-import { Providers } from '../../../app/components/providers';
-
-Cypress.Commands.add(
-    'mount',
-    (...[element, ...rest]: Parameters<typeof mount>) =>
-        mount(<Providers>{element}</Providers>, ...rest),
-);
+Cypress.Commands.add('mount', mount);
 
 declare global {
     namespace Cypress {

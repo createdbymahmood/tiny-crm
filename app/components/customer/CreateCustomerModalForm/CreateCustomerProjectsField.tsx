@@ -1,5 +1,7 @@
 import type { CreateCustomerFormPayload } from '@components/customer/CreateCustomerModalForm/CreateCustomerForm.types';
 import { ISO_8601_DATE_FORMAT } from '@configs/constants';
+import * as testIds from '@lib/cypress/testIds';
+import { getTestAttributes } from '@utils/test/getTestAttributes';
 import type { DatePickerProps, FormInstance } from 'antd';
 import { Button, DatePicker, Form, Input } from 'antd';
 import type { RuleObject } from 'antd/es/form';
@@ -79,14 +81,24 @@ const renderFormList =
                                     },
                                 ]}
                             >
-                                <Input />
+                                <Input
+                                    {...getTestAttributes(
+                                        testIds.createCustomer.form.elements
+                                            .projects.name,
+                                    )}
+                                />
                             </Form.Item>
 
                             <Form.Item
                                 label='Contact'
                                 name={getFieldName('contact')}
                             >
-                                <Input />
+                                <Input
+                                    {...getTestAttributes(
+                                        testIds.createCustomer.form.elements
+                                            .projects.contact,
+                                    )}
+                                />
                             </Form.Item>
 
                             <Form.Item

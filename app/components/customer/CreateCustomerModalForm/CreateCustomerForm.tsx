@@ -3,7 +3,9 @@
  * CreateCustomer
  *
  */
+import * as testIds from '@lib/cypress/testIds';
 import { useCreateCustomerMutation } from '@lib/data-provider/services/customer';
+import { getTestAttributes } from '@utils/test/getTestAttributes';
 import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import { transformAllDayjsInstancesToIso8601FormattedValue } from '@utils/transformAllDayjsInstancesToIso8601FormattedValue';
 import { transformEmptyValuesToNull } from '@utils/transformEmptyValuesToNull';
@@ -61,9 +63,10 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
             initialValues={
                 {
                     isActive: true,
-                    projects: [{ name: 'Some Cool AI project' }],
+                    projects: [{}],
                 } as CreateCustomerFormPayload
             }
+            {...getTestAttributes(testIds.createCustomer.form.root)}
         >
             <CreateCustomerFormView onCancel={onCancel} isLoading={isLoading} />
         </Form>

@@ -13,7 +13,7 @@ export interface ProvidersProps {
     children: React.ReactNode;
 }
 
-export const Providers = ({ children }) => {
+export const Providers: React.FC<ProvidersProps> = ({ children }) => {
     const { isLoading } = useStartMockServiceWorker();
     if (isLoading) return <Spin />;
 

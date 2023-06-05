@@ -7,6 +7,7 @@ export default defineConfig({
         specPattern: 'cypress/tests/**/*.spec.{js,jsx,ts,tsx}',
         baseUrl: 'http://localhost:9900',
     },
+    defaultCommandTimeout: 20_000,
     component: {
         devServer: {
             framework: 'react',
@@ -14,6 +15,6 @@ export default defineConfig({
             viteConfig,
         },
         specPattern: 'app/**/*.cy.spec.{js,jsx,ts,tsx}',
-        supportFile: 'cypress/support/component.ts',
+        supportFile: 'cypress/support/component.tsx',
     },
 });
