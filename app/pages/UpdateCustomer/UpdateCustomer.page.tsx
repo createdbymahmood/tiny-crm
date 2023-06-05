@@ -8,7 +8,6 @@ export const UpdateCustomer: React.FC = () => {
     return (
         <React.Fragment>
             <Helmet title='Update Customer' />
-
             <UpdateCustomerModal
                 open={modal.isOpen}
                 onCancel={modal.onCancel}
