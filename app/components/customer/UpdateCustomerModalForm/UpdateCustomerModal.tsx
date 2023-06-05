@@ -4,20 +4,27 @@ import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import type { ModalProps } from 'antd';
 import { Alert, Modal, Spin } from 'antd';
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
 
-export interface UpdateCustomerModalProps extends ModalProps {}
+export interface UpdateCustomerModalProps extends ModalProps {
+    customerId: string;
+}
 
-const useUpdateCustomerModalState = () => {
-    const customerId = useParams().id!;
+interface UseUpdateCustomerModalStateParams {
+    customerId: string;
+}
+
+const useUpdateCustomerModalState = ({
+    customerId,
+}: UseUpdateCustomerModalStateParams) => {
     const customerQuery = useGetCustomerQuery(customerId);
     return { customerQuery };
 };
 
-export const UpdateCustomerModal: React.FC<
-    UpdateCustomerModalProps
-> = props => {
-    const { customerQuery } = useUpdateCustomerModalState();
+export const UpdateCustomerModal: React.FC<UpdateCustomerModalProps> = ({
+    customerId,
+    ...props
+}) => {
+    const { customerQuery } = useUpdateCustomerModalState({ customerId });
 
     const content: React.ReactNode = (() => {
         if (customerQuery.isLoading) return <Spin />;
