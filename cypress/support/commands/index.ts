@@ -36,5 +36,4 @@
 //   }
 // }
 
-import './createCustomer';
 import './mount';
