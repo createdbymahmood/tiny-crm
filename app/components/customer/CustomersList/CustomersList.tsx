@@ -23,10 +23,6 @@ const expandableContent = {
     ),
 };
 
-interface CustomersListProps {
-    isLoading: boolean;
-}
-
 const createIndustryFiltersMap = pipe(
     map((customer: Customer) => ({
         text: customer.industry,
@@ -111,6 +107,11 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         width: 230,
     },
 ];
+
+interface CustomersListProps {
+    isLoading: boolean;
+    data?: Customers;
+}
 
 export const CustomersList: React.FC<CustomersListProps> = ({
     isLoading,
