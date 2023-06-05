@@ -1,12 +1,10 @@
 import { render, screen } from '@testing-library/react';
+import { sleep } from '@utils/sleep';
 import { describe, expect, it } from 'vitest';
 
 import { lazyImport } from './lazyImport';
 
 const loadingIndicator = 'Loading...';
-
-// eslint-disable-next-line no-promise-executor-return
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 describe('lazyImport', () => {
     it('should render without any props', () => {

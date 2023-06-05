@@ -2,6 +2,7 @@ import { MOCK_API_CALL_REQUEST_DELAY } from '@configs/constants';
 import { env } from '@configs/env';
 import { urls } from '@lib/data-provider/mock/urls';
 import { createEntityAdapter } from '@reduxjs/toolkit';
+import { sleep } from '@utils/sleep';
 import { each, find } from 'lodash';
 import { rest } from 'msw';
 import { v4 as uuid } from 'uuid';
@@ -15,15 +16,20 @@ const adapter = createEntityAdapter<Customer>();
 // eslint-disable-next-line fp/no-let
 let state = adapter.getInitialState();
 
-void (async () => {
+const dynamicSeedPromise = (async () => {
     try {
         const response = await fetch(env.JsonMockUrl);
-        const data = await response.json();
-        state = adapter.setAll(state, data);
+        return await response.json();
     } catch (error) {
         state = adapter.setAll(state, customersMock);
     }
 })();
+
+const mockSeedPromise = sleep(MOCK_API_CALL_REQUEST_DELAY, customersMock);
+
+await Promise.race([dynamicSeedPromise, mockSeedPromise]).then(data => {
+    state = adapter.setAll(state, data);
+});
 
 export const handlers = [
     rest.get(urls.customer, (req, res, ctx) => {
