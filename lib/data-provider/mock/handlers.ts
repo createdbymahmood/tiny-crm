@@ -1,37 +1,16 @@
 import { MOCK_API_CALL_REQUEST_DELAY } from '@configs/constants';
-import { env } from '@configs/env';
 import { urls } from '@lib/data-provider/mock/urls';
-import { createEntityAdapter } from '@reduxjs/toolkit';
-import { sleep } from '@utils/sleep';
+import type { EntityAdapter, EntityState } from '@reduxjs/toolkit';
 import { each, find } from 'lodash';
 import { rest } from 'msw';
 import { v4 as uuid } from 'uuid';
 
 import type { Customer } from '../services/customer/customer.types.d';
-// eslint-disable-next-line import/extensions
-import customersMock from './customers.json';
 
-const adapter = createEntityAdapter<Customer>();
-
-// eslint-disable-next-line fp/no-let
-let state = adapter.getInitialState();
-
-const dynamicSeedPromise = (async () => {
-    try {
-        const response = await fetch(env.JsonMockUrl);
-        return await response.json();
-    } catch (error) {
-        state = adapter.setAll(state, customersMock);
-    }
-})();
-
-const mockSeedPromise = sleep(MOCK_API_CALL_REQUEST_DELAY, customersMock);
-
-await Promise.race([dynamicSeedPromise, mockSeedPromise]).then(data => {
-    state = adapter.setAll(state, data);
-});
-
-export const handlers = [
+export const getHandlers = (
+    state: EntityState<Customer>,
+    adapter: EntityAdapter<Customer>,
+) => [
     rest.get(urls.customer, (req, res, ctx) => {
         const { id } = req.params as { id: string };
         const customer = find(state.entities, { id });

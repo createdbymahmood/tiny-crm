@@ -1,4 +1,4 @@
-import { Providers } from '@components/Providers';
+import { Providers } from '@components/providers';
 import { Routes } from '@routes/routes';
 import React from 'react';
 import ReactDOM from 'react-dom/client';

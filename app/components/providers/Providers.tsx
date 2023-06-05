@@ -1,5 +1,5 @@
 import { themeConfig } from '@lib/ant-design';
-import { worker } from '@lib/data-provider/mock/browser';
+// eslint-disable-next-line import/extensions
 import { store } from '@lib/data-provider/store';
 import { ConfigProvider, Spin } from 'antd';
 import * as React from 'react';
@@ -7,25 +7,16 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
+import { useStartMockServiceWorker } from './useStartMockServiceWorker';
+
 export interface ProvidersProps {
     children: React.ReactNode;
 }
 
-const useStartMockServiceWorker = () => {
-    const [isLoading, setIsLoading] = React.useState(true);
-    React.useEffect(() => {
-        void (async () => {
-            await worker.start();
-            setIsLoading(false);
-        })();
-    }, []);
-
-    return { isLoading };
-};
-
 export const Providers = ({ children }) => {
     const { isLoading } = useStartMockServiceWorker();
     if (isLoading) return <Spin />;
+
     return (
         <Provider store={store}>
             <BrowserRouter>
