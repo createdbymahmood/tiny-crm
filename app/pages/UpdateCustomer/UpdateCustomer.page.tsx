@@ -1,4 +1,4 @@
-import { UpdateCustomerModal } from '@components/customer/UpdateCustomerModalForm/UpdateCustomerModal';
+import { UpdateCustomerModal } from '@components/customer';
 import { useModalRouteState } from 'app/hooks/useModalRouteState';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
