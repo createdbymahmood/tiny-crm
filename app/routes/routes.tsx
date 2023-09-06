@@ -27,7 +27,7 @@ export const routes: RouteObject[] = [
         ],
     },
     {
-        path: paths.index,
+        path: '*',
         element: <Navigate to={paths.customers.index} />,
     },
 ];
