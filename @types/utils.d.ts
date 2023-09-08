@@ -6,4 +6,4 @@ type PathImpl<T, K extends keyof T> = K extends string
         : K
     : never;
 
-export type ObjectPath<T> = PathImpl<T, keyof T> | keyof T;
+export type DotNotationObjectPath<T> = PathImpl<T, keyof T> | keyof T;
