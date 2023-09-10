@@ -21,7 +21,7 @@
         "strictNullChecks": true,
         "types": ["cypress", "@testing-library/cypress"]
     },
-    "include": ["app", "@types/index.d.ts", "lib", "configs"],
+    "include": ["configs", "@types/index.d.ts", "src", "main.tsx"],
 
     "references": [{ "path": "./tsconfig.node.json" }],
     "exclude": ["node_modules"]

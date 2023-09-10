@@ -1,12 +1,11 @@
 {
     "compilerOptions": {
         "paths": {
-            "@lib/*": ["./lib/*"],
-            "@components/*": ["./app/components/*"],
-            "@pages/*": ["./app/pages/*"],
-            "@utils/*": ["./app/utils/*"],
-            "@routes/*": ["./app/routes/*"],
-            "@configs/*": ["./configs/*"]
+            "@configs/*": ["./configs/*"],
+            "@app/*": ["./src/app/*"],
+            "@lib/*": ["./src/lib/*"],
+            "@utils/*": ["./src/utils/*"],
+            "@hooks": ["./src/hooks/index.ts"]
         }
     }
 }
