@@ -11,10 +11,12 @@
         "test": "vitest",
         "cypress:open": "cypress open",
         "storybook": "storybook dev -p 6006",
-        "build-storybook": "storybook build"
+        "build-storybook": "storybook build",
+        "rtk-code-generate": "npx @rtk-query/codegen-openapi ./src/lib/data-provider/services/openapi-config.ts"
     },
     "dependencies": {
         "@reduxjs/toolkit": "1.9.5",
+        "@rtk-query/codegen-openapi": "1.0.0",
         "antd": "5.5.2",
         "dayjs": "1.11.8",
         "immer": "10.0.2",
@@ -50,6 +52,7 @@
         "@typescript-eslint/parser": "5.59.0",
         "@vitejs/plugin-react": "4.0.0",
         "cypress": "12.13.0",
+        "esbuild-runner": "2.2.2",
         "eslint": "8.38.0",
         "eslint-plugin-jest": "27.2.1",
         "eslint-plugin-react-hooks": "4.6.0",
@@ -59,6 +62,7 @@
         "prettier": "2.8.8",
         "prop-types": "^15.8.1",
         "storybook": "^7.0.18",
+        "ts-node": "10.9.1",
         "typescript": "5.0.2",
         "vite": "4.3.9",
         "vite-plugin-checker": "0.6.0",

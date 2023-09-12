@@ -4,7 +4,7 @@ import { getTestAttributes } from '@utils/test/getTestAttributes';
 import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import type { PopconfirmProps } from 'antd';
 import { message, Popconfirm } from 'antd';
-import { head } from 'lodash';
+import { head, omit } from 'lodash';
 import * as React from 'react';
 
 const useDeleteCustomerPopConfirmState = () => {
@@ -34,10 +34,11 @@ export const DeleteCustomerPopconfirm: React.FC<
     DeleteCustomerPopConfirmProps
 > = ({ customerIds, onConfirm, ...props }) => {
     const { onDeleteCustomer } = useDeleteCustomerPopConfirmState();
+    const omittedProps = ['onConfirm', 'okButtonProps'];
 
     return (
         <Popconfirm
-            {...props}
+            {...omit(props, omittedProps)}
             placement='topRight'
             title='Delete customer(s)'
             description='Are you sure to delete selected customer(s)?'
