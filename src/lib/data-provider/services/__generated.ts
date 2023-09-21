@@ -1,4 +1,5 @@
 import { emptySplitApi as api } from './emptyApi';
+
 const injectedRtkApi = api.injectEndpoints({
     endpoints: build => ({
         updatePet: build.mutation<UpdatePetApiResponse, UpdatePetApiArg>({
@@ -133,144 +134,144 @@ const injectedRtkApi = api.injectEndpoints({
 });
 export { injectedRtkApi as api };
 export type UpdatePetApiResponse = /** status 200 Successful operation */ Pet;
-export type UpdatePetApiArg = {
+export interface UpdatePetApiArg {
     /** Update an existent pet in the store */
     pet: Pet;
-};
+}
 export type AddPetApiResponse = /** status 200 Successful operation */ Pet;
-export type AddPetApiArg = {
+export interface AddPetApiArg {
     /** Create a new pet in the store */
     pet: Pet;
-};
+}
 export type FindPetsByStatusApiResponse =
     /** status 200 successful operation */ Pet[];
-export type FindPetsByStatusApiArg = {
+export interface FindPetsByStatusApiArg {
     /** Status values that need to be considered for filter */
     status?: 'available' | 'pending' | 'sold';
-};
+}
 export type FindPetsByTagsApiResponse =
     /** status 200 successful operation */ Pet[];
-export type FindPetsByTagsApiArg = {
+export interface FindPetsByTagsApiArg {
     /** Tags to filter by */
     tags?: string[];
-};
+}
 export type GetPetByIdApiResponse = /** status 200 successful operation */ Pet;
-export type GetPetByIdApiArg = {
+export interface GetPetByIdApiArg {
     /** ID of pet to return */
     petId: number;
-};
+}
 export type UpdatePetWithFormApiResponse = unknown;
-export type UpdatePetWithFormApiArg = {
+export interface UpdatePetWithFormApiArg {
     /** ID of pet that needs to be updated */
     petId: number;
     /** Name of pet that needs to be updated */
     name?: string;
     /** Status of pet that needs to be updated */
     status?: string;
-};
+}
 export type DeletePetApiResponse = unknown;
-export type DeletePetApiArg = {
+export interface DeletePetApiArg {
     apiKey?: string;
     /** Pet id to delete */
     petId: number;
-};
+}
 export type UploadFileApiResponse =
     /** status 200 successful operation */ ApiResponse;
-export type UploadFileApiArg = {
+export interface UploadFileApiArg {
     /** ID of pet to update */
     petId: number;
     /** Additional Metadata */
     additionalMetadata?: string;
     body: Blob;
-};
-export type GetInventoryApiResponse = /** status 200 successful operation */ {
+}
+export interface GetInventoryApiResponse {
     [key: string]: number;
-};
+}
 export type GetInventoryApiArg = void;
 export type PlaceOrderApiResponse =
     /** status 200 successful operation */ Order;
-export type PlaceOrderApiArg = {
+export interface PlaceOrderApiArg {
     order: Order;
-};
+}
 export type GetOrderByIdApiResponse =
     /** status 200 successful operation */ Order;
-export type GetOrderByIdApiArg = {
+export interface GetOrderByIdApiArg {
     /** ID of order that needs to be fetched */
     orderId: number;
-};
+}
 export type DeleteOrderApiResponse = unknown;
-export type DeleteOrderApiArg = {
+export interface DeleteOrderApiArg {
     /** ID of the order that needs to be deleted */
     orderId: number;
-};
+}
 export type CreateUserApiResponse = unknown;
-export type CreateUserApiArg = {
+export interface CreateUserApiArg {
     /** Created user object */
     user: User;
-};
+}
 export type CreateUsersWithListInputApiResponse =
     /** status 200 Successful operation */ User;
-export type CreateUsersWithListInputApiArg = {
+export interface CreateUsersWithListInputApiArg {
     body: User[];
-};
+}
 export type LoginUserApiResponse =
     /** status 200 successful operation */ string;
-export type LoginUserApiArg = {
+export interface LoginUserApiArg {
     /** The user name for login */
     username?: string;
     /** The password for login in clear text */
     password?: string;
-};
+}
 export type LogoutUserApiResponse = unknown;
 export type LogoutUserApiArg = void;
 export type GetUserByNameApiResponse =
     /** status 200 successful operation */ User;
-export type GetUserByNameApiArg = {
+export interface GetUserByNameApiArg {
     /** The name that needs to be fetched. Use user1 for testing.  */
     username: string;
-};
+}
 export type UpdateUserApiResponse = unknown;
-export type UpdateUserApiArg = {
+export interface UpdateUserApiArg {
     /** name that need to be deleted */
     username: string;
     /** Update an existent user in the store */
     user: User;
-};
+}
 export type DeleteUserApiResponse = unknown;
-export type DeleteUserApiArg = {
+export interface DeleteUserApiArg {
     /** The name that needs to be deleted */
     username: string;
-};
-export type Category = {
+}
+export interface Category {
     id?: number;
     name?: string;
-};
-export type Tag = {
+}
+export interface Tag {
     id?: number;
     name?: string;
-};
-export type Pet = {
+}
+export interface Pet {
     id?: number;
     name: string;
     category?: Category;
     photoUrls: string[];
     tags?: Tag[];
     status?: 'available' | 'pending' | 'sold';
-};
-export type ApiResponse = {
+}
+export interface ApiResponse {
     code?: number;
     type?: string;
     message?: string;
-};
-export type Order = {
+}
+export interface Order {
     id?: number;
     petId?: number;
     quantity?: number;
     shipDate?: string;
-    status?: 'placed' | 'approved' | 'delivered';
+    status?: 'approved' | 'delivered' | 'placed';
     complete?: boolean;
-};
-export type User = {
+}
+export interface User {
     id?: number;
     username?: string;
     firstName?: string;
@@ -279,7 +280,7 @@ export type User = {
     password?: string;
     phone?: string;
     userStatus?: number;
-};
+}
 export const {
     useUpdatePetMutation,
     useAddPetMutation,
