@@ -4,7 +4,7 @@ import type {
     Customer,
     Customers,
 } from '@lib/data-provider/services/customer/customer.types';
-import { createRoute } from '@lib/react-router/createRoute';
+import { createUrl } from '@lib/react-router/createUrl';
 import { getTestAttributes } from '@utils/test/getTestAttributes';
 import { Button, Space, Table, Tag, Tooltip, Typography } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
@@ -34,7 +34,7 @@ const createIndustryFiltersMap = pipe(
 const renderAction = (customer: Customer) => (
     <Space size='middle'>
         <Link
-            to={createRoute('customers.view', { id: customer.id })}
+            to={createUrl('customers.view', { id: customer.id })}
             {...getTestAttributes(testIds.viewCustomer.cta(customer.id))}
         >
             <Space>
@@ -52,7 +52,7 @@ const renderAction = (customer: Customer) => (
             </Button>
         </DeleteCustomerPopconfirm>
 
-        <Link to={createRoute('customers.update', { id: customer.id })}>
+        <Link to={createUrl('customers.update', { id: customer.id })}>
             <Button type='default'>Edit</Button>
         </Link>
     </Space>
@@ -189,7 +189,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
                 }}
             >
                 <Link
-                    to={createRoute('customers.create')}
+                    to={createUrl('customers.create')}
                     {...getTestAttributes(testIds.createOrUpdateCustomer.cta)}
                 >
                     <Button type='primary'>New Customer</Button>

@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import type { ParamMap } from 'urlcat';
 import generatePath from 'urlcat';
 
-export const createRoute = (
+export const createUrl = (
     path: DotNotationObjectPath<typeof paths>,
     params: ParamMap = {},
 ) => {
