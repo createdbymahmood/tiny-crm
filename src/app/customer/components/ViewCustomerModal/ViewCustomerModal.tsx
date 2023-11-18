@@ -36,8 +36,8 @@ export const ViewCustomerModal: React.FC<ViewCustomerModalProps> = ({
         if (!customerQuery.data)
             return (
                 <Alert
-                    type='error'
                     message={toClientErrorMessage(customerQuery.error)}
+                    type='error'
                 />
             );
 

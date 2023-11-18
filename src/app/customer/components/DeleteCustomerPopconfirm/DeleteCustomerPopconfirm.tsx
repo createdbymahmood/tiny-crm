@@ -39,18 +39,18 @@ export const DeleteCustomerPopconfirm: React.FC<
     return (
         <Popconfirm
             {...omit(props, omittedProps)}
+            cancelText='No'
+            description='Are you sure to delete selected customer(s)?'
+            okButtonProps={getTestAttributes(
+                testIds.deleteCustomer.cta(head(customerIds)!),
+            )}
+            okText='Yes'
             placement='topRight'
             title='Delete customer(s)'
-            description='Are you sure to delete selected customer(s)?'
             onConfirm={e => {
                 onConfirm?.(e);
                 void onDeleteCustomer(customerIds);
             }}
-            okText='Yes'
-            cancelText='No'
-            okButtonProps={getTestAttributes(
-                testIds.deleteCustomer.cta(head(customerIds)!),
-            )}
         />
     );
 };

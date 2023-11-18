@@ -92,9 +92,9 @@ export const CreateCustomerFormView: React.FC<CreateCustomerFormViewProps> = ({
                     </Button>
 
                     <Button
-                        type='primary'
                         htmlType='submit'
                         loading={isLoading}
+                        type='primary'
                         {...getTestAttributes(
                             testIds.createOrUpdateCustomer.form.elements.submit,
                         )}

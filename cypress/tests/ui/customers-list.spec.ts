@@ -1,5 +1,5 @@
-import * as testIds from '../../../lib/cypress/testIds';
-import { paths } from '../../../lib/react-router/paths';
+import * as testIds from '../../../src/lib/cypress/testIds';
+import { paths } from '../../../src/lib/react-router/paths';
 
 describe('Customers List', () => {
     beforeEach(() => {

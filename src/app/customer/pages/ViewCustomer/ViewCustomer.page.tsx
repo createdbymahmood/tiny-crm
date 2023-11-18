@@ -12,9 +12,9 @@ export const ViewCustomer: React.FC = () => {
         <React.Fragment>
             <Helmet title='View Customer' />
             <ViewCustomerModal
+                customerId={customerId}
                 open={modal.isOpen}
                 onCancel={modal.onCancel}
-                customerId={customerId}
             />
         </React.Fragment>
     );

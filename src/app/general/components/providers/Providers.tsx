@@ -23,12 +23,12 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
                 <ConfigProvider theme={themeConfig}>
                     <HelmetProvider>
                         <Helmet
-                            titleTemplate='%s | Customer Management'
                             defaultTitle='Customer Management'
+                            titleTemplate='%s | Customer Management'
                         >
                             <meta
-                                name='description'
                                 content='Customer Management'
+                                name='description'
                             />
                         </Helmet>
                         {children}

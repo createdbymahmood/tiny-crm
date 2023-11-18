@@ -18,5 +18,21 @@ module.exports = init({
     rules: {
         'import/no-cycle': ['off'],
         'cypress/unsafe-to-chain-command': ['off'],
+        'react/jsx-sort-props': [
+            2,
+            {
+                callbacksLast: true,
+                shorthandFirst: false,
+                shorthandLast: true,
+                ignoreCase: true,
+                noSortAlphabetically: false,
+                reservedFirst: [
+                    'key',
+                    'ref',
+                    'children',
+                    'dangerouslySetInnerHTML',
+                ],
+            },
+        ],
     },
 });

@@ -58,17 +58,17 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
     return (
         <Form
             form={form}
-            onFinish={onSubmit}
-            layout='vertical'
             initialValues={
                 {
                     isActive: true,
                     projects: [{}],
                 } as CreateCustomerFormPayload
             }
+            layout='vertical'
+            onFinish={onSubmit}
             {...getTestAttributes(testIds.createOrUpdateCustomer.form.create)}
         >
-            <CreateCustomerFormView onCancel={onCancel} isLoading={isLoading} />
+            <CreateCustomerFormView isLoading={isLoading} onCancel={onCancel} />
         </Form>
     );
 };

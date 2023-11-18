@@ -12,9 +12,9 @@ export const UpdateCustomer: React.FC = () => {
         <React.Fragment>
             <Helmet title='Update Customer' />
             <UpdateCustomerModal
+                customerId={customerId}
                 open={modal.isOpen}
                 onCancel={modal.onCancel}
-                customerId={customerId}
             />
         </React.Fragment>
     );

@@ -32,15 +32,15 @@ export const UpdateCustomerModal: React.FC<UpdateCustomerModalProps> = ({
         if (!customerQuery.data)
             return (
                 <Alert
-                    type='error'
                     message={toClientErrorMessage(customerQuery.error)}
+                    type='error'
                 />
             );
 
         return (
             <UpdateCusomterForm
-                onCancel={props.onCancel}
                 customer={customerQuery.data}
+                onCancel={props.onCancel}
             />
         );
     })();

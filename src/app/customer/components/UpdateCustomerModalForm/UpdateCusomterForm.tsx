@@ -74,12 +74,12 @@ export const UpdateCusomterForm: React.FC<UpdateCusomterFormProps> = ({
     return (
         <Form
             form={form}
-            onFinish={onSubmit}
-            layout='vertical'
             initialValues={transformCustomerToEditableFormValues(customer)}
+            layout='vertical'
+            onFinish={onSubmit}
             {...getTestAttributes(testIds.createOrUpdateCustomer.form.update)}
         >
-            <UpdateCustomerFormView onCancel={onCancel} isLoading={isLoading} />
+            <UpdateCustomerFormView isLoading={isLoading} onCancel={onCancel} />
         </Form>
     );
 };

@@ -71,7 +71,7 @@ const renderFormList =
                     ];
 
                     return (
-                        <Form.Item required={false} key={field.key}>
+                        <Form.Item key={field.key} required={false}>
                             <Form.Item
                                 label='Project name'
                                 name={getFieldName('name')}
@@ -103,19 +103,19 @@ const renderFormList =
                             </Form.Item>
 
                             <Form.Item
-                                name={getFieldName('start_date')}
                                 label='Start Date'
+                                name={getFieldName('start_date')}
                             >
                                 <DatePicker
+                                    disabledDate={getIsStartDateValid}
                                     format={ISO_8601_DATE_FORMAT}
                                     style={{ width: '100%' }}
-                                    disabledDate={getIsStartDateValid}
                                 />
                             </Form.Item>
 
                             <Form.Item
-                                name={getFieldName('end_date')}
                                 label='End Date'
+                                name={getFieldName('end_date')}
                                 rules={[
                                     {
                                         validator: endDateValidator(
@@ -126,11 +126,11 @@ const renderFormList =
                                 ]}
                             >
                                 <DatePicker
-                                    format={ISO_8601_DATE_FORMAT}
-                                    style={{ width: '100%' }}
                                     disabledDate={getIsEndDateValid(
                                         form.getFieldValue(startDateFieldPath),
                                     )}
+                                    format={ISO_8601_DATE_FORMAT}
+                                    style={{ width: '100%' }}
                                     onOpenChange={update}
                                 />
                             </Form.Item>

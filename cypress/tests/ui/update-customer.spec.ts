@@ -1,8 +1,8 @@
 import urlcat from 'urlcat';
 
-import * as testIds from '../../../lib/cypress/testIds';
-import type { Customer } from '../../../lib/data-provider/services/customer/customer.types';
-import { paths } from '../../../lib/react-router/paths';
+import * as testIds from '../../../src/lib/cypress/testIds';
+import type { Customer } from '../../../src/lib/data-provider/services/customer/customer.types';
+import { paths } from '../../../src/lib/react-router/paths';
 
 describe('pdate Customer', () => {
     it('should show update customer form', () => {
