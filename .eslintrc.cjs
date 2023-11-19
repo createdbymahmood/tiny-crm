@@ -34,5 +34,11 @@ module.exports = init({
                 ],
             },
         ],
+        'react/boolean-prop-naming': [
+            'error',
+            { rule: '^(is|has)[A-Z]([A-Za-z0-9]?)+' },
+        ],
+        'react/no-children-prop': ['error'],
+        'react/hook-use-state': ['error'],
     },
 });

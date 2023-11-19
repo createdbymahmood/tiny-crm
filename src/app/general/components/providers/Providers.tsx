@@ -1,5 +1,4 @@
 import { themeConfig } from '@lib/ant-design';
-// eslint-disable-next-line import/extensions
 import { store } from '@lib/data-provider/store';
 import { ConfigProvider, Spin } from 'antd';
 import * as React from 'react';
