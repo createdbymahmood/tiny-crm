@@ -20,9 +20,7 @@ const useDeleteCustomerPopConfirmState = () => {
         }
     };
 
-    return {
-        onDeleteCustomer,
-    };
+    return { onDeleteCustomer };
 };
 
 export interface DeleteCustomerPopConfirmProps
