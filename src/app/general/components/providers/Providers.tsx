@@ -1,10 +1,11 @@
-import { themeConfig } from '@lib/ant-design';
-import { store } from '@lib/data-provider/store';
 import { ConfigProvider, Spin } from 'antd';
 import * as React from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+
+import { themeConfig } from '@/lib/ant-design';
+import { store } from '@/lib/data-provider/store';
 
 import { useStartMockServiceWorker } from './useStartMockServiceWorker';
 

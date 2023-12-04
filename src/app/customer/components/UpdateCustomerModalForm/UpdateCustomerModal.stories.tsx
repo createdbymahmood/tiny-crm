@@ -1,6 +1,6 @@
-// eslint-disable-next-line import/extensions
-import customersMock from '@lib/data-provider/mock/customers.json';
 import type { Meta, StoryObj } from '@storybook/react';
+
+import customersMock from '@/lib/data-provider/mock/customers.json';
 
 import { UpdateCustomerModal } from './UpdateCustomerModal';
 

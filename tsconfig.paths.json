@@ -2,10 +2,7 @@
     "compilerOptions": {
         "paths": {
             "@configs/*": ["./configs/*"],
-            "@app/*": ["./src/app/*"],
-            "@lib/*": ["./src/lib/*"],
-            "@utils/*": ["./src/utils/*"],
-            "@hooks": ["./src/hooks/index.ts"]
+            "@/*": ["./src/*"]
         }
     }
 }

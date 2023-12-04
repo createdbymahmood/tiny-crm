@@ -3,10 +3,11 @@
  *CreateCustomerView
  *
  */
-import * as testIds from '@lib/cypress/testIds';
-import { getTestAttributes } from '@utils/test/getTestAttributes';
 import { Button, Checkbox, Form, Input, Space } from 'antd';
 import * as React from 'react';
+
+import * as testIds from '@/lib/cypress/testIds';
+import { getTestAttributes } from '@/utils/test/getTestAttributes';
 
 import type { FormCancelHandle } from './CreateCustomerForm.types.d';
 import { CreateCustomerProjectsField } from './CreateCustomerProjectsField';

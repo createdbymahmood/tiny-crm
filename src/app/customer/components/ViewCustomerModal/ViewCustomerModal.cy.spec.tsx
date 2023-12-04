@@ -1,6 +1,6 @@
-import { Providers } from '@app/general';
-import * as testIds from '@lib/cypress/testIds';
-import type { Customer } from '@lib/data-provider/services/customer/customer.types';
+import { Providers } from '@/app/general';
+import * as testIds from '@/lib/cypress/testIds';
+import type { Customer } from '@/lib/data-provider/services/customer/customer.types';
 
 import { ViewCustomerModal } from './ViewCustomerModal';
 

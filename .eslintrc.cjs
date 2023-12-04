@@ -40,5 +40,6 @@ module.exports = init({
         ],
         'react/no-children-prop': ['error'],
         'react/hook-use-state': ['error'],
+        'import/extensions': ['off'],
     },
 });

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { sleep } from '@utils/sleep';
 import { describe, expect, it } from 'vitest';
+
+import { sleep } from '@/utils/sleep';
 
 import { lazyImport } from './lazyImport';
 

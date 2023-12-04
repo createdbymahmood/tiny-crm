@@ -1,11 +1,3 @@
-import { DeleteCustomerPopconfirm } from '@app/customer';
-import * as testIds from '@lib/cypress/testIds';
-import type {
-    Customer,
-    Customers,
-} from '@lib/data-provider/services/customer/customer.types';
-import { createUrl } from '@lib/react-router/createUrl';
-import { getTestAttributes } from '@utils/test/getTestAttributes';
 import { Button, Space, Table, Tag, Tooltip, Typography } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type {
@@ -16,6 +8,15 @@ import { find } from 'lodash';
 import { map, pipe, uniqBy } from 'lodash/fp';
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { DeleteCustomerPopconfirm } from '@/app/customer';
+import * as testIds from '@/lib/cypress/testIds';
+import type {
+    Customer,
+    Customers,
+} from '@/lib/data-provider/services/customer/customer.types';
+import { createUrl } from '@/lib/react-router/createUrl';
+import { getTestAttributes } from '@/utils/test/getTestAttributes';
 
 const expandableContent = {
     expandedRowRender: (record: Customer) => (
@@ -133,7 +134,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
     const data = (props as unknown as { data?: Customers }).data?.map(
         customer => ({ ...customer, key: customer.id }),
     );
-    const tableColumns = createColumns(data!);
+    const tableColumns = createColumns(data as Customers);
     const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
     const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -155,11 +156,9 @@ export const CustomersList: React.FC<CustomersListProps> = ({
                     // eslint-disable-next-line fp/no-let
                     let newSelectedRowKeys = [] as React.Key[];
                     newSelectedRowKeys = changeableRowKeys.filter(id => {
-                        const customer = find(data, { id }) as
-                            | Customer
-                            | undefined;
+                        const customer = find(data, { id }) as Customer;
 
-                        if (customer?.isActive) return false;
+                        if (customer.isActive) return false;
                         return true;
                     });
                     setSelectedRowKeys(newSelectedRowKeys);

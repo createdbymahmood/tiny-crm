@@ -1,8 +1,9 @@
-import { paths } from '@lib/react-router/paths';
 import type { DotNotationObjectPath } from '@types';
 import { get } from 'lodash';
 import type { ParamMap } from 'urlcat';
 import generatePath from 'urlcat';
+
+import { paths } from '@/lib/react-router/paths';
 
 export const createUrl = (
     path: DotNotationObjectPath<typeof paths>,

@@ -1,23 +1,24 @@
-import type {
-    CreateCustomerFormPayload as UpdateCustomerFormPayload,
-    FormCancelHandle,
-} from '@app/customer';
-import {
-    createCustomerDtoTransformer,
-    CreateCustomerFormView as UpdateCustomerFormView,
-} from '@app/customer';
-import * as testIds from '@lib/cypress/testIds';
-import { useUpdateCustomerMutation } from '@lib/data-provider/services/customer';
-import type { Customer } from '@lib/data-provider/services/customer/customer.types';
-import { deepObjectTransformer } from '@utils/deepObjectTransformer';
-import { getTestAttributes } from '@utils/test/getTestAttributes';
-import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import { Form, message } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import dayJS from 'dayjs';
 import { produce } from 'immer';
 import { isString, noop } from 'lodash';
 import * as React from 'react';
+
+import type {
+    CreateCustomerFormPayload as UpdateCustomerFormPayload,
+    FormCancelHandle,
+} from '@/app/customer';
+import {
+    createCustomerDtoTransformer,
+    CreateCustomerFormView as UpdateCustomerFormView,
+} from '@/app/customer';
+import * as testIds from '@/lib/cypress/testIds';
+import { useUpdateCustomerMutation } from '@/lib/data-provider/services/customer';
+import type { Customer } from '@/lib/data-provider/services/customer/customer.types';
+import { deepObjectTransformer } from '@/utils/deepObjectTransformer';
+import { getTestAttributes } from '@/utils/test/getTestAttributes';
+import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
 
 export interface UpdateCusomterFormProps {
     onCancel?: FormCancelHandle;

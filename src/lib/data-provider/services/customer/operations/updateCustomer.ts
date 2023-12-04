@@ -1,8 +1,9 @@
-import { urls } from '@lib/data-provider/mock/urls';
-import type { CustomerEndpointBuilder } from '@lib/data-provider/services/customer';
-import { customerApi } from '@lib/data-provider/services/customer';
 import { findIndex } from 'lodash';
 import urlcat from 'urlcat';
+
+import { urls } from '@/lib/data-provider/mock/urls';
+import type { CustomerEndpointBuilder } from '@/lib/data-provider/services/customer';
+import { customerApi } from '@/lib/data-provider/services/customer';
 
 import type * as types from '../customer.types';
 

@@ -1,4 +1,4 @@
-import { lazyImport } from '@utils/lazyImport';
+import { lazyImport } from '@/utils/lazyImport';
 
 const Customers = lazyImport(
     () => import('./Customers.page' /* webpackChunkName: "Customers" */),

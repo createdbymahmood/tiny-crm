@@ -1,10 +1,3 @@
-import {
-    deleteCustomers,
-    getCustomer,
-    getCustomers,
-    updateCustomer,
-} from '@lib/data-provider/services/customer/operations';
-import { createCustomer } from '@lib/data-provider/services/customer/operations/createCustomer';
 import type { EndpointBuilder } from '@reduxjs/toolkit/dist/query/endpointDefinitions';
 import type {
     BaseQueryFn,
@@ -13,6 +6,14 @@ import type {
     FetchBaseQueryMeta,
 } from '@reduxjs/toolkit/query/react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+import {
+    deleteCustomers,
+    getCustomer,
+    getCustomers,
+    updateCustomer,
+} from '@/lib/data-provider/services/customer/operations';
+import { createCustomer } from '@/lib/data-provider/services/customer/operations/createCustomer';
 
 export type CustomerEndpointBuilder = EndpointBuilder<
     BaseQueryFn<

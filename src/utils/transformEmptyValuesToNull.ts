@@ -1,5 +1,6 @@
-import { deepObjectTransformer } from '@utils/deepObjectTransformer';
 import { isEmpty, isNull, isString } from 'lodash';
+
+import { deepObjectTransformer } from '@/utils/deepObjectTransformer';
 
 /**
  *

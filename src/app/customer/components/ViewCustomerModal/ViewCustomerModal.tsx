@@ -1,11 +1,12 @@
-import * as testIds from '@lib/cypress/testIds';
-import { useGetCustomerQuery } from '@lib/data-provider/services/customer';
-import { getTestAttributes } from '@utils/test/getTestAttributes';
-import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import type { ModalProps } from 'antd';
 import { Alert, Modal, Spin } from 'antd';
 import { merge } from 'lodash';
 import * as React from 'react';
+
+import * as testIds from '@/lib/cypress/testIds';
+import { useGetCustomerQuery } from '@/lib/data-provider/services/customer';
+import { getTestAttributes } from '@/utils/test/getTestAttributes';
+import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
 
 interface UseViewCustomerModalStateParams {
     customerId: string;

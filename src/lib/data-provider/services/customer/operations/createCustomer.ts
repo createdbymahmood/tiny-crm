@@ -1,5 +1,5 @@
-import { urls } from '@lib/data-provider/mock/urls';
-import type { CustomerEndpointBuilder } from '@lib/data-provider/services/customer';
+import { urls } from '@/lib/data-provider/mock/urls';
+import type { CustomerEndpointBuilder } from '@/lib/data-provider/services/customer';
 
 import type * as types from '../customer.types';
 

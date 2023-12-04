@@ -1,6 +1,7 @@
-import type { Customer } from '@lib/data-provider/services/customer/customer.types';
 import type { EntityAdapter, EntityState } from '@reduxjs/toolkit';
 import { setupWorker } from 'msw';
+
+import type { Customer } from '@/lib/data-provider/services/customer/customer.types';
 
 import { getHandlers } from './handlers';
 

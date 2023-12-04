@@ -1,8 +1,9 @@
-import { UpdateCustomerModal } from '@app/customer';
-import { useModalRouteState } from '@hooks';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
+
+import { UpdateCustomerModal } from '@/app/customer';
+import { useModalRouteState } from '@/hooks';
 
 export const UpdateCustomer: React.FC = () => {
     const { modal } = useModalRouteState();

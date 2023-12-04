@@ -1,9 +1,10 @@
 import { MOCK_API_CALL_REQUEST_DELAY } from '@configs/constants';
-import { urls } from '@lib/data-provider/mock/urls';
 import type { EntityAdapter, EntityState } from '@reduxjs/toolkit';
 import { each, find } from 'lodash';
 import { rest } from 'msw';
 import { v4 as uuid } from 'uuid';
+
+import { urls } from '@/lib/data-provider/mock/urls';
 
 import type { Customer } from '../services/customer/customer.types.d';
 

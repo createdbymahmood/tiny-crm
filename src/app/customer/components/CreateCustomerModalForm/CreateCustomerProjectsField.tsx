@@ -1,7 +1,4 @@
 import { ISO_8601_DATE_FORMAT } from '@configs/constants';
-import { useUpdate } from '@hooks';
-import * as testIds from '@lib/cypress/testIds';
-import { getTestAttributes } from '@utils/test/getTestAttributes';
 import type { DatePickerProps, FormInstance } from 'antd';
 import { Button, DatePicker, Form, Input } from 'antd';
 import type { RuleObject } from 'antd/es/form';
@@ -9,6 +6,10 @@ import type { NamePath } from 'antd/es/form/interface';
 import type { Dayjs } from 'dayjs';
 import dayJS from 'dayjs';
 import * as React from 'react';
+
+import { useUpdate } from '@/hooks';
+import * as testIds from '@/lib/cypress/testIds';
+import { getTestAttributes } from '@/utils/test/getTestAttributes';
 
 import type { CreateCustomerFormPayload } from './CreateCustomerForm.types.d';
 

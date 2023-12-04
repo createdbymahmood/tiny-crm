@@ -1,11 +1,12 @@
-import * as testIds from '@lib/cypress/testIds';
-import { useDeleteCustomersMutation } from '@lib/data-provider/services/customer';
-import { getTestAttributes } from '@utils/test/getTestAttributes';
-import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import type { PopconfirmProps } from 'antd';
 import { message, Popconfirm } from 'antd';
 import { head, omit } from 'lodash';
 import * as React from 'react';
+
+import * as testIds from '@/lib/cypress/testIds';
+import { useDeleteCustomersMutation } from '@/lib/data-provider/services/customer';
+import { getTestAttributes } from '@/utils/test/getTestAttributes';
+import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
 
 const useDeleteCustomerPopConfirmState = () => {
     const [deleteCustomers] = useDeleteCustomersMutation();

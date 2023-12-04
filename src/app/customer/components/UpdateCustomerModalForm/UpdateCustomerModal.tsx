@@ -1,9 +1,10 @@
-import { UpdateCusomterForm } from '@app/customer';
-import { useGetCustomerQuery } from '@lib/data-provider/services/customer';
-import { toClientErrorMessage } from '@utils/toClientErrorMessage';
 import type { ModalProps } from 'antd';
 import { Alert, Modal, Spin } from 'antd';
 import * as React from 'react';
+
+import { UpdateCusomterForm } from '@/app/customer';
+import { useGetCustomerQuery } from '@/lib/data-provider/services/customer';
+import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
 
 export interface UpdateCustomerModalProps extends ModalProps {
     customerId: string;
