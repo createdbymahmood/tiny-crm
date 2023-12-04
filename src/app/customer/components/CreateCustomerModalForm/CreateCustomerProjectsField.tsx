@@ -46,6 +46,12 @@ const endDateValidator =
         }
     };
 
+const projectsValidator = async (_, names?: string[]) => {
+    if (!names || names.length < 1) {
+        return Promise.reject(new Error('At least 1 project'));
+    }
+};
+
 interface RenderFormListParams {
     form: FormInstance;
     update: () => void;
@@ -157,12 +163,6 @@ const renderFormList =
             </React.Fragment>
         );
     };
-
-const projectsValidator = async (_, names?: string[]) => {
-    if (!names || names.length < 1) {
-        return Promise.reject(new Error('At least 1 project'));
-    }
-};
 
 export const CreateCustomerProjectsField: React.FC = () => {
     const form = Form.useFormInstance<CreateCustomerFormPayload>();
