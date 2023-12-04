@@ -1,88 +1,100 @@
 import { MOCK_API_CALL_REQUEST_DELAY } from '@configs/constants';
 import type { EntityAdapter, EntityState } from '@reduxjs/toolkit';
 import { each, find } from 'lodash';
-import type { StrictResponse } from 'msw';
-import { delay, http, HttpResponse } from 'msw';
+import { rest } from 'msw';
 import { v4 as uuid } from 'uuid';
 
 import { urls } from '@/lib/data-provider/mock/urls';
 
 import type { Customer } from '../services/customer/customer.types.d';
 
-type Response = StrictResponse<{ message: string }>;
 export const getHandlers = (
     state: EntityState<Customer>,
     adapter: EntityAdapter<Customer>,
 ) => [
-    http.get(urls.customer, async ({ params }) => {
-        const { id } = params as { id: string };
+    rest.get(urls.customer, (req, res, ctx) => {
+        const { id } = req.params as { id: string };
         const customer = find(state.entities, { id });
 
         if (!customer) {
-            return HttpResponse.json(
-                { message: `Customer with id ${id} not found` },
-                { status: 404 },
+            return res(
+                ctx.status(404),
+                ctx.json({
+                    message: `Customer with id ${id} not found`,
+                }),
             );
         }
 
-        await delay(MOCK_API_CALL_REQUEST_DELAY);
-        return HttpResponse.json(customer) as unknown as Response;
+        return res(ctx.json(customer), ctx.delay(MOCK_API_CALL_REQUEST_DELAY));
     }),
 
-    http.get(urls.customers, async () => {
-        await delay(MOCK_API_CALL_REQUEST_DELAY);
-        return HttpResponse.json(Object.values(state.entities));
+    rest.get(urls.customers, (_req, res, ctx) => {
+        return res(
+            ctx.json(Object.values(state.entities)),
+            ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+        );
     }),
 
-    http.put(urls.customer, async ({ params, request }) => {
-        const { id } = params as { id: string };
-        const changes = (await request.json()) as Customer;
+    rest.put(urls.customer, async (req, res, ctx) => {
+        const { id } = req.params as { id: string };
+        const changes = await req.json();
         const customer = find(state.entities, { id });
 
-        await delay(MOCK_API_CALL_REQUEST_DELAY);
-
         if (!customer) {
-            return HttpResponse.json(
-                { message: `Customer with id ${id} not found` },
-                { status: 404 },
+            return res(
+                ctx.status(MOCK_API_CALL_REQUEST_DELAY),
+                ctx.json({
+                    message: `Customer with id ${id} not found`,
+                }),
+                ctx.delay(),
             );
         }
 
         state = adapter.updateOne(state, { id, changes });
-        return HttpResponse.json(state.entities[id]) as unknown as Response;
+        return res(
+            ctx.json(state.entities[id]),
+            ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+        );
     }),
 
-    http.post(urls.deleteCustomers, async ({ request }) => {
-        const { ids } = (await request.json()) as { ids: string[] };
+    rest.post(urls.deleteCustomers, async (req, res, ctx) => {
+        const { ids } = await req.json();
         const customers = ids
             .map(id => find(state.entities, { id }))
             .filter(Boolean);
 
-        await delay(MOCK_API_CALL_REQUEST_DELAY);
-
         if (!customers.length) {
-            return HttpResponse.json(
-                {
+            return res(
+                ctx.json({
                     message: `No customers found with specified ids`,
-                },
-                { status: 404 },
+                }),
+                ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+                ctx.status(404),
             );
         }
 
         state = adapter.removeMany(state, ids);
-        return HttpResponse.json({ ids }) as unknown as Response;
+
+        return res(
+            ctx.json({
+                ids,
+                success: true,
+            }),
+            ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+        );
     }),
 
-    http.post(urls.customers, async ({ request }) => {
-        const customer = (await request.json()) as Customer;
+    rest.post(urls.customers, async (req, res, ctx) => {
+        const customer: Customer = await req.json();
 
         each(customer.projects, project => {
             project.id = uuid();
         });
 
         state = adapter.addOne(state, { ...customer, id: uuid() } as Customer);
-        await delay(MOCK_API_CALL_REQUEST_DELAY);
-
-        return HttpResponse.json(Object.values(state.entities));
+        return res(
+            ctx.json(Object.values(state.entities)),
+            ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+        );
     }),
 ];
