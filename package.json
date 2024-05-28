@@ -17,6 +17,7 @@
     "dependencies": {
         "@reduxjs/toolkit": "1.9.5",
         "@rtk-incubator/rtk-query-codegen-openapi": "0.5.1",
+        "@rtk-query/codegen-openapi": "1.2.0",
         "antd": "5.5.2",
         "dayjs": "1.11.8",
         "immer": "10.0.2",
