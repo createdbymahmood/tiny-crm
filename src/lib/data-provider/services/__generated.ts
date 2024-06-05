@@ -1,137 +1,184 @@
 import { emptySplitApi as api } from './emptyApi';
-const injectedRtkApi = api.injectEndpoints({
-    endpoints: build => ({
-        updatePet: build.mutation<UpdatePetApiResponse, UpdatePetApiArg>({
-            query: queryArg => ({
-                url: `/pet`,
-                method: 'PUT',
-                body: queryArg.pet,
+export const addTagTypes = ['pet', 'store', 'user'] as const;
+const injectedRtkApi = api
+    .enhanceEndpoints({
+        addTagTypes,
+    })
+    .injectEndpoints({
+        endpoints: build => ({
+            updatePet: build.mutation<UpdatePetApiResponse, UpdatePetApiArg>({
+                query: queryArg => ({
+                    url: `/pet`,
+                    method: 'PUT',
+                    body: queryArg.pet,
+                }),
+                invalidatesTags: ['pet'],
             }),
-        }),
-        addPet: build.mutation<AddPetApiResponse, AddPetApiArg>({
-            query: queryArg => ({
-                url: `/pet`,
-                method: 'POST',
-                body: queryArg.pet,
+            addPet: build.mutation<AddPetApiResponse, AddPetApiArg>({
+                query: queryArg => ({
+                    url: `/pet`,
+                    method: 'POST',
+                    body: queryArg.pet,
+                }),
+                invalidatesTags: ['pet'],
             }),
-        }),
-        findPetsByStatus: build.query<
-            FindPetsByStatusApiResponse,
-            FindPetsByStatusApiArg
-        >({
-            query: queryArg => ({
-                url: `/pet/findByStatus`,
-                params: { status: queryArg.status },
+            findPetsByStatus: build.query<
+                FindPetsByStatusApiResponse,
+                FindPetsByStatusApiArg
+            >({
+                query: queryArg => ({
+                    url: `/pet/findByStatus`,
+                    params: { status: queryArg.status },
+                }),
+                providesTags: ['pet'],
             }),
-        }),
-        findPetsByTags: build.query<
-            FindPetsByTagsApiResponse,
-            FindPetsByTagsApiArg
-        >({
-            query: queryArg => ({
-                url: `/pet/findByTags`,
-                params: { tags: queryArg.tags },
+            findPetsByTags: build.query<
+                FindPetsByTagsApiResponse,
+                FindPetsByTagsApiArg
+            >({
+                query: queryArg => ({
+                    url: `/pet/findByTags`,
+                    params: { tags: queryArg.tags },
+                }),
+                providesTags: ['pet'],
             }),
-        }),
-        getPetById: build.query<GetPetByIdApiResponse, GetPetByIdApiArg>({
-            query: queryArg => ({ url: `/pet/${queryArg.petId}` }),
-        }),
-        updatePetWithForm: build.mutation<
-            UpdatePetWithFormApiResponse,
-            UpdatePetWithFormApiArg
-        >({
-            query: queryArg => ({
-                url: `/pet/${queryArg.petId}`,
-                method: 'POST',
-                params: { name: queryArg.name, status: queryArg.status },
+            getPetById: build.query<GetPetByIdApiResponse, GetPetByIdApiArg>({
+                query: queryArg => ({ url: `/pet/${queryArg.petId}` }),
+                providesTags: ['pet'],
             }),
-        }),
-        deletePet: build.mutation<DeletePetApiResponse, DeletePetApiArg>({
-            query: queryArg => ({
-                url: `/pet/${queryArg.petId}`,
-                method: 'DELETE',
-                headers: { api_key: queryArg.apiKey },
+            updatePetWithForm: build.mutation<
+                UpdatePetWithFormApiResponse,
+                UpdatePetWithFormApiArg
+            >({
+                query: queryArg => ({
+                    url: `/pet/${queryArg.petId}`,
+                    method: 'POST',
+                    params: { name: queryArg.name, status: queryArg.status },
+                }),
+                invalidatesTags: ['pet'],
             }),
-        }),
-        uploadFile: build.mutation<UploadFileApiResponse, UploadFileApiArg>({
-            query: queryArg => ({
-                url: `/pet/${queryArg.petId}/uploadImage`,
-                method: 'POST',
-                body: queryArg.body,
-                params: { additionalMetadata: queryArg.additionalMetadata },
+            deletePet: build.mutation<DeletePetApiResponse, DeletePetApiArg>({
+                query: queryArg => ({
+                    url: `/pet/${queryArg.petId}`,
+                    method: 'DELETE',
+                    headers: { api_key: queryArg.apiKey },
+                }),
+                invalidatesTags: ['pet'],
             }),
-        }),
-        getInventory: build.query<GetInventoryApiResponse, GetInventoryApiArg>({
-            query: () => ({ url: `/store/inventory` }),
-        }),
-        placeOrder: build.mutation<PlaceOrderApiResponse, PlaceOrderApiArg>({
-            query: queryArg => ({
-                url: `/store/order`,
-                method: 'POST',
-                body: queryArg.order,
-            }),
-        }),
-        getOrderById: build.query<GetOrderByIdApiResponse, GetOrderByIdApiArg>({
-            query: queryArg => ({ url: `/store/order/${queryArg.orderId}` }),
-        }),
-        deleteOrder: build.mutation<DeleteOrderApiResponse, DeleteOrderApiArg>({
-            query: queryArg => ({
-                url: `/store/order/${queryArg.orderId}`,
-                method: 'DELETE',
-            }),
-        }),
-        createUser: build.mutation<CreateUserApiResponse, CreateUserApiArg>({
-            query: queryArg => ({
-                url: `/user`,
-                method: 'POST',
-                body: queryArg.user,
-            }),
-        }),
-        createUsersWithListInput: build.mutation<
-            CreateUsersWithListInputApiResponse,
-            CreateUsersWithListInputApiArg
-        >({
-            query: queryArg => ({
-                url: `/user/createWithList`,
-                method: 'POST',
-                body: queryArg.body,
-            }),
-        }),
-        loginUser: build.query<LoginUserApiResponse, LoginUserApiArg>({
-            query: queryArg => ({
-                url: `/user/login`,
-                params: {
-                    username: queryArg.username,
-                    password: queryArg.password,
+            uploadFile: build.mutation<UploadFileApiResponse, UploadFileApiArg>(
+                {
+                    query: queryArg => ({
+                        url: `/pet/${queryArg.petId}/uploadImage`,
+                        method: 'POST',
+                        body: queryArg.body,
+                        params: {
+                            additionalMetadata: queryArg.additionalMetadata,
+                        },
+                    }),
+                    invalidatesTags: ['pet'],
                 },
+            ),
+            getInventory: build.query<
+                GetInventoryApiResponse,
+                GetInventoryApiArg
+            >({
+                query: () => ({ url: `/store/inventory` }),
+                providesTags: ['store'],
             }),
-        }),
-        logoutUser: build.query<LogoutUserApiResponse, LogoutUserApiArg>({
-            query: () => ({ url: `/user/logout` }),
-        }),
-        getUserByName: build.query<
-            GetUserByNameApiResponse,
-            GetUserByNameApiArg
-        >({
-            query: queryArg => ({ url: `/user/${queryArg.username}` }),
-        }),
-        updateUser: build.mutation<UpdateUserApiResponse, UpdateUserApiArg>({
-            query: queryArg => ({
-                url: `/user/${queryArg.username}`,
-                method: 'PUT',
-                body: queryArg.user,
+            placeOrder: build.mutation<PlaceOrderApiResponse, PlaceOrderApiArg>(
+                {
+                    query: queryArg => ({
+                        url: `/store/order`,
+                        method: 'POST',
+                        body: queryArg.order,
+                    }),
+                    invalidatesTags: ['store'],
+                },
+            ),
+            getOrderById: build.query<
+                GetOrderByIdApiResponse,
+                GetOrderByIdApiArg
+            >({
+                query: queryArg => ({
+                    url: `/store/order/${queryArg.orderId}`,
+                }),
+                providesTags: ['store'],
             }),
-        }),
-        deleteUser: build.mutation<DeleteUserApiResponse, DeleteUserApiArg>({
-            query: queryArg => ({
-                url: `/user/${queryArg.username}`,
-                method: 'DELETE',
+            deleteOrder: build.mutation<
+                DeleteOrderApiResponse,
+                DeleteOrderApiArg
+            >({
+                query: queryArg => ({
+                    url: `/store/order/${queryArg.orderId}`,
+                    method: 'DELETE',
+                }),
+                invalidatesTags: ['store'],
             }),
+            createUser: build.mutation<CreateUserApiResponse, CreateUserApiArg>(
+                {
+                    query: queryArg => ({
+                        url: `/user`,
+                        method: 'POST',
+                        body: queryArg.user,
+                    }),
+                    invalidatesTags: ['user'],
+                },
+            ),
+            createUsersWithListInput: build.mutation<
+                CreateUsersWithListInputApiResponse,
+                CreateUsersWithListInputApiArg
+            >({
+                query: queryArg => ({
+                    url: `/user/createWithList`,
+                    method: 'POST',
+                    body: queryArg.body,
+                }),
+                invalidatesTags: ['user'],
+            }),
+            loginUser: build.query<LoginUserApiResponse, LoginUserApiArg>({
+                query: queryArg => ({
+                    url: `/user/login`,
+                    params: {
+                        username: queryArg.username,
+                        password: queryArg.password,
+                    },
+                }),
+                providesTags: ['user'],
+            }),
+            logoutUser: build.query<LogoutUserApiResponse, LogoutUserApiArg>({
+                query: () => ({ url: `/user/logout` }),
+                providesTags: ['user'],
+            }),
+            getUserByName: build.query<
+                GetUserByNameApiResponse,
+                GetUserByNameApiArg
+            >({
+                query: queryArg => ({ url: `/user/${queryArg.username}` }),
+                providesTags: ['user'],
+            }),
+            updateUser: build.mutation<UpdateUserApiResponse, UpdateUserApiArg>(
+                {
+                    query: queryArg => ({
+                        url: `/user/${queryArg.username}`,
+                        method: 'PUT',
+                        body: queryArg.user,
+                    }),
+                    invalidatesTags: ['user'],
+                },
+            ),
+            deleteUser: build.mutation<DeleteUserApiResponse, DeleteUserApiArg>(
+                {
+                    query: queryArg => ({
+                        url: `/user/${queryArg.username}`,
+                        method: 'DELETE',
+                    }),
+                    invalidatesTags: ['user'],
+                },
+            ),
         }),
-    }),
-    overrideExisting: false,
-});
-export { injectedRtkApi as api };
+        overrideExisting: false,
+    });
+export { injectedRtkApi as generatedApi };
 export type UpdatePetApiResponse = /** status 200 Successful operation */ Pet;
 export type UpdatePetApiArg = {
     /** Update an existent pet in the store */
@@ -283,24 +330,3 @@ export type User = {
     /** User Status */
     userStatus?: number;
 };
-export const {
-    useUpdatePetMutation,
-    useAddPetMutation,
-    useFindPetsByStatusQuery,
-    useFindPetsByTagsQuery,
-    useGetPetByIdQuery,
-    useUpdatePetWithFormMutation,
-    useDeletePetMutation,
-    useUploadFileMutation,
-    useGetInventoryQuery,
-    usePlaceOrderMutation,
-    useGetOrderByIdQuery,
-    useDeleteOrderMutation,
-    useCreateUserMutation,
-    useCreateUsersWithListInputMutation,
-    useLoginUserQuery,
-    useLogoutUserQuery,
-    useGetUserByNameQuery,
-    useUpdateUserMutation,
-    useDeleteUserMutation,
-} = injectedRtkApi;

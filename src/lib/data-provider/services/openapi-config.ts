@@ -5,8 +5,9 @@ const config: ConfigFile = {
     apiFile: './emptyApi.ts',
     apiImport: 'emptySplitApi',
     outputFile: './__generated.ts',
-    exportName: 'api',
-    hooks: true,
+    exportName: 'generatedApi',
+    hooks: false,
+    tag: true,
 };
 
 export default config;
