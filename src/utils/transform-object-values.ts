@@ -1,6 +1,6 @@
 import {isArray, isObject, map, transform} from 'lodash';
 
-interface DeepObjectTransformerParams<T> {
+interface TransformObjectValuesParams<T> {
     obj: T;
     predicate: (value: any) => boolean;
     transformer: (value: any) => any;
@@ -13,11 +13,11 @@ interface DeepObjectTransformerParams<T> {
  * @param transformer - function that transforms value
  * @returns object with transformed values
  */
-export function deepObjectTransformer<T>({
+export function transformObjectValues<T>({
     obj,
     predicate,
     transformer,
-}: DeepObjectTransformerParams<T>): T {
+}: TransformObjectValuesParams<T>): T {
     try {
         return transform(
             obj as unknown[],
@@ -26,14 +26,14 @@ export function deepObjectTransformer<T>({
                     result[key] = transformer(value);
                 } else if (isArray(value)) {
                     result[key] = map(value, item =>
-                        deepObjectTransformer({
+                        transformObjectValues({
                             obj: item,
                             predicate,
                             transformer,
                         }),
                     );
                 } else if (isObject(value)) {
-                    result[key] = deepObjectTransformer({
+                    result[key] = transformObjectValues({
                         obj: value,
                         predicate,
                         transformer,

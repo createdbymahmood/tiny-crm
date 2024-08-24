@@ -16,9 +16,9 @@ import {
 import * as testIds from '@/lib/cypress/testIds';
 import type {Customer} from '@/lib/data-provider/services/__generated';
 import {useUpdateCustomerMutation} from '@/lib/data-provider/services/api';
-import {deepObjectTransformer} from '@/utils/deep-object-transformer';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
 import {toClientErrorMessage} from '@/utils/to-client-error-message';
+import {transformObjectValues} from '@/utils/transform-object-values';
 
 export interface UpdateCusomterFormProps {
     onCancel?: FormCancelHandle;
@@ -32,7 +32,7 @@ export interface UpdateCusomterFormProps {
  * to ensure all of date values are transformed into dayjs instances to be able to be used in the form's datepicker.
  */
 const transformCustomerToEditableFormValues = (customer: Customer) => {
-    return deepObjectTransformer({
+    return transformObjectValues({
         obj: customer,
         predicate: value => {
             try {

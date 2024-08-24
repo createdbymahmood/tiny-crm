@@ -2,7 +2,7 @@ import {Outlet} from '@tanstack/react-router';
 import * as React from 'react';
 import {Helmet} from 'react-helmet-async';
 
-import {CustomersList} from '@/app/customer';
+import {Customers as CustomersView} from '@/app/customer';
 import {useGetCustomersQuery} from '@/lib/data-provider/services/api';
 
 export const Customers: React.FC = () => {
@@ -11,7 +11,7 @@ export const Customers: React.FC = () => {
     return (
         <React.Fragment>
             <Helmet title='Customers' />
-            <CustomersList {...customersQuery} />
+            <CustomersView {...customersQuery} />
             <Outlet />
         </React.Fragment>
     );

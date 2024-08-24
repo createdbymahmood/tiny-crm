@@ -9,7 +9,6 @@ import {find} from 'lodash';
 import {map, pipe, uniqBy} from 'lodash/fp';
 import React, {Fragment, useState} from 'react';
 
-// eslint-disable-next-line import/no-cycle
 import {DeleteCustomerPopconfirm} from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
 import type {Customer} from '@/lib/data-provider/services/__generated';
@@ -124,15 +123,12 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
     },
 ];
 
-interface CustomersListProps {
+interface CustomersProps {
     isLoading: boolean;
     data?: Customers;
 }
 
-export const CustomersList: React.FC<CustomersListProps> = ({
-    isLoading,
-    ...props
-}) => {
+export const Customers: React.FC<CustomersProps> = ({isLoading, ...props}) => {
     const data = (props as unknown as {data?: Customers}).data?.map(
         customer => ({...customer, key: customer.id}),
     );

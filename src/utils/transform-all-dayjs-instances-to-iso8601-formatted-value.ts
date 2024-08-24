@@ -2,7 +2,7 @@ import {ISO_8601_DATE_FORMAT} from '@configs/constants';
 import type {Dayjs} from 'dayjs';
 import dayJS from 'dayjs';
 
-import {deepObjectTransformer} from '@/utils/deep-object-transformer';
+import {transformObjectValues} from '@/utils/transform-object-values';
 
 /**
  *
@@ -11,7 +11,7 @@ import {deepObjectTransformer} from '@/utils/deep-object-transformer';
  */
 
 export function transformAllDayjsInstancesToIso8601FormattedValue<T>(obj: T) {
-    return deepObjectTransformer<T>({
+    return transformObjectValues<T>({
         obj,
         predicate: value => dayJS.isDayjs(value),
         transformer: (value: Dayjs) => value.format(ISO_8601_DATE_FORMAT),

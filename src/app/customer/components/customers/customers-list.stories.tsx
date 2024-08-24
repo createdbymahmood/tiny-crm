@@ -2,10 +2,10 @@ import type {Meta, StoryObj} from '@storybook/react';
 
 import customersMock from '@/lib/data-provider/mock/customers.json';
 
-import {CustomersList} from './customers-list';
+import {Customers} from './customers';
 
-const meta: Meta<typeof CustomersList> = {
-    component: CustomersList,
+const meta: Meta<typeof Customers> = {
+    component: Customers,
 };
 
 export const Loading: StoryObj = {
