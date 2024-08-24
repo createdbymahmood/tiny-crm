@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom/client';
 
 import {Providers} from '@/app/general/components/providers';
 
-function render() {
-    const element = ReactDOM.createRoot(document.getElementById('root')!);
-    element.render(
+function render(root: ReactDOM.Root) {
+    root.render(
         <React.StrictMode>
             <Providers />
         </React.StrictMode>,
     );
 }
 
-render();
+const targetElement = document.getElementById('root')!;
+const root = ReactDOM.createRoot(targetElement);
+
+render(root);
