@@ -6,17 +6,17 @@ import {UpdateCustomerModal} from '@/app/customer';
 import {useModalRouteState} from '@/hooks';
 
 export const UpdateCustomer: React.FC = () => {
-    const {modal} = useModalRouteState();
-    const customerId = useParams({strict: false, select: s => s.customerId!});
+  const {modal} = useModalRouteState();
+  const customerId = useParams({strict: false, select: s => s.customerId!});
 
-    return (
-        <React.Fragment>
-            <Helmet title='Update Customer' />
-            <UpdateCustomerModal
-                customerId={customerId}
-                open={modal.isOpen}
-                onCancel={modal.onCancel}
-            />
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <Helmet title='Update Customer' />
+      <UpdateCustomerModal
+        customerId={customerId}
+        open={modal.isOpen}
+        onCancel={modal.onCancel}
+      />
+    </React.Fragment>
+  );
 };

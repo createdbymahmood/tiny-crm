@@ -6,13 +6,13 @@ import {Customers as CustomersView} from '@/app/customer';
 import {useGetCustomersQuery} from '@/lib/data-provider/services/api';
 
 export const Customers: React.FC = () => {
-    const customersQuery = useGetCustomersQuery();
+  const customersQuery = useGetCustomersQuery();
 
-    return (
-        <React.Fragment>
-            <Helmet title='Customers' />
-            <CustomersView {...customersQuery} />
-            <Outlet />
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <Helmet title='Customers' />
+      <CustomersView {...customersQuery} />
+      <Outlet />
+    </React.Fragment>
+  );
 };

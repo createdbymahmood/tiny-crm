@@ -11,9 +11,9 @@ import {transformObjectValues} from '@/utils/transform-object-values';
  */
 
 export function transformAllDayjsInstancesToIso8601FormattedValue<T>(obj: T) {
-    return transformObjectValues<T>({
-        obj,
-        predicate: value => dayJS.isDayjs(value),
-        transformer: (value: Dayjs) => value.format(ISO_8601_DATE_FORMAT),
-    });
+  return transformObjectValues<T>({
+    obj,
+    predicate: value => dayJS.isDayjs(value),
+    transformer: (value: Dayjs) => value.format(ISO_8601_DATE_FORMAT),
+  });
 }

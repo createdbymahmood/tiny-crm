@@ -3,59 +3,59 @@ import {describe, expect, it} from 'vitest';
 import {retry} from '@/utils/retry';
 
 describe('retry()', () => {
-    it('returns a Promise', () => {
-        const result = retry(() => Promise.resolve());
+  it('returns a Promise', () => {
+    const result = retry(() => Promise.resolve());
 
-        expect(result).toBeInstanceOf(Promise);
-    });
+    expect(result).toBeInstanceOf(Promise);
+  });
 
-    it('retries N times', async () => {
-        let count = 0;
+  it('retries N times', async () => {
+    let count = 0;
 
-        const fn = async () => {
-            count++;
+    const fn = async () => {
+      count++;
 
-            if (count < 3) {
-                return Promise.reject(new Error('Something went wrong'));
-            }
+      if (count < 3) {
+        return Promise.reject(new Error('Something went wrong'));
+      }
 
-            return Promise.resolve('Success');
-        };
+      return Promise.resolve('Success');
+    };
 
-        await retry(fn, 3, 0);
+    await retry(fn, 3, 0);
 
-        expect(count).toBe(3);
-    });
+    expect(count).toBe(3);
+  });
 
-    it('rejects when the maximum number of retries is reached', async () => {
-        const fn = (): Promise<unknown> =>
-            Promise.reject(new Error('Something went wrong'));
+  it('rejects when the maximum number of retries is reached', async () => {
+    const fn = (): Promise<unknown> =>
+      Promise.reject(new Error('Something went wrong'));
 
-        try {
-            await retry(fn, 3, 0);
-        } catch (error) {
-            expect(error.message).toBe('Something went wrong');
-        }
-    });
+    try {
+      await retry(fn, 3, 0);
+    } catch (error) {
+      expect(error.message).toBe('Something went wrong');
+    }
+  });
 
-    it('delays retrying by the specified interval', async () => {
-        let count = 0;
-        const startTime = Date.now();
+  it('delays retrying by the specified interval', async () => {
+    let count = 0;
+    const startTime = Date.now();
 
-        const fn = () => {
-            count++;
+    const fn = () => {
+      count++;
 
-            if (count < 3) {
-                return Promise.reject(new Error('Something went wrong'));
-            }
+      if (count < 3) {
+        return Promise.reject(new Error('Something went wrong'));
+      }
 
-            return Promise.resolve('Success');
-        };
+      return Promise.resolve('Success');
+    };
 
-        const interval = 1000;
-        await retry(fn, 3, interval);
-        const endTime = Date.now();
+    const interval = 1000;
+    await retry(fn, 3, interval);
+    const endTime = Date.now();
 
-        expect(endTime - startTime).toBeGreaterThanOrEqual(interval * 2);
-    });
+    expect(endTime - startTime).toBeGreaterThanOrEqual(interval * 2);
+  });
 });

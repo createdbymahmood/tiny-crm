@@ -3,18 +3,18 @@ import {useNavigate} from '@tanstack/react-router';
 import * as React from 'react';
 
 export const useModalRouteState = () => {
-    const [isOpen, setIsOpen] = React.useState<boolean>(true);
-    const navigate = useNavigate();
+  const [isOpen, setIsOpen] = React.useState<boolean>(true);
+  const navigate = useNavigate();
 
-    const onCancel = () => {
-        setIsOpen(false);
+  const onCancel = () => {
+    setIsOpen(false);
 
-        /* To persist animation */
-        setTimeout(
-            () => void navigate({to: '/customers'}),
-            MODAL_AS_ROUTE_CLOSE_DELAY,
-        );
-    };
+    /* To persist animation */
+    setTimeout(
+      () => void navigate({to: '/customers'}),
+      MODAL_AS_ROUTE_CLOSE_DELAY,
+    );
+  };
 
-    return {modal: {isOpen, onCancel}};
+  return {modal: {isOpen, onCancel}};
 };

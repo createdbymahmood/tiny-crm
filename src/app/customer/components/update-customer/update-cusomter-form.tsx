@@ -6,12 +6,12 @@ import {isString, noop} from 'lodash';
 import * as React from 'react';
 
 import type {
-    CreateCustomerFormPayload as UpdateCustomerFormPayload,
-    FormCancelHandle,
+  CreateCustomerFormPayload as UpdateCustomerFormPayload,
+  FormCancelHandle,
 } from '@/app/customer';
 import {
-    CreateCustomerFormView as UpdateCustomerFormView,
-    transformCustomerFormValuesToDTO,
+  CreateCustomerFormView as UpdateCustomerFormView,
+  transformCustomerFormValuesToDTO,
 } from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
 import type {Customer} from '@/lib/data-provider/services/__generated';
@@ -21,8 +21,8 @@ import {toClientErrorMessage} from '@/utils/to-client-error-message';
 import {transformObjectValues} from '@/utils/transform-object-values';
 
 export interface UpdateCusomterFormProps {
-    onCancel?: FormCancelHandle;
-    customer: Customer;
+  onCancel?: FormCancelHandle;
+  customer: Customer;
 }
 
 /**
@@ -32,58 +32,58 @@ export interface UpdateCusomterFormProps {
  * to ensure all of date values are transformed into dayjs instances to be able to be used in the form's datepicker.
  */
 const transformCustomerToEditableFormValues = (customer: Customer) => {
-    return transformObjectValues({
-        obj: customer,
-        predicate: value => {
-            try {
-                return isString(value) && dayJS(value).isValid();
-            } catch (error) {
-                return false;
-            }
-        },
-        transformer: value => {
-            return dayJS(value);
-        },
-    });
+  return transformObjectValues({
+    obj: customer,
+    predicate: value => {
+      try {
+        return isString(value) && dayJS(value).isValid();
+      } catch (error) {
+        return false;
+      }
+    },
+    transformer: value => {
+      return dayJS(value);
+    },
+  });
 };
 
 export const UpdateCusomterForm: React.FC<UpdateCusomterFormProps> = ({
-    onCancel = noop,
-    customer,
+  onCancel = noop,
+  customer,
 }) => {
-    /*  */
-    const [form] = useForm<UpdateCustomerFormPayload>();
+  /*  */
+  const [form] = useForm<UpdateCustomerFormPayload>();
 
-    const [updateCustomer, {isLoading}] = useUpdateCustomerMutation();
+  const [updateCustomer, {isLoading}] = useUpdateCustomerMutation();
 
-    const onSubmit = async (newCustomer: UpdateCustomerFormPayload) => {
-        const newCustomerData = produce(newCustomer, draft => {
-            draft.projects = transformCustomerFormValuesToDTO(draft.projects);
-        });
+  const onSubmit = async (newCustomer: UpdateCustomerFormPayload) => {
+    const newCustomerData = produce(newCustomer, draft => {
+      draft.projects = transformCustomerFormValuesToDTO(draft.projects);
+    });
 
-        try {
-            void message.loading('Updating customer...');
-            await updateCustomer({
-                customer: newCustomerData,
-                id: customer.id!,
-            }).unwrap();
-            void message.success('Customer updated successfully!');
-            /* Closing modal... */
-            onCancel();
-        } catch (error) {
-            void message.error(toClientErrorMessage(error));
-        }
-    };
+    try {
+      void message.loading('Updating customer...');
+      await updateCustomer({
+        customer: newCustomerData,
+        id: customer.id!,
+      }).unwrap();
+      void message.success('Customer updated successfully!');
+      /* Closing modal... */
+      onCancel();
+    } catch (error) {
+      void message.error(toClientErrorMessage(error));
+    }
+  };
 
-    return (
-        <Form
-            form={form}
-            initialValues={transformCustomerToEditableFormValues(customer)}
-            layout='vertical'
-            onFinish={onSubmit}
-            {...getTestAttributes(testIds.createOrUpdateCustomer.form.update)}
-        >
-            <UpdateCustomerFormView isLoading={isLoading} onCancel={onCancel} />
-        </Form>
-    );
+  return (
+    <Form
+      form={form}
+      initialValues={transformCustomerToEditableFormValues(customer)}
+      layout='vertical'
+      onFinish={onSubmit}
+      {...getTestAttributes(testIds.createOrUpdateCustomer.form.update)}
+    >
+      <UpdateCustomerFormView isLoading={isLoading} onCancel={onCancel} />
+    </Form>
+  );
 };

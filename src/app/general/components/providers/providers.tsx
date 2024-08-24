@@ -15,33 +15,30 @@ const router = createRouter({routeTree});
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
-    interface Register {
-        router: typeof router;
-    }
+  interface Register {
+    router: typeof router;
+  }
 }
 
 export interface ProvidersProps {}
 
 export const Providers: React.FC<ProvidersProps> = () => {
-    const {isLoading} = useStartMockServiceWorker();
-    if (isLoading) return <Spin />;
+  const {isLoading} = useStartMockServiceWorker();
+  if (isLoading) return <Spin />;
 
-    return (
-        <Provider store={store}>
-            <ConfigProvider theme={themeConfig}>
-                <HelmetProvider>
-                    <Helmet
-                        defaultTitle='Customer Management'
-                        titleTemplate='%s | Customer Management'
-                    >
-                        <meta
-                            content='Customer Management'
-                            name='description'
-                        />
-                    </Helmet>
-                    <RouterProvider router={router} />
-                </HelmetProvider>
-            </ConfigProvider>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <ConfigProvider theme={themeConfig}>
+        <HelmetProvider>
+          <Helmet
+            defaultTitle='Customer Management'
+            titleTemplate='%s | Customer Management'
+          >
+            <meta content='Customer Management' name='description' />
+          </Helmet>
+          <RouterProvider router={router} />
+        </HelmetProvider>
+      </ConfigProvider>
+    </Provider>
+  );
 };
