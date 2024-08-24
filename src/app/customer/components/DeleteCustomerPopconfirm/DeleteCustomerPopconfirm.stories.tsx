@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 
-import { DeleteCustomerPopconfirm } from './DeleteCustomerPopconfirm';
+import {DeleteCustomerPopconfirm} from './DeleteCustomerPopconfirm';
 
 const meta: Meta<typeof DeleteCustomerPopconfirm> = {
     component: DeleteCustomerPopconfirm,

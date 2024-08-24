@@ -1,17 +1,17 @@
-import { ISO_8601_DATE_FORMAT } from '@configs/constants';
-import type { DatePickerProps, FormInstance } from 'antd';
-import { Button, DatePicker, Form, Input } from 'antd';
-import type { RuleObject } from 'antd/es/form';
-import type { NamePath } from 'antd/es/form/interface';
-import type { Dayjs } from 'dayjs';
+import {ISO_8601_DATE_FORMAT} from '@configs/constants';
+import type {DatePickerProps, FormInstance} from 'antd';
+import {Button, DatePicker, Form, Input} from 'antd';
+import type {RuleObject} from 'antd/es/form';
+import type {NamePath} from 'antd/es/form/interface';
+import type {Dayjs} from 'dayjs';
 import dayJS from 'dayjs';
 import * as React from 'react';
 
-import { useUpdate } from '@/hooks';
+import {useUpdate} from '@/hooks';
 import * as testIds from '@/lib/cypress/testIds';
-import { getTestAttributes } from '@/utils/test/getTestAttributes';
+import {getTestAttributes} from '@/utils/test/getTestAttributes';
 
-import type { CreateCustomerFormPayload } from './CreateCustomerForm.types.d';
+import type {CreateCustomerFormPayload} from './CreateCustomerForm.types.d';
 
 const getIsStartDateValid: DatePickerProps['disabledDate'] = current => {
     // Can not select days before today
@@ -65,7 +65,7 @@ const renderFormList =
     }: RenderFormListParams): React.ComponentProps<
         typeof Form.List
     >['children'] =>
-    (fields, { add, remove }, { errors }) => {
+    (fields, {add, remove}, {errors}) => {
         return (
             <React.Fragment>
                 {fields.map(field => {
@@ -116,7 +116,7 @@ const renderFormList =
                                 <DatePicker
                                     disabledDate={getIsStartDateValid}
                                     format={ISO_8601_DATE_FORMAT}
-                                    style={{ width: '100%' }}
+                                    style={{width: '100%'}}
                                 />
                             </Form.Item>
 
@@ -137,7 +137,7 @@ const renderFormList =
                                         form.getFieldValue(startDateFieldPath),
                                     )}
                                     format={ISO_8601_DATE_FORMAT}
-                                    style={{ width: '100%' }}
+                                    style={{width: '100%'}}
                                     onOpenChange={update}
                                 />
                             </Form.Item>
@@ -169,8 +169,8 @@ export const CreateCustomerProjectsField: React.FC = () => {
     const form = Form.useFormInstance<CreateCustomerFormPayload>();
     const update = useUpdate();
     return (
-        <Form.List name='projects' rules={[{ validator: projectsValidator }]}>
-            {renderFormList({ form, update })}
+        <Form.List name='projects' rules={[{validator: projectsValidator}]}>
+            {renderFormList({form, update})}
         </Form.List>
     );
 };

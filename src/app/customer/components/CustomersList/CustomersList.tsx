@@ -1,19 +1,19 @@
-import { Link } from '@tanstack/react-router';
-import { Button, Space, Table, Tag, Tooltip, Typography } from 'antd';
-import type { ColumnsType, TableProps } from 'antd/es/table';
+import {Link} from '@tanstack/react-router';
+import {Button, Space, Table, Tag, Tooltip, Typography} from 'antd';
+import type {ColumnsType, TableProps} from 'antd/es/table';
 import type {
     TablePaginationConfig,
     TableRowSelection,
 } from 'antd/es/table/interface';
-import { find } from 'lodash';
-import { map, pipe, uniqBy } from 'lodash/fp';
-import React, { Fragment, useState } from 'react';
+import {find} from 'lodash';
+import {map, pipe, uniqBy} from 'lodash/fp';
+import React, {Fragment, useState} from 'react';
 
 // eslint-disable-next-line import/no-cycle
-import { DeleteCustomerPopconfirm } from '@/app/customer';
+import {DeleteCustomerPopconfirm} from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
-import type { Customer } from '@/lib/data-provider/services/__generated';
-import { getTestAttributes } from '@/utils/test/getTestAttributes';
+import type {Customer} from '@/lib/data-provider/services/__generated';
+import {getTestAttributes} from '@/utils/test/getTestAttributes';
 
 const expandableContent = {
     expandedRowRender: (record: Customer) => (
@@ -33,7 +33,7 @@ const renderAction = (customer: Customer) => (
     <Space size='middle'>
         <Link
             to='/customers/$customerId'
-            params={{ customerId: customer.id! }}
+            params={{customerId: customer.id!}}
             {...getTestAttributes(testIds.viewCustomer.cta(customer.id!))}
         >
             <Space>
@@ -53,7 +53,7 @@ const renderAction = (customer: Customer) => (
 
         <Link
             to='/customers/$customerId/update'
-            params={{ customerId: customer.id! }}
+            params={{customerId: customer.id!}}
         >
             <Button type='default'>Edit</Button>
         </Link>
@@ -133,8 +133,8 @@ export const CustomersList: React.FC<CustomersListProps> = ({
     isLoading,
     ...props
 }) => {
-    const data = (props as unknown as { data?: Customers }).data?.map(
-        customer => ({ ...customer, key: customer.id }),
+    const data = (props as unknown as {data?: Customers}).data?.map(
+        customer => ({...customer, key: customer.id}),
     );
     const tableColumns = createColumns(data as Customers);
     const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -158,7 +158,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
                     // eslint-disable-next-line fp/no-let
                     let newSelectedRowKeys = [] as React.Key[];
                     newSelectedRowKeys = changeableRowKeys.filter(id => {
-                        const customer = find(data, { id }) as Customer;
+                        const customer = find(data, {id}) as Customer;
 
                         if (customer.isActive) return false;
                         return true;
@@ -175,7 +175,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
         tableLayout: 'fixed',
         loading: isLoading,
         onChange(pagination, filters, sorter, extra) {
-            console.log({ pagination, filters, sorter, extra });
+            console.log({pagination, filters, sorter, extra});
         },
         pagination: {
             position: ['bottomRight'] as TablePaginationConfig['position'],
@@ -213,7 +213,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
         <Fragment>
             <Typography.Title
                 level={4}
-                style={{ padding: '0 20px' }}
+                style={{padding: '0 20px'}}
                 {...getTestAttributes(testIds.viewCustomer.list.title)}
             >
                 Customers list

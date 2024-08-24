@@ -1,11 +1,11 @@
-import { env } from '@configs/env';
-import { createEntityAdapter } from '@reduxjs/toolkit';
+import {env} from '@configs/env';
+import {createEntityAdapter} from '@reduxjs/toolkit';
 import * as React from 'react';
 
-import { getWorker } from '@/lib/data-provider/mock/browser';
+import {getWorker} from '@/lib/data-provider/mock/browser';
 // eslint-disable-next-line import/extensions
 import customersMock from '@/lib/data-provider/mock/customers.json';
-import { Customer } from '@/lib/data-provider/services/__generated';
+import type {Customer} from '@/lib/data-provider/services/__generated';
 
 export const useStartMockServiceWorker = () => {
     const [isLoading, setIsLoading] = React.useState(true);
@@ -32,5 +32,5 @@ export const useStartMockServiceWorker = () => {
         [setupMockServiceWorker],
     );
 
-    return { isLoading };
+    return {isLoading};
 };

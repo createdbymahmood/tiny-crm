@@ -1,24 +1,24 @@
-import { Form, message } from 'antd';
-import { useForm } from 'antd/es/form/Form';
+import {Form, message} from 'antd';
+import {useForm} from 'antd/es/form/Form';
 import dayJS from 'dayjs';
-import { produce } from 'immer';
-import { isString, noop } from 'lodash';
+import {produce} from 'immer';
+import {isString, noop} from 'lodash';
 import * as React from 'react';
 
 import type {
-    FormCancelHandle,
     CreateCustomerFormPayload as UpdateCustomerFormPayload,
+    FormCancelHandle,
 } from '@/app/customer';
 import {
     createCustomerDtoTransformer,
     CreateCustomerFormView as UpdateCustomerFormView,
 } from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
-import { Customer } from '@/lib/data-provider/services/__generated';
-import { useUpdateCustomerMutation } from '@/lib/data-provider/services/api';
-import { deepObjectTransformer } from '@/utils/deepObjectTransformer';
-import { getTestAttributes } from '@/utils/test/getTestAttributes';
-import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
+import type {Customer} from '@/lib/data-provider/services/__generated';
+import {useUpdateCustomerMutation} from '@/lib/data-provider/services/api';
+import {deepObjectTransformer} from '@/utils/deepObjectTransformer';
+import {getTestAttributes} from '@/utils/test/getTestAttributes';
+import {toClientErrorMessage} from '@/utils/toClientErrorMessage';
 
 export interface UpdateCusomterFormProps {
     onCancel?: FormCancelHandle;
@@ -54,7 +54,7 @@ export const UpdateCusomterForm: React.FC<UpdateCusomterFormProps> = ({
     /*  */
     const [form] = useForm<UpdateCustomerFormPayload>();
 
-    const [updateCustomer, { isLoading }] = useUpdateCustomerMutation();
+    const [updateCustomer, {isLoading}] = useUpdateCustomerMutation();
 
     const onSubmit = async (newCustomer: UpdateCustomerFormPayload) => {
         const newCustomerData = produce(newCustomer, draft => {
@@ -65,7 +65,7 @@ export const UpdateCusomterForm: React.FC<UpdateCusomterFormProps> = ({
             void message.loading('Updating customer...');
             await updateCustomer({
                 customer: newCustomerData,
-                id: customer.id as string,
+                id: customer.id!,
             }).unwrap();
             void message.success('Customer updated successfully!');
             /* Closing modal... */

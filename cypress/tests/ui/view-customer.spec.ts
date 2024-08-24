@@ -17,7 +17,7 @@ describe('View Customer', () => {
             /* User must be redirected to view customer page */
             cy.location('pathname').should(
                 'eq',
-                urlcat('/customers/:id', { id: customer.id }),
+                urlcat('/customers/:id', {id: customer.id}),
             );
 
             /* Should see the content */

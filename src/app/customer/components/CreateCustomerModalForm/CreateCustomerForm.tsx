@@ -3,25 +3,25 @@
  * CreateCustomer
  *
  */
-import { Form, message } from 'antd';
-import { useForm } from 'antd/es/form/Form';
-import { produce } from 'immer';
-import { noop } from 'lodash';
-import { pipe } from 'lodash/fp';
+import {Form, message} from 'antd';
+import {useForm} from 'antd/es/form/Form';
+import {produce} from 'immer';
+import {noop} from 'lodash';
+import {pipe} from 'lodash/fp';
 import * as React from 'react';
 
 import * as testIds from '@/lib/cypress/testIds';
-import { getTestAttributes } from '@/utils/test/getTestAttributes';
-import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
-import { transformAllDayjsInstancesToIso8601FormattedValue } from '@/utils/transformAllDayjsInstancesToIso8601FormattedValue';
-import { transformEmptyValuesToNull } from '@/utils/transformEmptyValuesToNull';
+import {useCreateCustomerMutation} from '@/lib/data-provider/services/api';
+import {getTestAttributes} from '@/utils/test/getTestAttributes';
+import {toClientErrorMessage} from '@/utils/toClientErrorMessage';
+import {transformAllDayjsInstancesToIso8601FormattedValue} from '@/utils/transformAllDayjsInstancesToIso8601FormattedValue';
+import {transformEmptyValuesToNull} from '@/utils/transformEmptyValuesToNull';
 
-import { useCreateCustomerMutation } from '@/lib/data-provider/services/api';
 import type {
     CreateCustomerFormPayload,
     FormCancelHandle,
 } from './CreateCustomerForm.types.d';
-import { CreateCustomerFormView } from './CreateCustomerFormView';
+import {CreateCustomerFormView} from './CreateCustomerFormView';
 
 interface CreateCustomerFormProps {
     onCancel?: FormCancelHandle;
@@ -38,7 +38,7 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
     /*  */
     const [form] = useForm<CreateCustomerFormPayload>();
 
-    const [createCustomer, { isLoading }] = useCreateCustomerMutation();
+    const [createCustomer, {isLoading}] = useCreateCustomerMutation();
 
     const onSubmit = async (newCustomer: CreateCustomerFormPayload) => {
         const data = produce(newCustomer, draft => {

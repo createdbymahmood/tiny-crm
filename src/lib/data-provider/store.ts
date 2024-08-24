@@ -1,6 +1,7 @@
-import { api } from '@/lib/data-provider/services/api';
-import type { Action, ThunkAction } from '@reduxjs/toolkit';
-import { configureStore } from '@reduxjs/toolkit';
+import type {Action, ThunkAction} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
+
+import {api} from '@/lib/data-provider/services/api';
 
 export const store = configureStore({
     reducer: {

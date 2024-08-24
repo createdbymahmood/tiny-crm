@@ -1,5 +1,5 @@
 import * as testIds from '../../../src/lib/cypress/testIds';
-import type { Customer } from '../../../src/lib/data-provider/services/__generated';
+import type {Customer} from '../../../src/lib/data-provider/services/__generated';
 
 describe('Create Customer', () => {
     beforeEach(() => {

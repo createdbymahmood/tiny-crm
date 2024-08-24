@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 
 import customersMock from '@/lib/data-provider/mock/customers.json';
 
-import { ViewCustomerModal } from './ViewCustomerModal';
+import {ViewCustomerModal} from './ViewCustomerModal';
 
 const meta: Meta<typeof ViewCustomerModal> = {
     component: ViewCustomerModal,

@@ -1,18 +1,18 @@
-import { MOCK_API_CALL_REQUEST_DELAY } from '@configs/constants';
-import type { EntityAdapter, EntityState } from '@reduxjs/toolkit';
-import { each, find } from 'lodash';
-import { rest } from 'msw';
-import { v4 as uuid } from 'uuid';
+import {MOCK_API_CALL_REQUEST_DELAY} from '@configs/constants';
+import type {EntityAdapter, EntityState} from '@reduxjs/toolkit';
+import {each, find} from 'lodash';
+import {rest} from 'msw';
+import {v4 as uuid} from 'uuid';
 
-import { Customer } from '@/lib/data-provider/services/__generated';
+import type {Customer} from '@/lib/data-provider/services/__generated';
 
 export const getHandlers = (
     state: EntityState<Customer>,
     adapter: EntityAdapter<Customer>,
 ) => [
     rest.get('/customers/:id', (req, res, ctx) => {
-        const { id } = req.params as { id: string };
-        const customer = find(state.entities, { id });
+        const {id} = req.params as {id: string};
+        const customer = find(state.entities, {id});
 
         if (!customer) {
             return res(
@@ -34,9 +34,9 @@ export const getHandlers = (
     }),
 
     rest.put('/customers/:id', async (req, res, ctx) => {
-        const { id } = req.params as { id: string };
+        const {id} = req.params as {id: string};
         const changes = await req.json();
-        const customer = find(state.entities, { id });
+        const customer = find(state.entities, {id});
 
         if (!customer) {
             return res(
@@ -48,7 +48,7 @@ export const getHandlers = (
             );
         }
 
-        state = adapter.updateOne(state, { id, changes });
+        state = adapter.updateOne(state, {id, changes});
         return res(
             ctx.json(state.entities[id]),
             ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
@@ -58,7 +58,7 @@ export const getHandlers = (
     rest.post('/deleteCustomers', async (req, res, ctx) => {
         const ids = await req.json();
         const customers = ids
-            .map(id => find(state.entities, { id }))
+            .map(id => find(state.entities, {id}))
             .filter(Boolean);
 
         if (!customers.length) {
@@ -89,7 +89,7 @@ export const getHandlers = (
             project.id = uuid();
         });
 
-        state = adapter.addOne(state, { ...customer, id: uuid() } as Customer);
+        state = adapter.addOne(state, {...customer, id: uuid()} as Customer);
         return res(
             ctx.json(Object.values(state.entities)),
             ctx.delay(MOCK_API_CALL_REQUEST_DELAY),

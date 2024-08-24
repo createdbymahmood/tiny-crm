@@ -1,4 +1,4 @@
-import { isArray, isObject, map, transform } from 'lodash';
+import {isArray, isObject, map, transform} from 'lodash';
 
 interface DeepObjectTransformerParams<T> {
     obj: T;

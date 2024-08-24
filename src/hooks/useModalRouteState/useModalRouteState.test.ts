@@ -1,8 +1,8 @@
-import { MODAL_AS_ROUTE_CLOSE_DELAY } from '@configs/constants';
-import { renderHook } from '@testing-library/react-hooks';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import {MODAL_AS_ROUTE_CLOSE_DELAY} from '@configs/constants';
+import {renderHook} from '@testing-library/react-hooks';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 
-import { useModalRouteState } from './useModalRouteState';
+import {useModalRouteState} from './useModalRouteState';
 
 let mockedUseNavigate;
 
@@ -37,7 +37,7 @@ describe('useModalRouteState()', () => {
     });
 
     it('should set isOpen to false when onCancel is called', () => {
-        const { result } = renderHook(() => useModalRouteState());
+        const {result} = renderHook(() => useModalRouteState());
         result.current.modal.onCancel();
         vi.advanceTimersByTime(MODAL_AS_ROUTE_CLOSE_DELAY);
 
@@ -45,14 +45,14 @@ describe('useModalRouteState()', () => {
     });
 
     it('should NOT navigate when onCancel is called but MODAL_AS_ROUTE_CLOSE_DELAY MS has not been passed', () => {
-        const { result } = renderHook(() => useModalRouteState());
+        const {result} = renderHook(() => useModalRouteState());
         result.current.modal.onCancel();
 
         expect(mockedUseNavigate).not.toBeCalled();
     });
 
     it('should navigate in MODAL_AS_ROUTE_CLOSE_DELAY MS when onCancel is called', () => {
-        const { result } = renderHook(() => useModalRouteState());
+        const {result} = renderHook(() => useModalRouteState());
         result.current.modal.onCancel();
 
         expect(mockedUseNavigate).not.toBeCalled();

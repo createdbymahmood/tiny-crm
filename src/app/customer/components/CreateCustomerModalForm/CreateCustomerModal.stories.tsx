@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 
-import { CreateCustomerModal } from './CreateCustomerModal';
+import {CreateCustomerModal} from './CreateCustomerModal';
 
 const meta: Meta<typeof CreateCustomerModal> = {
     component: CreateCustomerModal,

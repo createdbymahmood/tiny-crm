@@ -1,12 +1,12 @@
-import type { PopconfirmProps } from 'antd';
-import { message, Popconfirm } from 'antd';
-import { head, omit } from 'lodash';
+import type {PopconfirmProps} from 'antd';
+import {message, Popconfirm} from 'antd';
+import {head, omit} from 'lodash';
 import * as React from 'react';
 
 import * as testIds from '@/lib/cypress/testIds';
-import { useDeleteCustomersMutation } from '@/lib/data-provider/services/api';
-import { getTestAttributes } from '@/utils/test/getTestAttributes';
-import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
+import {useDeleteCustomersMutation} from '@/lib/data-provider/services/api';
+import {getTestAttributes} from '@/utils/test/getTestAttributes';
+import {toClientErrorMessage} from '@/utils/toClientErrorMessage';
 
 const useDeleteCustomerPopConfirmState = () => {
     const [deleteCustomers] = useDeleteCustomersMutation();
@@ -21,7 +21,7 @@ const useDeleteCustomerPopConfirmState = () => {
         }
     };
 
-    return { onDeleteCustomer };
+    return {onDeleteCustomer};
 };
 
 export interface DeleteCustomerPopConfirmProps
@@ -31,8 +31,8 @@ export interface DeleteCustomerPopConfirmProps
 
 export const DeleteCustomerPopconfirm: React.FC<
     DeleteCustomerPopConfirmProps
-> = ({ customerIds, onConfirm, ...props }) => {
-    const { onDeleteCustomer } = useDeleteCustomerPopConfirmState();
+> = ({customerIds, onConfirm, ...props}) => {
+    const {onDeleteCustomer} = useDeleteCustomerPopConfirmState();
     const omittedProps = ['onConfirm', 'okButtonProps'];
 
     return (

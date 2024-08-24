@@ -1,5 +1,5 @@
-import { MODAL_AS_ROUTE_CLOSE_DELAY } from '@configs/constants';
-import { useNavigate } from '@tanstack/react-router';
+import {MODAL_AS_ROUTE_CLOSE_DELAY} from '@configs/constants';
+import {useNavigate} from '@tanstack/react-router';
 import * as React from 'react';
 
 export const useModalRouteState = () => {
@@ -11,10 +11,10 @@ export const useModalRouteState = () => {
 
         /* To persist animation */
         setTimeout(
-            () => void navigate({ to: '/customers' }),
+            () => void navigate({to: '/customers'}),
             MODAL_AS_ROUTE_CLOSE_DELAY,
         );
     };
 
-    return { modal: { isOpen, onCancel } };
+    return {modal: {isOpen, onCancel}};
 };

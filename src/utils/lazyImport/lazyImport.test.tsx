@@ -1,16 +1,16 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import {render, screen} from '@testing-library/react';
+import {describe, expect, it} from 'vitest';
 
-import { sleep } from '@/utils/sleep';
+import {sleep} from '@/utils/sleep';
 
-import { lazyImport } from './lazyImport';
+import {lazyImport} from './lazyImport';
 
 const loadingIndicator = 'Loading...';
 
 describe('lazyImport', () => {
     it('should render without any props', () => {
         const LazyComponent = lazyImport(() => import('./ExampleComponent'));
-        const { container } = render(<LazyComponent />);
+        const {container} = render(<LazyComponent />);
 
         expect(container).toMatchSnapshot();
     });
@@ -19,7 +19,7 @@ describe('lazyImport', () => {
         const LazyComponent = lazyImport(
             () => sleep(1000).then(() => import('./ExampleComponent')),
             undefined,
-            { fallback: <div>{loadingIndicator}</div> },
+            {fallback: <div>{loadingIndicator}</div>},
         );
         render(<LazyComponent />);
         const loadingElement = await screen.findByText(loadingIndicator);

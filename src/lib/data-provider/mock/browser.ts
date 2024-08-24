@@ -1,8 +1,9 @@
-import type { EntityAdapter, EntityState } from '@reduxjs/toolkit';
-import { setupWorker } from 'msw';
+import type {EntityAdapter, EntityState} from '@reduxjs/toolkit';
+import {setupWorker} from 'msw';
 
-import { getHandlers } from './handlers';
-import { Customer } from '@/lib/data-provider/services/__generated';
+import type {Customer} from '@/lib/data-provider/services/__generated';
+
+import {getHandlers} from './handlers';
 
 export const getWorker = (
     state: EntityState<Customer>,

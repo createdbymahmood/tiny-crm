@@ -1,12 +1,12 @@
-import type { ModalProps } from 'antd';
-import { Alert, Modal, Spin } from 'antd';
-import { merge } from 'lodash';
+import type {ModalProps} from 'antd';
+import {Alert, Modal, Spin} from 'antd';
+import {merge} from 'lodash';
 import * as React from 'react';
 
 import * as testIds from '@/lib/cypress/testIds';
-import { useGetCustomerByIdQuery } from '@/lib/data-provider/services/api';
-import { getTestAttributes } from '@/utils/test/getTestAttributes';
-import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
+import {useGetCustomerByIdQuery} from '@/lib/data-provider/services/api';
+import {getTestAttributes} from '@/utils/test/getTestAttributes';
+import {toClientErrorMessage} from '@/utils/toClientErrorMessage';
 
 interface UseViewCustomerModalStateParams {
     customerId: string;
@@ -16,20 +16,20 @@ const useViewCustomerModalState = ({
     customerId,
 }: UseViewCustomerModalStateParams) => {
     const customerQuery = useGetCustomerByIdQuery(customerId);
-    return { customerId, customerQuery };
+    return {customerId, customerQuery};
 };
 
 export interface ViewCustomerModalProps extends ModalProps {
     customerId: string;
 }
 
-const defaultModalProps: ModalProps = { footer: null };
+const defaultModalProps: ModalProps = {footer: null};
 
 export const ViewCustomerModal: React.FC<ViewCustomerModalProps> = ({
     customerId,
     ...props
 }) => {
-    const { customerQuery } = useViewCustomerModalState({ customerId });
+    const {customerQuery} = useViewCustomerModalState({customerId});
 
     const content: React.ReactNode = (() => {
         if (customerQuery.isLoading) return <Spin />;
@@ -45,9 +45,7 @@ export const ViewCustomerModal: React.FC<ViewCustomerModalProps> = ({
         return (
             <div
                 {...getTestAttributes(
-                    testIds.viewCustomer.content(
-                        customerQuery.data.id as string,
-                    ),
+                    testIds.viewCustomer.content(customerQuery.data.id!),
                 )}
             >
                 {JSON.stringify(customerQuery.data)}

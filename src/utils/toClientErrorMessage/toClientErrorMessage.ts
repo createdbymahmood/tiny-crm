@@ -1,5 +1,5 @@
-import { DEFAULT_ERROR_MESSAGE } from '@configs/constants';
-import { get } from 'lodash';
+import {DEFAULT_ERROR_MESSAGE} from '@configs/constants';
+import {get} from 'lodash';
 
 export const toClientErrorMessage = (error: unknown): string => {
     try {

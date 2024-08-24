@@ -1,10 +1,10 @@
-import type { ModalProps } from 'antd';
-import { Alert, Modal, Spin } from 'antd';
+import type {ModalProps} from 'antd';
+import {Alert, Modal, Spin} from 'antd';
 import * as React from 'react';
 
-import { UpdateCusomterForm } from '@/app/customer';
-import { useGetCustomerByIdQuery } from '@/lib/data-provider/services/api';
-import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
+import {UpdateCusomterForm} from '@/app/customer';
+import {useGetCustomerByIdQuery} from '@/lib/data-provider/services/api';
+import {toClientErrorMessage} from '@/utils/toClientErrorMessage';
 
 export interface UpdateCustomerModalProps extends ModalProps {
     customerId: string;
@@ -18,14 +18,14 @@ const useUpdateCustomerModalState = ({
     customerId,
 }: UseUpdateCustomerModalStateParams) => {
     const customerQuery = useGetCustomerByIdQuery(customerId);
-    return { customerQuery };
+    return {customerQuery};
 };
 
 export const UpdateCustomerModal: React.FC<UpdateCustomerModalProps> = ({
     customerId,
     ...props
 }) => {
-    const { customerQuery } = useUpdateCustomerModalState({ customerId });
+    const {customerQuery} = useUpdateCustomerModalState({customerId});
 
     const content: React.ReactNode = (() => {
         if (customerQuery.isLoading) return <Spin />;

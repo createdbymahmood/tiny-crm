@@ -1,17 +1,17 @@
-import { createRouter, RouterProvider } from '@tanstack/react-router';
-import { ConfigProvider, Spin } from 'antd';
+import {createRouter, RouterProvider} from '@tanstack/react-router';
+import {ConfigProvider, Spin} from 'antd';
 import * as React from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Provider } from 'react-redux';
+import {Helmet, HelmetProvider} from 'react-helmet-async';
+import {Provider} from 'react-redux';
 
-import { themeConfig } from '@/lib/ant-design';
-import { store } from '@/lib/data-provider/store';
-import { routeTree } from '@/routeTree.gen';
+import {themeConfig} from '@/lib/ant-design';
+import {store} from '@/lib/data-provider/store';
+import {routeTree} from '@/routeTree.gen';
 
-import { useStartMockServiceWorker } from './useStartMockServiceWorker';
+import {useStartMockServiceWorker} from './useStartMockServiceWorker';
 
 // Create a new router instance
-const router = createRouter({ routeTree });
+const router = createRouter({routeTree});
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
@@ -23,7 +23,7 @@ declare module '@tanstack/react-router' {
 export interface ProvidersProps {}
 
 export const Providers: React.FC<ProvidersProps> = () => {
-    const { isLoading } = useStartMockServiceWorker();
+    const {isLoading} = useStartMockServiceWorker();
     if (isLoading) return <Spin />;
 
     return (

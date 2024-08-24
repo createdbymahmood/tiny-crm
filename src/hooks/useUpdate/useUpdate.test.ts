@@ -1,7 +1,7 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { describe, expect, it } from 'vitest';
+import {renderHook} from '@testing-library/react-hooks';
+import {describe, expect, it} from 'vitest';
 
-import { useUpdate } from './useUpdate';
+import {useUpdate} from './useUpdate';
 
 describe('useUpdate()', () => {
     it('should initiate correctly', () => {

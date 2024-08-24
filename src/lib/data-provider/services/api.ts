@@ -1,15 +1,17 @@
-import { generatedApi } from '@/lib/data-provider/services/__generated';
-import { providesList } from '@/utils/redux';
-import { findIndex, includes, remove } from 'lodash';
+import {findIndex, includes, remove} from 'lodash';
+
+import {generatedApi} from '@/lib/data-provider/services/__generated';
+import {providesList} from '@/utils/redux';
+
 const addTagTypes = ['customers', 'admin'] as const;
 
 export const api = generatedApi.enhanceEndpoints({
-    addTagTypes: addTagTypes,
+    addTagTypes,
     endpoints: {
         deleteCustomers(endpoint) {
             endpoint.onQueryStarted = async function onQueryStarted(
                 ids,
-                { dispatch, queryFulfilled },
+                {dispatch, queryFulfilled},
             ) {
                 const customersQueryUpdateResult = dispatch(
                     generatedApi.util.updateQueryData(
@@ -18,7 +20,7 @@ export const api = generatedApi.enhanceEndpoints({
                         draft => {
                             if (!ids) return;
                             const entityIndexes = ids.map(id =>
-                                findIndex(draft, { id }),
+                                findIndex(draft, {id}),
                             );
 
                             remove(draft, (_, index) =>
@@ -35,12 +37,12 @@ export const api = generatedApi.enhanceEndpoints({
                 }
             };
 
-            endpoint.invalidatesTags = [{ type: 'customers' }];
+            endpoint.invalidatesTags = [{type: 'customers'}];
         },
         updateCustomer(endpoint) {
             endpoint.onQueryStarted = async function onQueryStarted(
-                { id, ...patch },
-                { dispatch, queryFulfilled },
+                {id, ...patch},
+                {dispatch, queryFulfilled},
             ) {
                 const customerQueryUpdateResult = dispatch(
                     generatedApi.util.updateQueryData(
@@ -58,7 +60,7 @@ export const api = generatedApi.enhanceEndpoints({
                         'getCustomers',
                         undefined,
                         draft => {
-                            const entityIndex = findIndex(draft, { id });
+                            const entityIndex = findIndex(draft, {id});
 
                             if (entityIndex > -1) {
                                 // eslint-disable-next-line fp/no-mutating-assign
@@ -94,7 +96,7 @@ export const api = generatedApi.enhanceEndpoints({
         },
         getCustomerById(endpoint) {
             endpoint.providesTags = customer => [
-                { type: 'customers', id: customer?.id },
+                {type: 'customers', id: customer?.id},
             ];
         },
     },

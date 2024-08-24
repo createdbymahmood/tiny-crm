@@ -1,7 +1,7 @@
-import { DEFAULT_ERROR_MESSAGE } from '@configs/constants';
-import { describe, expect, it } from 'vitest';
+import {DEFAULT_ERROR_MESSAGE} from '@configs/constants';
+import {describe, expect, it} from 'vitest';
 
-import { toClientErrorMessage } from './toClientErrorMessage';
+import {toClientErrorMessage} from './toClientErrorMessage';
 
 describe('toClientErrorMessage', () => {
     it('should return DEFAULT_ERROR_MESSAGE if error is not an object', () => {
@@ -19,13 +19,13 @@ describe('toClientErrorMessage', () => {
     });
 
     it('should return DEFAULT_ERROR_MESSAGE when error object has no data or message property', () => {
-        const error = { status: 404 };
+        const error = {status: 404};
 
         expect(toClientErrorMessage(error)).toEqual(DEFAULT_ERROR_MESSAGE);
     });
 
     test('should return DEFAULT_ERROR_MESSAGE when error object message property is falsy', () => {
-        const error = { data: { message: null } };
+        const error = {data: {message: null}};
 
         expect(toClientErrorMessage(error)).toEqual(DEFAULT_ERROR_MESSAGE);
     });
