@@ -1,11 +1,10 @@
 import urlcat from 'urlcat';
 
 import * as testIds from '../../../src/lib/cypress/testIds';
-import { paths } from '../../../src/lib/react-router/paths';
 
 describe('View Customer', () => {
     beforeEach(() => {
-        cy.visit(paths.customers.index);
+        cy.visit('/customers');
     });
 
     it('should display customer list modal', () => {
@@ -18,7 +17,7 @@ describe('View Customer', () => {
             /* User must be redirected to view customer page */
             cy.location('pathname').should(
                 'eq',
-                urlcat(paths.customers.view, { id: customer.id }),
+                urlcat('/customers/:id', { id: customer.id }),
             );
 
             /* Should see the content */

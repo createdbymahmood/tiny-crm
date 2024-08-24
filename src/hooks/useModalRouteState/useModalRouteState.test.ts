@@ -6,8 +6,8 @@ import { useModalRouteState } from './useModalRouteState';
 
 let mockedUseNavigate;
 
-vi.mock('react-router-dom', () => ({
-    ...vi.importActual('react-router-dom'),
+vi.mock('@tanstack/react-router', () => ({
+    ...vi.importActual('@tanstack/react-router'),
     useNavigate: () => mockedUseNavigate,
 }));
 

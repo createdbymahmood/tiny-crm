@@ -1,13 +1,13 @@
+import { useParams } from '@tanstack/react-router';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
 
 import { ViewCustomerModal } from '@/app/customer';
 import { useModalRouteState } from '@/hooks';
 
 export const ViewCustomer: React.FC = () => {
     const { modal } = useModalRouteState();
-    const customerId = useParams().id!;
+    const customerId = useParams({ strict: false, select: s => s.customerId! });
 
     return (
         <React.Fragment>

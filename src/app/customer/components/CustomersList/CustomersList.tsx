@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import { Button, Space, Table, Tag, Tooltip, Typography } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type {
@@ -7,14 +8,12 @@ import type {
 import { find } from 'lodash';
 import { map, pipe, uniqBy } from 'lodash/fp';
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
 
+// eslint-disable-next-line import/no-cycle
 import { DeleteCustomerPopconfirm } from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
-
-import { createUrl } from '@/lib/react-router/createUrl';
+import type { Customer } from '@/lib/data-provider/services/__generated';
 import { getTestAttributes } from '@/utils/test/getTestAttributes';
-import { Customer } from '@/lib/data-provider/services/__generated';
 
 const expandableContent = {
     expandedRowRender: (record: Customer) => (
@@ -33,29 +32,29 @@ const createIndustryFiltersMap = pipe(
 const renderAction = (customer: Customer) => (
     <Space size='middle'>
         <Link
-            to={createUrl('customers.view', { id: customer.id })}
-            {...getTestAttributes(
-                testIds.viewCustomer.cta(customer.id as string),
-            )}
+            to='/customers/$customerId'
+            params={{ customerId: customer.id! }}
+            {...getTestAttributes(testIds.viewCustomer.cta(customer.id!))}
         >
             <Space>
                 <Typography>View</Typography>
             </Space>
         </Link>
 
-        <DeleteCustomerPopconfirm customerIds={[customer.id as string]}>
+        <DeleteCustomerPopconfirm customerIds={[customer.id!]}>
             <Button
                 type='primary'
                 danger
-                {...getTestAttributes(
-                    testIds.deleteCustomer.cta(customer.id as string),
-                )}
+                {...getTestAttributes(testIds.deleteCustomer.cta(customer.id!))}
             >
                 Delete
             </Button>
         </DeleteCustomerPopconfirm>
 
-        <Link to={createUrl('customers.update', { id: customer.id })}>
+        <Link
+            to='/customers/$customerId/update'
+            params={{ customerId: customer.id! }}
+        >
             <Button type='default'>Edit</Button>
         </Link>
     </Space>
@@ -68,11 +67,11 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         dataIndex: 'company',
         showSorterTooltip: true,
         sorter: (a, b) => {
-            if ((a.company as string) < (b.company as string)) {
+            if (a.company! < b.company!) {
                 return -1;
             }
 
-            if ((a.company as string) > (b.company as string)) {
+            if (a.company! > b.company!) {
                 return 1;
             }
 
@@ -106,7 +105,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         dataIndex: 'industry',
         filters: createIndustryFiltersMap(data),
         onFilter: (value, record) =>
-            (record.industry as string).startsWith(value as string),
+            record.industry!.startsWith(value as string),
         width: 100,
         responsive: ['md'],
     },
@@ -191,7 +190,7 @@ export const CustomersList: React.FC<CustomersListProps> = ({
                 }}
             >
                 <Link
-                    to={createUrl('customers.create')}
+                    to='/customers/create'
                     {...getTestAttributes(testIds.createOrUpdateCustomer.cta)}
                 >
                     <Button type='primary'>New Customer</Button>

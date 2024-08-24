@@ -1,7 +1,7 @@
 import { generatedApi } from '@/lib/data-provider/services/__generated';
 import { providesList } from '@/utils/redux';
 import { findIndex, includes, remove } from 'lodash';
-const addTagTypes = ['customers', 'admin'];
+const addTagTypes = ['customers', 'admin'] as const;
 
 export const api = generatedApi.enhanceEndpoints({
     addTagTypes: addTagTypes,

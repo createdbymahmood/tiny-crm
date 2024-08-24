@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
@@ -17,6 +18,7 @@ const viteConfig = defineConfig({
         checker({ typescript: true }),
         tsconfigPaths(),
         viteCompression(),
+        TanStackRouterVite(),
     ],
     server: {
         port: 9900,

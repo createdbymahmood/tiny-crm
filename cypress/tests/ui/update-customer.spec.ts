@@ -1,15 +1,14 @@
 import urlcat from 'urlcat';
 
 import * as testIds from '../../../src/lib/cypress/testIds';
-import type { Customer } from '../../../src/lib/data-provider/services/customer/customer.types';
-import { paths } from '../../../src/lib/react-router/paths';
+import type { Customer } from '../../../src/lib/data-provider/services/__generated';
 
 describe('pdate Customer', () => {
     it('should show update customer form', () => {
         cy.fixture('customer.json')
             .as('customer')
             .then((customer: Customer) => {
-                cy.visit(urlcat(paths.customers.update, { id: customer.id }));
+                cy.visit(urlcat('/customers/:id/update', { id: customer.id }));
             });
         cy.findByTestId(testIds.createOrUpdateCustomer.form.update).should(
             'be.visible',
@@ -21,7 +20,7 @@ describe('pdate Customer', () => {
             .as('newCustomer')
             .then((newCustomer: Customer) => {
                 cy.visit(
-                    urlcat(paths.customers.update, { id: newCustomer.id }),
+                    urlcat('/customers/:id/update', { id: newCustomer.id }),
                 );
 
                 /* Clear previous customer name */
@@ -70,6 +69,6 @@ describe('pdate Customer', () => {
         cy.findByTestId(
             testIds.createOrUpdateCustomer.form.elements.submit,
         ).click();
-        cy.location('pathname').should('eq', paths.customers.index);
+        cy.location('pathname').should('eq', '/customers');
     });
 });

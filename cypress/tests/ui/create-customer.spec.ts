@@ -1,10 +1,9 @@
 import * as testIds from '../../../src/lib/cypress/testIds';
-import type { Customer } from '../../../src/lib/data-provider/services/customer/customer.types';
-import { paths } from '../../../src/lib/react-router/paths';
+import type { Customer } from '../../../src/lib/data-provider/services/__generated';
 
 describe('Create Customer', () => {
     beforeEach(() => {
-        cy.visit(paths.customers.create);
+        cy.visit('/customers/create');
     });
 
     it('should show create customer form', () => {
@@ -58,6 +57,6 @@ describe('Create Customer', () => {
         cy.findByTestId(
             testIds.createOrUpdateCustomer.form.elements.submit,
         ).click();
-        cy.location('pathname').should('eq', paths.customers.index);
+        cy.location('pathname').should('eq', '/customers');
     });
 });

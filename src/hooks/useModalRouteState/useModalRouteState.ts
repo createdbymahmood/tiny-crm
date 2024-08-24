@@ -1,8 +1,6 @@
 import { MODAL_AS_ROUTE_CLOSE_DELAY } from '@configs/constants';
+import { useNavigate } from '@tanstack/react-router';
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { createUrl } from '@/lib/react-router/createUrl';
 
 export const useModalRouteState = () => {
     const [isOpen, setIsOpen] = React.useState<boolean>(true);
@@ -13,7 +11,7 @@ export const useModalRouteState = () => {
 
         /* To persist animation */
         setTimeout(
-            () => navigate(createUrl('customers.index')),
+            () => void navigate({ to: '/customers' }),
             MODAL_AS_ROUTE_CLOSE_DELAY,
         );
     };
