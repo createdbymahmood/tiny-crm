@@ -18,7 +18,6 @@ export const api = generatedApi.enhanceEndpoints({
                         'getCustomers',
                         undefined,
                         draft => {
-                            if (!ids) return;
                             const entityIndexes = ids.map(id =>
                                 findIndex(draft, {id}),
                             );
