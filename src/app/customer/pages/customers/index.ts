@@ -1,7 +1,7 @@
 import {lazyImport} from '@/utils/lazyImport';
 
 const Customers = lazyImport(
-    () => import('./Customers.page' /* webpackChunkName: "Customers" */),
+    () => import('./customers.page' /* webpackChunkName: "Customers" */),
     module => module.Customers,
 );
 
