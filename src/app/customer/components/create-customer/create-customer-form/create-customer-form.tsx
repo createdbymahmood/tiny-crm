@@ -20,7 +20,7 @@ import {transformEmptyValuesToNull} from '@/utils/transform-empty-values-to-null
 import type {
     CreateCustomerFormPayload,
     FormCancelHandle,
-} from './create-customer-form.types.d';
+} from './create-customer-form.types';
 import {CreateCustomerFormView} from './create-customer-form-view';
 
 interface CreateCustomerFormProps {

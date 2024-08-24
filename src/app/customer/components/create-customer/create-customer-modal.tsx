@@ -2,7 +2,7 @@ import type {ModalProps} from 'antd';
 import {Modal} from 'antd';
 import * as React from 'react';
 
-import {CreateCustomerForm} from './create-customer-form';
+import {CreateCustomerForm} from './create-customer-form/create-customer-form';
 
 export interface CreateCustomerModalProps extends ModalProps {}
 

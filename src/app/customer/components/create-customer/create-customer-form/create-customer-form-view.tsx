@@ -9,7 +9,7 @@ import * as React from 'react';
 import * as testIds from '@/lib/cypress/testIds';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
 
-import type {FormCancelHandle} from './create-customer-form.types.d';
+import type {FormCancelHandle} from './create-customer-form.types';
 import {CreateCustomerProjectsField} from './create-customer-projects-field';
 
 interface CreateCustomerFormViewProps {

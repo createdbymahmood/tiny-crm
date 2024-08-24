@@ -11,7 +11,7 @@ import {useUpdate} from '@/hooks';
 import * as testIds from '@/lib/cypress/testIds';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
 
-import type {CreateCustomerFormPayload} from './create-customer-form.types.d';
+import type {CreateCustomerFormPayload} from './create-customer-form.types';
 
 const getIsStartDateValid: DatePickerProps['disabledDate'] = current => {
     // Can not select days before today
