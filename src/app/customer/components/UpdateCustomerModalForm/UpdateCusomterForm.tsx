@@ -9,9 +9,10 @@ import type {
     CreateCustomerFormPayload as UpdateCustomerFormPayload,
     FormCancelHandle,
 } from '@/app/customer';
+// eslint-disable-next-line import/no-cycle
 import {
-    createCustomerDtoTransformer,
     CreateCustomerFormView as UpdateCustomerFormView,
+    transformCustomerFormValuesToDTO,
 } from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
 import type {Customer} from '@/lib/data-provider/services/__generated';
@@ -58,7 +59,7 @@ export const UpdateCusomterForm: React.FC<UpdateCusomterFormProps> = ({
 
     const onSubmit = async (newCustomer: UpdateCustomerFormPayload) => {
         const newCustomerData = produce(newCustomer, draft => {
-            draft.projects = createCustomerDtoTransformer(draft.projects);
+            draft.projects = transformCustomerFormValuesToDTO(draft.projects);
         });
 
         try {

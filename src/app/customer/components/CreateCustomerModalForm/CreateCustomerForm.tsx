@@ -27,7 +27,7 @@ interface CreateCustomerFormProps {
     onCancel?: FormCancelHandle;
 }
 
-export const createCustomerDtoTransformer = pipe(
+export const transformCustomerFormValuesToDTO = pipe(
     transformAllDayjsInstancesToIso8601FormattedValue,
     transformEmptyValuesToNull,
 );
@@ -42,7 +42,7 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
 
     const onSubmit = async (newCustomer: CreateCustomerFormPayload) => {
         const data = produce(newCustomer, draft => {
-            draft.projects = createCustomerDtoTransformer(draft.projects);
+            draft.projects = transformCustomerFormValuesToDTO(draft.projects);
         });
 
         try {
