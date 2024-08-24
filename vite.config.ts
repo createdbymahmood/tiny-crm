@@ -22,6 +22,7 @@ const viteConfig = defineConfig({
     ],
     server: {
         port: 9900,
+        open: true,
     },
     test: {
         environment: 'jsdom',
