@@ -1,4 +1,4 @@
-import { emptySplitApi as api } from './emptyApi';
+import {emptySplitApi as api} from './empty-Api';
 export const addTagTypes = ['customers', 'admin'] as const;
 const injectedRtkApi = api
     .enhanceEndpoints({
@@ -10,7 +10,7 @@ const injectedRtkApi = api
                 GetCustomersApiResponse,
                 GetCustomersApiArg
             >({
-                query: () => ({ url: `/customers` }),
+                query: () => ({url: `/customers`}),
                 providesTags: ['customers'],
             }),
             createCustomer: build.mutation<
@@ -28,7 +28,7 @@ const injectedRtkApi = api
                 GetCustomerByIdApiResponse,
                 GetCustomerByIdApiArg
             >({
-                query: queryArg => ({ url: `/customers/${queryArg}` }),
+                query: queryArg => ({url: `/customers/${queryArg}`}),
                 providesTags: ['customers'],
             }),
             updateCustomer: build.mutation<
@@ -56,7 +56,7 @@ const injectedRtkApi = api
         }),
         overrideExisting: false,
     });
-export { injectedRtkApi as generatedApi };
+export {injectedRtkApi as generatedApi};
 export type GetCustomersApiResponse =
     /** status 200 List of customers */ Customer[];
 export type GetCustomersApiArg = void;
