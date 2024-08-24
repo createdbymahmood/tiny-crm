@@ -1,45 +1,17 @@
+const path = __dirname;
+const resolvers = [`${path}/tsconfig.eslint.json`];
+
 const { init } = require('@fullstacksjs/eslint-config/init');
 
 module.exports = init({
     modules: {
+        next: false,
         auto: true,
         esm: true,
+        react: true,
         typescript: {
-            parserProject: ['./tsconfig.eslint.json'],
-            resolverProject: ['./tsconfig.json'],
+            parserProject: resolvers,
+            resolverProject: resolvers,
         },
-    },
-    root: true,
-    settings: {
-        'import/resolver': {
-            typescript: {},
-        },
-    },
-    rules: {
-        'import/no-cycle': ['off'],
-        'cypress/unsafe-to-chain-command': ['off'],
-        'react/jsx-sort-props': [
-            2,
-            {
-                callbacksLast: true,
-                shorthandFirst: false,
-                shorthandLast: true,
-                ignoreCase: true,
-                noSortAlphabetically: false,
-                reservedFirst: [
-                    'key',
-                    'ref',
-                    'children',
-                    'dangerouslySetInnerHTML',
-                ],
-            },
-        ],
-        'react/boolean-prop-naming': [
-            'error',
-            { rule: '^(is|has)[A-Z]([A-Za-z0-9]?)+' },
-        ],
-        'react/no-children-prop': ['error'],
-        'react/hook-use-state': ['error'],
-        'import/extensions': ['off'],
     },
 });
