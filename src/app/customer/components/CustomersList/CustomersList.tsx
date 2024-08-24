@@ -11,12 +11,10 @@ import { Link } from 'react-router-dom';
 
 import { DeleteCustomerPopconfirm } from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
-import type {
-    Customer,
-    Customers,
-} from '@/lib/data-provider/services/customer/customer.types';
+
 import { createUrl } from '@/lib/react-router/createUrl';
 import { getTestAttributes } from '@/utils/test/getTestAttributes';
+import { Customer } from '@/lib/data-provider/services/__generated';
 
 const expandableContent = {
     expandedRowRender: (record: Customer) => (
@@ -36,18 +34,22 @@ const renderAction = (customer: Customer) => (
     <Space size='middle'>
         <Link
             to={createUrl('customers.view', { id: customer.id })}
-            {...getTestAttributes(testIds.viewCustomer.cta(customer.id))}
+            {...getTestAttributes(
+                testIds.viewCustomer.cta(customer.id as string),
+            )}
         >
             <Space>
                 <Typography>View</Typography>
             </Space>
         </Link>
 
-        <DeleteCustomerPopconfirm customerIds={[customer.id]}>
+        <DeleteCustomerPopconfirm customerIds={[customer.id as string]}>
             <Button
                 type='primary'
                 danger
-                {...getTestAttributes(testIds.deleteCustomer.cta(customer.id))}
+                {...getTestAttributes(
+                    testIds.deleteCustomer.cta(customer.id as string),
+                )}
             >
                 Delete
             </Button>
@@ -59,17 +61,18 @@ const renderAction = (customer: Customer) => (
     </Space>
 );
 
+type Customers = Customer[];
 const createColumns = (data: Customers): ColumnsType<Customer> => [
     {
         title: 'Company',
         dataIndex: 'company',
         showSorterTooltip: true,
         sorter: (a, b) => {
-            if (a.company < b.company) {
+            if ((a.company as string) < (b.company as string)) {
                 return -1;
             }
 
-            if (a.company > b.company) {
+            if ((a.company as string) > (b.company as string)) {
                 return 1;
             }
 
@@ -103,7 +106,7 @@ const createColumns = (data: Customers): ColumnsType<Customer> => [
         dataIndex: 'industry',
         filters: createIndustryFiltersMap(data),
         onFilter: (value, record) =>
-            record.industry.startsWith(value as string),
+            (record.industry as string).startsWith(value as string),
         width: 100,
         responsive: ['md'],
     },

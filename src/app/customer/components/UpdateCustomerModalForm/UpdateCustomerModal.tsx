@@ -3,7 +3,7 @@ import { Alert, Modal, Spin } from 'antd';
 import * as React from 'react';
 
 import { UpdateCusomterForm } from '@/app/customer';
-import { useGetCustomerQuery } from '@/lib/data-provider/services/customer';
+import { useGetCustomerByIdQuery } from '@/lib/data-provider/services/api';
 import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
 
 export interface UpdateCustomerModalProps extends ModalProps {
@@ -17,7 +17,7 @@ interface UseUpdateCustomerModalStateParams {
 const useUpdateCustomerModalState = ({
     customerId,
 }: UseUpdateCustomerModalStateParams) => {
-    const customerQuery = useGetCustomerQuery(customerId);
+    const customerQuery = useGetCustomerByIdQuery(customerId);
     return { customerQuery };
 };
 

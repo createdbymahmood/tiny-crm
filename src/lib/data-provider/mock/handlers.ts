@@ -4,15 +4,13 @@ import { each, find } from 'lodash';
 import { rest } from 'msw';
 import { v4 as uuid } from 'uuid';
 
-import { urls } from '@/lib/data-provider/mock/urls';
-
-import type { Customer } from '../services/customer/customer.types.d';
+import { Customer } from '@/lib/data-provider/services/__generated';
 
 export const getHandlers = (
     state: EntityState<Customer>,
     adapter: EntityAdapter<Customer>,
 ) => [
-    rest.get(urls.customer, (req, res, ctx) => {
+    rest.get('/customers/:id', (req, res, ctx) => {
         const { id } = req.params as { id: string };
         const customer = find(state.entities, { id });
 
@@ -28,14 +26,14 @@ export const getHandlers = (
         return res(ctx.json(customer), ctx.delay(MOCK_API_CALL_REQUEST_DELAY));
     }),
 
-    rest.get(urls.customers, (_req, res, ctx) => {
+    rest.get('/customers', (_req, res, ctx) => {
         return res(
             ctx.json(Object.values(state.entities)),
             ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
         );
     }),
 
-    rest.put(urls.customer, async (req, res, ctx) => {
+    rest.put('/customers/:id', async (req, res, ctx) => {
         const { id } = req.params as { id: string };
         const changes = await req.json();
         const customer = find(state.entities, { id });
@@ -57,8 +55,8 @@ export const getHandlers = (
         );
     }),
 
-    rest.post(urls.deleteCustomers, async (req, res, ctx) => {
-        const { ids } = await req.json();
+    rest.post('/deleteCustomers', async (req, res, ctx) => {
+        const ids = await req.json();
         const customers = ids
             .map(id => find(state.entities, { id }))
             .filter(Boolean);
@@ -84,7 +82,7 @@ export const getHandlers = (
         );
     }),
 
-    rest.post(urls.customers, async (req, res, ctx) => {
+    rest.post('/customers', async (req, res, ctx) => {
         const customer: Customer = await req.json();
 
         each(customer.projects, project => {

@@ -4,7 +4,7 @@ import { merge } from 'lodash';
 import * as React from 'react';
 
 import * as testIds from '@/lib/cypress/testIds';
-import { useGetCustomerQuery } from '@/lib/data-provider/services/customer';
+import { useGetCustomerByIdQuery } from '@/lib/data-provider/services/api';
 import { getTestAttributes } from '@/utils/test/getTestAttributes';
 import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
 
@@ -15,7 +15,7 @@ interface UseViewCustomerModalStateParams {
 const useViewCustomerModalState = ({
     customerId,
 }: UseViewCustomerModalStateParams) => {
-    const customerQuery = useGetCustomerQuery(customerId);
+    const customerQuery = useGetCustomerByIdQuery(customerId);
     return { customerId, customerQuery };
 };
 
@@ -45,7 +45,9 @@ export const ViewCustomerModal: React.FC<ViewCustomerModalProps> = ({
         return (
             <div
                 {...getTestAttributes(
-                    testIds.viewCustomer.content(customerQuery.data.id),
+                    testIds.viewCustomer.content(
+                        customerQuery.data.id as string,
+                    ),
                 )}
             >
                 {JSON.stringify(customerQuery.data)}

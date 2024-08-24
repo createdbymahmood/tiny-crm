@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: Customer API
+  description: API for managing customers
+  version: 1.0.0
+
+tags:
+  - name: customers
+    description: Operations related to customer management
+  - name: admin
+    description: Administrative operations
+
+paths:
+  /customers:
+    get:
+      summary: Retrieve all customers
+      operationId: getCustomers
+      tags:
+        - customers
+      responses:
+        200:
+          description: List of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Customer"
+        500:
+          description: Internal server error
+
+    post:
+      summary: Create a new customer
+      operationId: createCustomer
+      tags:
+        - customers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+      responses:
+        201:
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        400:
+          description: Invalid request
+
+  /customers/{id}:
+    get:
+      summary: Retrieve a customer by ID
+      operationId: getCustomerById
+      tags:
+        - customers
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Customer details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        404:
+          description: Customer not found
+
+    put:
+      summary: Update a customer
+      operationId: updateCustomer
+      tags:
+        - customers
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+      responses:
+        200:
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        404:
+          description: Customer not found
+
+  /deleteCustomers:
+    post:
+      summary: Delete multiple customers by IDs
+      operationId: deleteCustomers
+      tags:
+        - admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        200:
+          description: Customers deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ids:
+                    type: array
+                    items:
+                      type: string
+                  success:
+                    type: boolean
+        404:
+          description: No customers found with specified IDs
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        isActive:
+          type: boolean
+        company:
+          type: string
+        industry:
+          type: string
+        projects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+        about:
+          type: string
+
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        contact:
+          type: string
+          nullable: true
+        start_date:
+          type: string
+          format: date
+          nullable: true
+        end_date:
+          type: string
+          format: date
+          nullable: true

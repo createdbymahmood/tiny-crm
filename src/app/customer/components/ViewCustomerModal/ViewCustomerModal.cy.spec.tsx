@@ -1,8 +1,8 @@
 import { Providers } from '@/app/general';
 import * as testIds from '@/lib/cypress/testIds';
-import type { Customer } from '@/lib/data-provider/services/customer/customer.types';
 
 import { ViewCustomerModal } from './ViewCustomerModal';
+import { Customer } from '@/lib/data-provider/services/__generated';
 
 describe('Login Form', () => {
     let customer;

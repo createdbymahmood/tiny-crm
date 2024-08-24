@@ -6,16 +6,16 @@ import { isString, noop } from 'lodash';
 import * as React from 'react';
 
 import type {
-    CreateCustomerFormPayload as UpdateCustomerFormPayload,
     FormCancelHandle,
+    CreateCustomerFormPayload as UpdateCustomerFormPayload,
 } from '@/app/customer';
 import {
     createCustomerDtoTransformer,
     CreateCustomerFormView as UpdateCustomerFormView,
 } from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
-import { useUpdateCustomerMutation } from '@/lib/data-provider/services/customer';
-import type { Customer } from '@/lib/data-provider/services/customer/customer.types';
+import { Customer } from '@/lib/data-provider/services/__generated';
+import { useUpdateCustomerMutation } from '@/lib/data-provider/services/api';
 import { deepObjectTransformer } from '@/utils/deepObjectTransformer';
 import { getTestAttributes } from '@/utils/test/getTestAttributes';
 import { toClientErrorMessage } from '@/utils/toClientErrorMessage';
@@ -57,13 +57,16 @@ export const UpdateCusomterForm: React.FC<UpdateCusomterFormProps> = ({
     const [updateCustomer, { isLoading }] = useUpdateCustomerMutation();
 
     const onSubmit = async (newCustomer: UpdateCustomerFormPayload) => {
-        const data = produce(newCustomer, draft => {
+        const newCustomerData = produce(newCustomer, draft => {
             draft.projects = createCustomerDtoTransformer(draft.projects);
         });
 
         try {
             void message.loading('Updating customer...');
-            await updateCustomer({ ...data, id: customer.id }).unwrap();
+            await updateCustomer({
+                customer: newCustomerData,
+                id: customer.id as string,
+            }).unwrap();
             void message.success('Customer updated successfully!');
             /* Closing modal... */
             onCancel();

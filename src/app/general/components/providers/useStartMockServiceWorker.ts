@@ -5,7 +5,7 @@ import * as React from 'react';
 import { getWorker } from '@/lib/data-provider/mock/browser';
 // eslint-disable-next-line import/extensions
 import customersMock from '@/lib/data-provider/mock/customers.json';
-import type { Customer } from '@/lib/data-provider/services/customer/customer.types';
+import { Customer } from '@/lib/data-provider/services/__generated';
 
 export const useStartMockServiceWorker = () => {
     const [isLoading, setIsLoading] = React.useState(true);
