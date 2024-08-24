@@ -11,15 +11,15 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as CustomersImport } from './routes/customers'
+import { Route as CustomersRouteImport } from './routes/customers/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as CustomersCreateImport } from './routes/customers.create'
-import { Route as CustomersCustomerIdImport } from './routes/customers.$customerId'
-import { Route as CustomersCustomerIdUpdateImport } from './routes/customers.$customerId_.update'
+import { Route as CustomersCreateImport } from './routes/customers/create'
+import { Route as CustomersCustomerIdImport } from './routes/customers/$customerId'
+import { Route as CustomersCustomerIdUpdateImport } from './routes/customers/$customerId_.update'
 
 // Create/Update Routes
 
-const CustomersRoute = CustomersImport.update({
+const CustomersRouteRoute = CustomersRouteImport.update({
   path: '/customers',
   getParentRoute: () => rootRoute,
 } as any)
@@ -31,17 +31,17 @@ const IndexRoute = IndexImport.update({
 
 const CustomersCreateRoute = CustomersCreateImport.update({
   path: '/create',
-  getParentRoute: () => CustomersRoute,
+  getParentRoute: () => CustomersRouteRoute,
 } as any)
 
 const CustomersCustomerIdRoute = CustomersCustomerIdImport.update({
   path: '/$customerId',
-  getParentRoute: () => CustomersRoute,
+  getParentRoute: () => CustomersRouteRoute,
 } as any)
 
 const CustomersCustomerIdUpdateRoute = CustomersCustomerIdUpdateImport.update({
   path: '/$customerId/update',
-  getParentRoute: () => CustomersRoute,
+  getParentRoute: () => CustomersRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -59,7 +59,7 @@ declare module '@tanstack/react-router' {
       id: '/customers'
       path: '/customers'
       fullPath: '/customers'
-      preLoaderRoute: typeof CustomersImport
+      preLoaderRoute: typeof CustomersRouteImport
       parentRoute: typeof rootRoute
     }
     '/customers/$customerId': {
@@ -67,21 +67,21 @@ declare module '@tanstack/react-router' {
       path: '/$customerId'
       fullPath: '/customers/$customerId'
       preLoaderRoute: typeof CustomersCustomerIdImport
-      parentRoute: typeof CustomersImport
+      parentRoute: typeof CustomersRouteImport
     }
     '/customers/create': {
       id: '/customers/create'
       path: '/create'
       fullPath: '/customers/create'
       preLoaderRoute: typeof CustomersCreateImport
-      parentRoute: typeof CustomersImport
+      parentRoute: typeof CustomersRouteImport
     }
     '/customers/$customerId/update': {
       id: '/customers/$customerId/update'
       path: '/$customerId/update'
       fullPath: '/customers/$customerId/update'
       preLoaderRoute: typeof CustomersCustomerIdUpdateImport
-      parentRoute: typeof CustomersImport
+      parentRoute: typeof CustomersRouteImport
     }
   }
 }
@@ -90,7 +90,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  CustomersRoute: CustomersRoute.addChildren({
+  CustomersRouteRoute: CustomersRouteRoute.addChildren({
     CustomersCustomerIdRoute,
     CustomersCreateRoute,
     CustomersCustomerIdUpdateRoute,
@@ -113,7 +113,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "index.tsx"
     },
     "/customers": {
-      "filePath": "customers.tsx",
+      "filePath": "customers/route.tsx",
       "children": [
         "/customers/$customerId",
         "/customers/create",
@@ -121,15 +121,15 @@ export const routeTree = rootRoute.addChildren({
       ]
     },
     "/customers/$customerId": {
-      "filePath": "customers.$customerId.tsx",
+      "filePath": "customers/$customerId.tsx",
       "parent": "/customers"
     },
     "/customers/create": {
-      "filePath": "customers.create.tsx",
+      "filePath": "customers/create.tsx",
       "parent": "/customers"
     },
     "/customers/$customerId/update": {
-      "filePath": "customers.$customerId_.update.tsx",
+      "filePath": "customers/$customerId_.update.tsx",
       "parent": "/customers"
     }
   }
