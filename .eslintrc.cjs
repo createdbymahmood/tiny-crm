@@ -1,7 +1,7 @@
 const path = __dirname;
 const resolvers = [`${path}/tsconfig.eslint.json`];
 
-const { init } = require('@fullstacksjs/eslint-config/init');
+const {init} = require('@fullstacksjs/eslint-config/init');
 
 module.exports = init({
     modules: {
@@ -13,5 +13,8 @@ module.exports = init({
             parserProject: resolvers,
             resolverProject: resolvers,
         },
+    },
+    rules: {
+        'import/no-cycle': 'off',
     },
 });
