@@ -16,5 +16,6 @@ module.exports = init({
     },
     rules: {
         'import/no-cycle': 'off',
+        'import/extensions': 'off',
     },
 });
