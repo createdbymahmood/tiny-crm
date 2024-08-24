@@ -104,7 +104,7 @@ paths:
       summary: Delete multiple customers by IDs
       operationId: deleteCustomers
       tags:
-        - admin
+        - customers
       requestBody:
         required: true
         content:

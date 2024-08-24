@@ -31,8 +31,6 @@ export const api = generatedApi.enhanceEndpoints({
           customersQueryUpdateResult.undo();
         }
       };
-
-      endpoint.invalidatesTags = [{type: 'customers'}];
     },
     updateCustomer(endpoint) {
       endpoint.onQueryStarted = async function onQueryStarted(
@@ -69,21 +67,16 @@ export const api = generatedApi.enhanceEndpoints({
         }
       };
     },
-    getCustomers() {
-      return {
-        providesTags: response => {
-          return providesList({
-            resultsWithIds: response?.map(customer => ({
-              ...customer,
-              id: customer.id,
-            })),
-            tagType: 'customers',
-          });
-        },
-      };
-    },
-    createCustomer(endpoint) {
-      endpoint.invalidatesTags = ['customers'];
+    getCustomers: {
+      providesTags: response => {
+        return providesList({
+          resultsWithIds: response?.map(customer => ({
+            ...customer,
+            id: customer.id!,
+          })),
+          tagType: 'customers',
+        });
+      },
     },
     getCustomerById(endpoint) {
       endpoint.providesTags = customer => [
