@@ -83,6 +83,12 @@ export const api = generatedApi.enhanceEndpoints({
         {type: 'customers', id: customer?.id},
       ];
     },
+    login: {
+      invalidatesTags: [],
+    },
+    logout: {
+      invalidatesTags: [],
+    },
   },
 });
 
@@ -92,4 +98,7 @@ export const {
   useGetCustomerByIdQuery,
   useGetCustomersQuery,
   useUpdateCustomerMutation,
+  useLoginMutation,
+  useGetMeQuery,
+  useLogoutMutation,
 } = api;

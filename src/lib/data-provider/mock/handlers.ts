@@ -1,11 +1,23 @@
 import {MOCK_API_CALL_REQUEST_DELAY} from '@configs/constants';
 import type {EntityAdapter, EntityState} from '@reduxjs/toolkit';
-import {each, find} from 'lodash';
+import * as jose from 'jose'; // Import jsonwebtoken
+import {each, find, isEqual} from 'lodash';
 import {rest} from 'msw';
 import {v4 as uuid} from 'uuid';
 
 import type {Customer} from '@/lib/data-provider/services/__generated';
 
+export const mockUser = {
+  username: 'admin',
+  password: 'U1oP0oSUQyUGDY',
+};
+
+const secret = new TextEncoder().encode(
+  'cc7e0d44fd473002f1c42167459001140ec6389b7353f8088f4d9a95f2f596f2',
+);
+const alg = 'HS256';
+
+// eslint-disable-next-line max-lines-per-function
 export const getHandlers = (
   state: EntityState<Customer>,
   adapter: EntityAdapter<Customer>,
@@ -92,5 +104,92 @@ export const getHandlers = (
       ctx.json(Object.values(state.entities)),
       ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
     );
+  }),
+
+  rest.post('/login', async (req, res, ctx) => {
+    const credentials = await req.json();
+
+    if (isEqual(credentials, mockUser)) {
+      const token = await new jose.SignJWT({username: mockUser.username})
+        .setProtectedHeader({alg})
+        .sign(secret);
+
+      return res(
+        ctx.json({token, username: mockUser.username}),
+        ctx.status(200),
+        ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+      );
+    } else {
+      return res(
+        ctx.status(401),
+        ctx.json({
+          message: 'Invalid username or password',
+        }),
+        ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+      );
+    }
+  }),
+
+  rest.get('/me', async (req, res, ctx) => {
+    const token = req.headers.get('Authorization');
+
+    if (!token) {
+      return res(
+        ctx.status(401),
+        ctx.json({
+          message: 'Unauthorized: No token provided',
+        }),
+      );
+    }
+
+    try {
+      const decoded = await jose.jwtVerify(token, secret);
+      return await res(
+        ctx.json({
+          username: decoded.payload,
+        }),
+        ctx.status(200),
+        ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+      );
+    } catch (error) {
+      return res(
+        ctx.status(401),
+        ctx.json({
+          message: 'Invalid token',
+        }),
+        ctx.delay(MOCK_API_CALL_REQUEST_DELAY),
+      );
+    }
+  }),
+
+  rest.post('/logout', async (req, res, ctx) => {
+    const token = req.headers.get('Authorization');
+
+    if (!token) {
+      return res(
+        ctx.status(401),
+        ctx.json({
+          message: 'Unauthorized: No token provided',
+        }),
+      );
+    }
+
+    try {
+      const decoded = await jose.jwtVerify(token, secret);
+      return await res(
+        ctx.json({
+          username: decoded.payload,
+          // Add other user details here
+        }),
+        ctx.status(200),
+      );
+    } catch (error) {
+      return res(
+        ctx.status(401),
+        ctx.json({
+          message: 'Invalid token',
+        }),
+      );
+    }
   }),
 ];

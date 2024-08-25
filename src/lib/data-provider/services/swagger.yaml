@@ -9,6 +9,8 @@ tags:
     description: Operations related to customer management
   - name: admin
     description: Administrative operations
+  - name: auth
+    description: Authentication operations
 
 paths:
   /customers:
@@ -130,6 +132,71 @@ paths:
         404:
           description: No customers found with specified IDs
 
+  /login:
+    post:
+      summary: Login to the system
+      operationId: login
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  username:
+                    type: string
+        401:
+          description: Invalid credentials
+
+  /me:
+    get:
+      summary: Retrieve the current user
+      operationId: getMe
+      tags:
+        - auth
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: User details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+        401:
+          description: Unauthorized
+
+  /logout:
+    post:
+      summary: Logout from the system
+      operationId: logout
+      tags:
+        - auth
+      security:
+        - BearerAuth: []
+      responses:
+        401:
+          description: Unauthorized
+
 components:
   schemas:
     Customer:
@@ -168,3 +235,11 @@ components:
           type: string
           format: date
           nullable: true
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      in: header
+      name: Authorization

@@ -1,5 +1,5 @@
 import {emptySplitApi as api} from './empty-api';
-export const addTagTypes = ['customers'] as const;
+export const addTagTypes = ['customers', 'auth'] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
@@ -50,6 +50,18 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['customers'],
       }),
+      login: build.mutation<LoginApiResponse, LoginApiArg>({
+        query: queryArg => ({url: `/login`, method: 'POST', body: queryArg}),
+        invalidatesTags: ['auth'],
+      }),
+      getMe: build.query<GetMeApiResponse, GetMeApiArg>({
+        query: () => ({url: `/me`}),
+        providesTags: ['auth'],
+      }),
+      logout: build.mutation<LogoutApiResponse, LogoutApiArg>({
+        query: () => ({url: `/logout`, method: 'POST'}),
+        invalidatesTags: ['auth'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -75,6 +87,20 @@ export type DeleteCustomersApiResponse =
     success?: boolean;
   };
 export type DeleteCustomersApiArg = string[];
+export type LoginApiResponse = /** status 200 Login successful */ {
+  token?: string;
+  username?: string;
+};
+export type LoginApiArg = {
+  username?: string;
+  password?: string;
+};
+export type GetMeApiResponse = /** status 200 User details */ {
+  username?: string;
+};
+export type GetMeApiArg = void;
+export type LogoutApiResponse = unknown;
+export type LogoutApiArg = void;
 export type Project = {
   id?: string;
   name?: string;
