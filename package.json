@@ -21,6 +21,7 @@
     "@rtk-query/codegen-openapi": "1.2.0",
     "@tanstack/react-router": "^1.50.0",
     "antd": "^5.20.2",
+    "antd-style": "^3.6.2",
     "dayjs": "1.11.8",
     "immer": "10.0.2",
     "jose": "^5.7.0",
