@@ -52,11 +52,11 @@ export interface ProvidersProps {}
 
 export const Providers: React.FC<ProvidersProps> = () => {
   const {isLoading} = useStartMockServiceWorker();
-  if (isLoading) return <Spin />;
+  if (isLoading) return null;
 
   return (
     <Provider store={store}>
-      <PersistGate loading={<Spin />} persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <ConfigProvider theme={themeConfig}>
           <HelmetProvider>
             <Helmet
