@@ -1,8 +1,8 @@
 import {createFileRoute} from '@tanstack/react-router';
 import {memo} from 'react';
 
-import {LoginForm} from '@/app/auth';
+import Login from '@/app/auth/pages/login';
 
 export const Route = createFileRoute('/_unauth/auth/login')({
-  component: memo(LoginForm),
+  component: memo(Login),
 });
