@@ -7,8 +7,11 @@ import checker from 'vite-plugin-checker';
 import viteCompression from 'vite-plugin-compression';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-const getManualChunks = (id: string) => {
+const vendors = ['react', 'react-dom', 'ant', 'rc', 'emotion'];
+
+export const getManualChunks = (id: string) => {
   if (!id.includes('node_modules')) return;
+  if (vendors.some(v => id.includes(v))) return 'vendors';
   return id.toString().split('node_modules/')[1].split('/')[0].toString();
 };
 
