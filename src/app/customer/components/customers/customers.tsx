@@ -212,7 +212,7 @@ export const Customers: React.FC<CustomersProps> = ({isLoading, ...props}) => {
       <Flex
         align='center'
         justify='space-between'
-        style={{padding: '10px 20px'}}
+        style={{padding: '20px 20px 10px 20px'}}
       >
         <Typography.Title
           level={4}
@@ -226,7 +226,10 @@ export const Customers: React.FC<CustomersProps> = ({isLoading, ...props}) => {
           Logout
         </Button>
       </Flex>
-      <Table {...tableProps} columns={tableColumns} dataSource={data} />
+
+      <div style={{overflow: 'scroll'}}>
+        <Table {...tableProps} columns={tableColumns} dataSource={data} />
+      </div>
     </Fragment>
   );
 };
