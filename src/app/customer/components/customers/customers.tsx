@@ -1,5 +1,5 @@
 import {Link} from '@tanstack/react-router';
-import {Button, Space, Table, Tag, Tooltip, Typography} from 'antd';
+import {Button, Flex, Space, Table, Tag, Tooltip, Typography} from 'antd';
 import type {ColumnsType, TableProps} from 'antd/es/table';
 import type {
   TablePaginationConfig,
@@ -12,6 +12,7 @@ import React, {Fragment, useState} from 'react';
 import {DeleteCustomerPopconfirm} from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
 import type {Customer} from '@/lib/data-provider/services/__generated';
+import {useLogoutMutation} from '@/lib/data-provider/services/api';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
 
 const expandableContent = {
@@ -134,6 +135,7 @@ export const Customers: React.FC<CustomersProps> = ({isLoading, ...props}) => {
   }));
   const tableColumns = createColumns(data as Customers);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [logout] = useLogoutMutation();
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -207,13 +209,23 @@ export const Customers: React.FC<CustomersProps> = ({isLoading, ...props}) => {
   };
   return (
     <Fragment>
-      <Typography.Title
-        level={4}
-        style={{padding: '0 20px'}}
-        {...getTestAttributes(testIds.viewCustomer.list.title)}
+      <Flex
+        align='center'
+        justify='space-between'
+        style={{padding: '10px 20px'}}
       >
-        Customers list
-      </Typography.Title>
+        <Typography.Title
+          level={4}
+          style={{margin: 0}}
+          {...getTestAttributes(testIds.viewCustomer.list.title)}
+        >
+          Customers list
+        </Typography.Title>
+
+        <Button danger type='dashed' onClick={() => logout()}>
+          Logout
+        </Button>
+      </Flex>
       <Table {...tableProps} columns={tableColumns} dataSource={data} />
     </Fragment>
   );
