@@ -1,4 +1,5 @@
 import {MOCK_API_CALL_REQUEST_DELAY} from '@configs/constants';
+import {env} from '@configs/env';
 import type {EntityAdapter, EntityState} from '@reduxjs/toolkit';
 import * as jose from 'jose'; // Import jsonwebtoken
 import {each, find, isEqual} from 'lodash';
@@ -12,9 +13,7 @@ export const mockUser = {
   password: 'U1oP0oSUQyUGDY',
 };
 
-const secret = new TextEncoder().encode(
-  'cc7e0d44fd473002f1c42167459001140ec6389b7353f8088f4d9a95f2f596f2',
-);
+const secret = new TextEncoder().encode(env.JWTKey);
 const alg = 'HS256';
 
 // eslint-disable-next-line max-lines-per-function
