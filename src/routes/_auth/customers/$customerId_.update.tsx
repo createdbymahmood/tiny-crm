@@ -3,6 +3,6 @@ import {memo} from 'react';
 
 import UpdateCustomer from '@/app/customer/pages/update-customer';
 
-export const Route = createFileRoute('/customers/$customerId/update')({
+export const Route = createFileRoute('/_auth/customers/$customerId/update')({
   component: memo(UpdateCustomer),
 });
