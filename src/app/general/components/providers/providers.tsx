@@ -1,12 +1,13 @@
 import '@/styles/global.css';
 
 import {createRouter, RouterProvider} from '@tanstack/react-router';
-import {ConfigProvider, Spin} from 'antd';
+import {ConfigProvider} from 'antd';
 import * as React from 'react';
 import {Helmet, HelmetProvider} from 'react-helmet-async';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
+import {Pending} from '@/app/general/components/pending';
 import {themeConfig} from '@/lib/ant-design';
 import {useAppDispatch, useAppSelector} from '@/lib/data-provider/hooks';
 import {useGetMeQuery} from '@/lib/data-provider/services/api/api';
@@ -38,7 +39,7 @@ const InnerApp = () => {
   const isAuth = isAuthenticated && isInitialized;
   const meQuery = useGetMeQuery();
 
-  if (meQuery.isLoading) return <Spin />;
+  if (meQuery.isLoading) return <Pending />;
 
   return (
     <RouterProvider

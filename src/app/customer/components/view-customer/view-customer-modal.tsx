@@ -1,8 +1,9 @@
 import type {ModalProps} from 'antd';
-import {Alert, Modal, Spin} from 'antd';
+import {Alert, Modal} from 'antd';
 import {merge} from 'lodash';
 import * as React from 'react';
 
+import {Pending} from '@/app/general';
 import * as testIds from '@/lib/cypress/testIds';
 import {useGetCustomerByIdQuery} from '@/lib/data-provider/services/api/api';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
@@ -32,7 +33,7 @@ export const ViewCustomerModal: React.FC<ViewCustomerModalProps> = ({
   const {customerQuery} = useViewCustomerModalState({customerId});
 
   const content: React.ReactNode = (() => {
-    if (customerQuery.isLoading) return <Spin />;
+    if (customerQuery.isLoading) return <Pending />;
 
     if (!customerQuery.data)
       return (
