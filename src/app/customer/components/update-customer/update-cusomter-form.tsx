@@ -14,8 +14,8 @@ import {
   transformCustomerFormValuesToDTO,
 } from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
-import type {Customer} from '@/lib/data-provider/services/__generated';
-import {useUpdateCustomerMutation} from '@/lib/data-provider/services/api';
+import type {Customer} from '@/lib/data-provider/services/api/__generated';
+import {useUpdateCustomerMutation} from '@/lib/data-provider/services/api/api';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
 import {toClientErrorMessage} from '@/utils/to-client-error-message';
 import {transformObjectValues} from '@/utils/transform-object-values';

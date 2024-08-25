@@ -1,6 +1,9 @@
 import type {Dayjs} from 'dayjs';
 
-import type {Customer, Project} from '@/lib/data-provider/services/__generated';
+import type {
+  Customer,
+  Project,
+} from '@/lib/data-provider/services/api/__generated';
 
 export interface CreateCustomerFormPayload extends Customer {
   projects: (Project & {

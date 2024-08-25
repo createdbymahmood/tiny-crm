@@ -9,7 +9,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 
 import {themeConfig} from '@/lib/ant-design';
 import {useAppDispatch, useAppSelector} from '@/lib/data-provider/hooks';
-import {useGetMeQuery} from '@/lib/data-provider/services/api';
+import {useGetMeQuery} from '@/lib/data-provider/services/api/api';
 import {persistor, store} from '@/lib/data-provider/store';
 import {routeTree} from '@/routeTree.gen';
 

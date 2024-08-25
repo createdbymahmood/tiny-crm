@@ -11,8 +11,8 @@ import React, {Fragment, useState} from 'react';
 
 import {DeleteCustomerPopconfirm} from '@/app/customer';
 import * as testIds from '@/lib/cypress/testIds';
-import type {Customer} from '@/lib/data-provider/services/__generated';
-import {useLogoutMutation} from '@/lib/data-provider/services/api';
+import type {Customer} from '@/lib/data-provider/services/api/__generated';
+import {useLogoutMutation} from '@/lib/data-provider/services/api/api';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
 
 const expandableContent = {

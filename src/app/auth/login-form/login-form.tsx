@@ -2,8 +2,8 @@ import {Form, message} from 'antd';
 import type {Callbacks} from 'rc-field-form/lib/interface.d.ts';
 
 import {mockUser} from '@/lib/data-provider/mock/handlers';
-import type {LoginApiArg} from '@/lib/data-provider/services/__generated';
-import {useLoginMutation} from '@/lib/data-provider/services/api';
+import type {LoginApiArg} from '@/lib/data-provider/services/api/__generated';
+import {useLoginMutation} from '@/lib/data-provider/services/api/api';
 import {toClientErrorMessage} from '@/utils/to-client-error-message';
 
 import {LoginFormView} from './login-form-view';

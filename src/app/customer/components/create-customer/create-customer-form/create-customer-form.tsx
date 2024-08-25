@@ -11,7 +11,7 @@ import {pipe} from 'lodash/fp';
 import * as React from 'react';
 
 import * as testIds from '@/lib/cypress/testIds';
-import {useCreateCustomerMutation} from '@/lib/data-provider/services/api';
+import {useCreateCustomerMutation} from '@/lib/data-provider/services/api/api';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
 import {toClientErrorMessage} from '@/utils/to-client-error-message';
 import {transformAllDayjsInstancesToIso8601FormattedValue} from '@/utils/transform-all-dayjs-instances-to-iso8601-formatted-value';

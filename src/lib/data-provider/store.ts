@@ -3,9 +3,9 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import {api} from '@/lib/data-provider/services/api';
+import {api} from '@/lib/data-provider/services/api/api';
 
-import auth from './services/auth-slice';
+import auth from './services/reducers/auth-slice';
 
 const authPersistConfig = {
   key: 'auth',

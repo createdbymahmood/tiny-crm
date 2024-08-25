@@ -1,6 +1,6 @@
 import {findIndex, includes, remove} from 'lodash';
 
-import {generatedApi} from '@/lib/data-provider/services/__generated';
+import {generatedApi} from '@/lib/data-provider/services/api/__generated';
 import {providesList} from '@/utils/redux';
 
 const addTagTypes = ['customers', 'admin'] as const;

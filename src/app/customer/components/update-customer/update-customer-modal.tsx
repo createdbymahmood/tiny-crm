@@ -3,7 +3,7 @@ import {Alert, Modal, Spin} from 'antd';
 import * as React from 'react';
 
 import {UpdateCusomterForm} from '@/app/customer';
-import {useGetCustomerByIdQuery} from '@/lib/data-provider/services/api';
+import {useGetCustomerByIdQuery} from '@/lib/data-provider/services/api/api';
 import {toClientErrorMessage} from '@/utils/to-client-error-message';
 
 export interface UpdateCustomerModalProps extends ModalProps {

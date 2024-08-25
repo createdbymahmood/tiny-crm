@@ -4,7 +4,7 @@ import {head, omit} from 'lodash';
 import * as React from 'react';
 
 import * as testIds from '@/lib/cypress/testIds';
-import {useDeleteCustomersMutation} from '@/lib/data-provider/services/api';
+import {useDeleteCustomersMutation} from '@/lib/data-provider/services/api/api';
 import {getTestAttributes} from '@/utils/test/get-test-attributes';
 import {toClientErrorMessage} from '@/utils/to-client-error-message';
 

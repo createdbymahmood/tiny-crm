@@ -6,7 +6,7 @@ import {each, find, isEqual} from 'lodash';
 import {rest} from 'msw';
 import {v4 as uuid} from 'uuid';
 
-import type {Customer} from '@/lib/data-provider/services/__generated';
+import type {Customer} from '@/lib/data-provider/services/api/__generated';
 
 export const mockUser = {
   username: 'admin',

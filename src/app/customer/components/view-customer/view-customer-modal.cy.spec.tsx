@@ -1,6 +1,6 @@
 import {Providers} from '@/app/general';
 import * as testIds from '@/lib/cypress/testIds';
-import type {Customer} from '@/lib/data-provider/services/__generated';
+import type {Customer} from '@/lib/data-provider/services/api/__generated';
 
 import {ViewCustomerModal} from './view-customer-modal';
 

@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {assign} from 'lodash';
 
-import {api} from '@/lib/data-provider/services/api';
+import {api} from '@/lib/data-provider/services/api/api';
 
 interface User {
   username: string;
@@ -26,9 +26,7 @@ const initialState: AuthState = {
 const slice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    logout: () => initialState,
-  },
+  reducers: {},
   extraReducers: builder => {
     /* LOGIN  */
     builder

@@ -1,4 +1,5 @@
 import {emptySplitApi as api} from './empty-api';
+
 export const addTagTypes = ['customers', 'auth'] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
@@ -77,42 +78,41 @@ export type GetCustomerByIdApiResponse =
 export type GetCustomerByIdApiArg = string;
 export type UpdateCustomerApiResponse =
   /** status 200 Customer updated successfully */ Customer;
-export type UpdateCustomerApiArg = {
+export interface UpdateCustomerApiArg {
   id: string;
   customer: Customer;
-};
-export type DeleteCustomersApiResponse =
-  /** status 200 Customers deleted successfully */ {
-    ids?: string[];
-    success?: boolean;
-  };
+}
+export interface DeleteCustomersApiResponse {
+  ids?: string[];
+  success?: boolean;
+}
 export type DeleteCustomersApiArg = string[];
-export type LoginApiResponse = /** status 200 Login successful */ {
+export interface LoginApiResponse {
   token?: string;
   username?: string;
-};
-export type LoginApiArg = {
+}
+export interface LoginApiArg {
   username?: string;
   password?: string;
-};
-export type GetMeApiResponse = /** status 200 User details */ {
+}
+export interface GetMeApiResponse {
   username?: string;
-};
+}
 export type GetMeApiArg = void;
 export type LogoutApiResponse = unknown;
 export type LogoutApiArg = void;
-export type Project = {
+export interface Project {
   id?: string;
   name?: string;
   contact?: string | null;
   start_date?: string | null;
   end_date?: string | null;
-};
-export type Customer = {
+}
+export interface Customer {
   id?: string;
   isActive?: boolean;
   company?: string;
   industry?: string;
   projects?: Project[];
   about?: string;
-};
+}
