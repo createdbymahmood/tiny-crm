@@ -85,7 +85,7 @@ export const LoginFormView: React.FC<LoginFormViewProps> = ({isLoading}) => {
             },
           ]}
         >
-          <Input prefix={<MailOutlined />} placeholder='Email' />
+          <Input size='large' prefix={<MailOutlined />} placeholder='Email' />
         </Form.Item>
         <Form.Item
           name='password'
@@ -100,11 +100,18 @@ export const LoginFormView: React.FC<LoginFormViewProps> = ({isLoading}) => {
             prefix={<LockOutlined />}
             type='password'
             placeholder='Password'
+            size='large'
           />
         </Form.Item>
 
         <Form.Item style={{marginBottom: '0px'}}>
-          <Button loading={isLoading} block type='primary' htmlType='submit'>
+          <Button
+            size='large'
+            loading={isLoading}
+            block
+            type='primary'
+            htmlType='submit'
+          >
             Log in
           </Button>
         </Form.Item>
