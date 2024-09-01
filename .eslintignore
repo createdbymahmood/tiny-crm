@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # auto generated files
-src/lib/data-provider/services/__generated.ts
+**/*/__generated.ts
