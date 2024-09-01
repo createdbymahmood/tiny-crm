@@ -12,7 +12,7 @@
     "cypress:open": "cypress open",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "rtk-code-generate": "bunx @rtk-incubator/rtk-query-codegen-openapi ./src/lib/data-provider/services/openapi-config.ts"
+    "rtk-code-generate": "bunx @rtk-incubator/rtk-query-codegen-openapi ./src/lib/data-provider/services/api/openapi-config.ts"
   },
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
