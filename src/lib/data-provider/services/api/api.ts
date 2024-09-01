@@ -1,9 +1,10 @@
 import {findIndex, includes, remove} from 'lodash';
 
-import {generatedApi} from '@/lib/data-provider/services/api/__generated';
+import {
+  addTagTypes,
+  generatedApi,
+} from '@/lib/data-provider/services/api/__generated';
 import {providesList} from '@/utils/redux';
-
-const addTagTypes = ['customers', 'admin'] as const;
 
 export const api = generatedApi.enhanceEndpoints({
   addTagTypes,
@@ -53,7 +54,7 @@ export const api = generatedApi.enhanceEndpoints({
 
               if (entityIndex > -1) {
                 // eslint-disable-next-line fp/no-mutating-assign
-                Object.assign(draft[entityIndex], patch);
+                Object.assign(draft[entityIndex], patch.customer);
               }
             },
           ),
