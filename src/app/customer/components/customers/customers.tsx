@@ -172,9 +172,6 @@ export const Customers: React.FC<CustomersProps> = ({isLoading, ...props}) => {
     rowSelection,
     tableLayout: 'fixed',
     loading: isLoading,
-    onChange(pagination, filters, sorter, extra) {
-      console.log({pagination, filters, sorter, extra});
-    },
     pagination: {
       position: ['bottomRight'] as TablePaginationConfig['position'],
     },
@@ -200,7 +197,7 @@ export const Customers: React.FC<CustomersProps> = ({isLoading, ...props}) => {
             onConfirm={clearRowSelection}
           >
             <Button type='primary' danger>
-              Delete selected customer(s)
+              Delete {selectedRowKeys.length} {'  '} selected customer(s)
             </Button>
           </DeleteCustomerPopconfirm>
         )}
